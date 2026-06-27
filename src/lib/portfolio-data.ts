@@ -192,7 +192,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Palette,
-    span: { col: 1, row: 1 },
+    span: { col: 1, row: 2 },
   },
   {
     name: "Arcadian King",
@@ -207,7 +207,7 @@ export const projects: Project[] = [
   {
     name: "Avatar Archive",
     description:
-      "Everything Avatar: The Last Airbender in one place — books, episodes, lore, characters. If it's ATLA, it's here. Email me for the source code 😉",
+      "Everything ATLA in one place — lore, episodes, books, characters. Email me for the source code 😉",
     link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
     tag: "Live Project",
     status: "live",

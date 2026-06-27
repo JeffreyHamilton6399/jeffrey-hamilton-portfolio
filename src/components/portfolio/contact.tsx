@@ -76,6 +76,7 @@ export function Contact() {
                       value={form.name}
                       onChange={update("name")}
                       required
+                      className="h-11"
                     />
                   </div>
                   <div className="grid gap-2">
@@ -88,6 +89,7 @@ export function Contact() {
                       value={form.email}
                       onChange={update("email")}
                       required
+                      className="h-11"
                     />
                   </div>
                 </div>
@@ -100,13 +102,14 @@ export function Contact() {
                     value={form.message}
                     onChange={update("message")}
                     required
+                    className="min-h-[120px]"
                   />
                 </div>
                 <Button
                   type="submit"
                   size="lg"
                   disabled={sending}
-                  className="btn-press bg-amber-500 text-white shadow-md transition-shadow hover:bg-amber-600 hover:shadow-lg hover:shadow-amber-500/25"
+                  className="btn-press h-12 w-full bg-amber-500 text-white shadow-md transition-shadow hover:bg-amber-600 hover:shadow-lg hover:shadow-amber-500/25 sm:w-auto"
                 >
                   {sending ? (
                     <>

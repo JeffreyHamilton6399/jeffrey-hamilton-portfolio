@@ -77,8 +77,8 @@ function ProjectCard({ project }: { project: Project }) {
       className={`${spanClasses(project)} h-full`}
     >
       <Card
-        className={`group relative flex h-full min-h-[200px] flex-col overflow-hidden border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
-          isImageCard ? "bg-zinc-950" : ""
+        className={`group relative flex h-full flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
+          isImageCard ? "overflow-hidden bg-zinc-950" : "overflow-visible"
         }`}
       >
         {/* Background image for CAD / Robotics cards */}
@@ -211,8 +211,9 @@ export function Projects() {
           <ToolsBanner />
         </Reveal>
 
-        {/* 6-column grid with varied spans. Mobile collapses to 1 col. */}
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6 lg:auto-rows-[200px]">
+        {/* 6-column grid with varied spans on desktop.
+            Mobile: single column, auto height (no fixed rows). */}
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6 lg:auto-rows-[210px]">
           {projects.map((project) => (
             <Reveal
               key={project.name}

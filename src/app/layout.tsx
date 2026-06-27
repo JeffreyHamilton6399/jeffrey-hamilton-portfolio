@@ -32,7 +32,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Jeffrey Hamilton" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", type: "image/x-icon" },
+    ],
   },
   openGraph: {
     title: "Jeffrey Hamilton — Digital Designer · Blackbelt · Builder",

@@ -62,11 +62,11 @@ export function ToolsBanner() {
           ))}
         </div>
 
-        <div className="mt-9">
+        <div className="mt-9 px-4 sm:px-0">
           <Button
             asChild
             size="lg"
-            className="btn-press bg-amber-500 text-zinc-950 shadow-lg shadow-amber-500/25 hover:bg-amber-400"
+            className="btn-press w-full bg-amber-500 text-zinc-950 shadow-lg shadow-amber-500/25 hover:bg-amber-400 sm:w-auto"
           >
             <a
               href={toolsBanner.link}

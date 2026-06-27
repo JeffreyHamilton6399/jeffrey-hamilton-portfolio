@@ -17,9 +17,9 @@ const LAST_UPDATED = "June 2026";
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-border/60 bg-background">
-      <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 py-4 sm:px-8">
-        {/* Left — empty, balances layout */}
-        <div className="hidden sm:block" />
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-6 py-4 sm:px-8 md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-4">
+        {/* Left — empty, balances layout on desktop */}
+        <div className="hidden md:block" />
 
         {/* Center — name + updated date */}
         <div className="text-center">
@@ -33,7 +33,7 @@ export function Footer() {
         </div>
 
         {/* Right — three icon buttons */}
-        <div className="flex items-center justify-end gap-2.5">
+        <div className="flex items-center justify-center gap-2.5 md:justify-end">
           {footerButtons.map((btn) => (
             <motion.a
               key={btn.label}
