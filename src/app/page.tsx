@@ -1,7 +1,6 @@
-import { Header } from "@/components/portfolio/header";
+import { SidebarNav } from "@/components/portfolio/sidebar-nav";
 import { Hero } from "@/components/portfolio/hero";
 import { About } from "@/components/portfolio/about";
-import { AiDevWork } from "@/components/portfolio/ai-dev-work";
 import { Tools } from "@/components/portfolio/tools";
 import { YouTube } from "@/components/portfolio/youtube";
 import { Projects } from "@/components/portfolio/projects";
@@ -13,12 +12,11 @@ import { Footer } from "@/components/portfolio/footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
+    <div className="flex min-h-screen flex-col bg-background md:pl-14">
+      <SidebarNav />
       <main className="flex-1">
         <Hero />
         <About />
-        <AiDevWork />
         <Tools />
         <YouTube />
         <Projects />

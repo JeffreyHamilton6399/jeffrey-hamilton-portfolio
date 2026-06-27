@@ -1,58 +1,86 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowUpRight, Lock } from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { tools } from "@/lib/portfolio-data";
-import { SectionHeading } from "./section-heading";
-import { StaggerGroup, StaggerItem } from "./reveal";
+import { Button } from "@/components/ui/button";
+import { toolsBanner } from "@/lib/portfolio-data";
+import { Reveal } from "./reveal";
 
 export function Tools() {
   return (
     <section id="tools" className="scroll-mt-20 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <SectionHeading
-          eyebrow="Tools I've Built"
-          title="Nine tools. Zero servers."
-          description="Every one of these runs entirely in your browser — no logins, no databases, no data leaving your device. Privacy by design, not as an afterthought."
-        />
+        <Reveal>
+          <div className="relative overflow-hidden rounded-3xl border border-amber-500/20 bg-zinc-950 px-6 py-14 text-center shadow-2xl sm:px-12 sm:py-20">
+            {/* accent glow */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full bg-amber-500/30 blur-3xl"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-orange-500/25 blur-3xl"
+            />
+            {/* subtle grid texture */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-[0.06]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+                backgroundSize: "44px 44px",
+              }}
+            />
 
-        <StaggerGroup
-          className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          stagger={0.07}
-        >
-          {tools.map((tool, i) => {
-            const Icon = tool.icon;
-            return (
-              <StaggerItem key={tool.name}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="h-full"
+            <div className="relative">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-300">
+                <Lock className="h-3.5 w-3.5" />
+                Privacy by design
+              </span>
+
+              <h2 className="mx-auto mt-6 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                {toolsBanner.headline}
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-zinc-300 sm:text-lg">
+                {toolsBanner.subheadline}
+              </p>
+
+              {/* inline tool pills */}
+              <div className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-2">
+                {toolsBanner.pills.map((pill, i) => (
+                  <motion.span
+                    key={pill}
+                    initial={{ opacity: 0, y: 8 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: i * 0.04 }}
+                    className="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm font-medium text-zinc-200 transition-colors hover:border-amber-400/50 hover:text-amber-300"
+                  >
+                    {pill}
+                  </motion.span>
+                ))}
+              </div>
+
+              <div className="mt-10">
+                <Button
+                  asChild
+                  size="lg"
+                  className="btn-press bg-amber-500 text-zinc-950 shadow-lg shadow-amber-500/25 hover:bg-amber-400"
                 >
-                  <Card className="group h-full overflow-hidden border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-md hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30">
-                    <CardContent className="flex h-full flex-col p-5">
-                      <div className="flex items-center justify-between">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-muted text-foreground/80 transition-all duration-200 group-hover:scale-110 group-hover:bg-amber-100 group-hover:text-amber-700 dark:group-hover:bg-amber-950/50 dark:group-hover:text-amber-300">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <span className="text-xs font-medium text-muted-foreground/70">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                      </div>
-                      <h3 className="mt-4 text-base font-semibold">
-                        {tool.name}
-                      </h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                        {tool.blurb}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </StaggerItem>
-            );
-          })}
-        </StaggerGroup>
+                  <a
+                    href={toolsBanner.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {toolsBanner.cta}
+                    <ArrowUpRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

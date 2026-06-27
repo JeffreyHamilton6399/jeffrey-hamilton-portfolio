@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, Calendar, MapPin } from "lucide-react";
+import { Check, Calendar, MapPin, ExternalLink } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { experiences, type Experience } from "@/lib/portfolio-data";
@@ -92,9 +92,22 @@ function ExperienceCard({ exp, index }: { exp: Experience; index: number }) {
               ))}
             </ul>
 
-            <div className="mt-5 flex items-center gap-1.5 text-xs text-muted-foreground">
-              <MapPin className="h-3.5 w-3.5" />
-              {exp.location}
+            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin className="h-3.5 w-3.5" />
+                {exp.location}
+              </span>
+              {exp.website ? (
+                <a
+                  href={exp.website.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-medium text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  {exp.website.label}
+                </a>
+              ) : null}
             </div>
           </CardContent>
         </Card>

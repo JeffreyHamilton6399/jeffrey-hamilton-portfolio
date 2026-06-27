@@ -6,23 +6,18 @@ import {
   Youtube,
   Clock,
   Bot,
-  Globe,
   Code2,
-  Rocket,
-  FileText,
   Palette,
-  Braces,
-  KeyRound,
-  QrCode,
-  Timer,
-  Type,
-  Ruler,
-  Wrench,
-  GraduationCap,
+  Cpu,
   Award,
-  Sword,
   Users,
-  Layers,
+  Type,
+  Gamepad2,
+  Clapperboard,
+  Building2,
+  GraduationCap,
+  Globe,
+  ExternalLink,
 } from "lucide-react";
 
 export const profile = {
@@ -33,7 +28,6 @@ export const profile = {
     "I'm 17. I've been working since I was old enough to carry an egg basket — and I haven't really stopped since.",
   location: "Utah, United States",
   email: "jeffreyscotthamilton639@gmail.com",
-  // Pull-quote used in the About area
   quote:
     "I like making things that just work — no fluff, no broken buttons, no excuses.",
 };
@@ -46,27 +40,17 @@ export const socials = {
   youtubeVR: "https://www.youtube.com/@JeffreyVR6399",
 };
 
+// The sidebar tracks exactly these 6 sections, in this order.
 export const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#tools", label: "Tools" },
-  { href: "#youtube", label: "YouTube" },
-  { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", label: "About", id: "about" },
+  { href: "#tools", label: "Tools", id: "tools" },
+  { href: "#youtube", label: "YouTube", id: "youtube" },
+  { href: "#projects", label: "Projects", id: "projects" },
+  { href: "#experience", label: "Experience", id: "experience" },
+  { href: "#contact", label: "Contact", id: "contact" },
 ];
 
-// Every section id that participates in scroll-spy
-export const sectionIds = [
-  "about",
-  "ai-dev",
-  "tools",
-  "youtube",
-  "projects",
-  "experience",
-  "education",
-  "skills",
-  "contact",
-];
+export const sectionIds = navLinks.map((n) => n.id);
 
 export type Experience = {
   company: string;
@@ -77,6 +61,7 @@ export type Experience = {
   accent: string;
   description: string;
   highlights: string[];
+  website?: { label: string; url: string };
 };
 
 export const experiences: Experience[] = [
@@ -98,85 +83,147 @@ export const experiences: Experience[] = [
   },
   {
     company: "Bobby Lawrence Karate",
-    role: "Martial Arts Instructor",
-    period: "2022 — Present",
+    role: "Intern & Assistant Instructor",
+    period: "Mar 2025 — Present",
     location: "Bobby Lawrence Karate",
     icon: Dumbbell,
     accent: "rose",
     description:
-      "I teach students of every age — from kids who can't stand still to adults who finally have time to try. Currently a blackbelt.",
+      "Earned my black belt after failing the first test and coming back stronger. Now I help teach younger students — running drills, demonstrating technique, and making sure the newer kids actually want to come back next week.",
     highlights: [
-      "Lead group classes for kids, teens, and adults",
-      "Coach students toward belt promotions and real goals",
-      "Run sparring, forms, and fundamentals week to week",
-      "Hold the line on discipline without killing the fun",
+      "Assist in classes across age groups and belt levels",
+      "Run drills and demonstrate technique for newer students",
+      "Helped turn first-test failure into a black belt",
+      "Keep the dojo welcoming so kids stick with it",
     ],
+    website: { label: "oremkarate.com", url: "https://oremkarate.com/" },
   },
   {
     company: "Day's Market Place",
-    role: "Store Associate",
-    period: "Retail",
+    role: "Bagger → Cashier in Training",
+    period: "Apr 2026 — Present",
     location: "Day's Market Place",
     icon: Store,
     accent: "emerald",
     description:
-      "Front of house. I'm the person who actually knows where things are and won't roll their eyes when you ask.",
+      "Part-time customer service and grocery work. Started as a bagger, currently cross-training as a cashier. Day-to-day involves keeping things moving, helping customers, and staying sharp under pressure during busy shifts.",
     highlights: [
-      "Ran the register and kept the till balanced",
-      "Stocked, rotated, and faced product before open",
-      "Opened and closed the store on shift",
-      "Turned grumpy customers into regulars",
+      "Bagging, cart runs, and keeping front-end flow moving",
+      "Cross-training on the register as a cashier",
+      "Customer service through the busy shifts",
+      "Staying sharp when the line gets long",
     ],
+    website: { label: "daysmarket.com", url: "https://www.daysmarket.com/" },
   },
 ];
 
-export type AiDevFeature = {
-  icon: LucideIcon;
-  title: string;
-  body: string;
+// ---- Tools: single hero banner (replaces the old 9-card grid) ----
+export const toolsBanner = {
+  headline: "9 Privacy-First Browser Tools",
+  subheadline:
+    "Everything runs on your device. No uploads. No servers. No accounts.",
+  pills: [
+    "ShrinkRay",
+    "ConvertIt",
+    "Hummingbird",
+    "Cutout",
+    "DevToys",
+    "ExifErase",
+    "LinkClean",
+    "FileBeam",
+    "BlurIt",
+  ],
+  cta: "Explore All Tools",
+  link: "https://jeffrey-hamilton-tools.vercel.app",
 };
 
-export const aiDevFeatures: AiDevFeature[] = [
-  {
-    icon: Bot,
-    title: "AI-Assisted Development",
-    body: "I work alongside AI tools to design, build, and ship real products — not just prompting, but actually reading the output, debugging it, and making it better.",
-  },
-  {
-    icon: Globe,
-    title: "Browser-First Tools",
-    body: "All 9 of my shipped tools run entirely in the browser. No servers, no databases, no user data leaving the device. Privacy by design, not as an afterthought.",
-  },
-  {
-    icon: Code2,
-    title: "Python",
-    body: "Comfortable in Python for scripting, automation, and personal projects that scratch an itch.",
-  },
-  {
-    icon: Rocket,
-    title: "Rapid Shipping",
-    body: "I've gone from idea to deployed app multiple times — using Vercel, GitHub, and modern JS frameworks to move fast without breaking things.",
-  },
-];
-
-export type Tool = {
+// ---- Projects ----
+export type ProjectStatus = "live" | "school" | "progress";
+export type Project = {
   name: string;
-  blurb: string;
+  description: string;
+  link?: string;
+  tag: string;
+  status: ProjectStatus;
   icon: LucideIcon;
+  span: "wide" | "normal" | "gallery";
 };
 
-export const tools: Tool[] = [
-  { name: "MarkRight", blurb: "Live Markdown editor with instant preview.", icon: FileText },
-  { name: "Huebox", blurb: "Color palette generator with contrast checks.", icon: Palette },
-  { name: "JSONLab", blurb: "Format, validate, and explore JSON.", icon: Braces },
-  { name: "PassForge", blurb: "Password generator with a strength meter.", icon: KeyRound },
-  { name: "QRMe", blurb: "Turn any link or text into a QR code.", icon: QrCode },
-  { name: "Chronos", blurb: "Convert timezones for meetings in a click.", icon: Clock },
-  { name: "Countly", blurb: "Live word and character counter.", icon: Type },
-  { name: "Pomofocus", blurb: "Pomodoro timer with a built-in task list.", icon: Timer },
-  { name: "ConvertIt", blurb: "Fast unit converter — length, weight, temp.", icon: Ruler },
+export const projects: Project[] = [
+  {
+    name: "SpellFall",
+    description:
+      "A browser-based word game built for fun and replayability. Type fast, think faster.",
+    link: "https://spellfall.vercel.app",
+    tag: "Live Project",
+    status: "live",
+    icon: Type,
+    span: "wide",
+  },
+  {
+    name: "PixelParty",
+    description:
+      "A multiplayer pixel drawing game — jump in, claim your canvas, make something chaotic.",
+    link: "https://pixelparty-eight.vercel.app",
+    tag: "Live Project",
+    status: "live",
+    icon: Palette,
+    span: "normal",
+  },
+  {
+    name: "Arcadian King",
+    description:
+      "A game project developed as part of my digital media coursework.",
+    link: "https://drive.google.com/drive/folders/15Z6Z5LzGXDxmJrTZn3WV1Nbb9D4_GRyx",
+    tag: "School Project",
+    status: "school",
+    icon: Gamepad2,
+    span: "normal",
+  },
+  {
+    name: "School Animations",
+    description:
+      "Motion graphics and animations created for Timpview's digital media program.",
+    link: "https://drive.google.com/drive/folders/1O0zvlk09MEzY3aKWY9ww-3gbG3ieK3HN",
+    tag: "School Project",
+    status: "school",
+    icon: Clapperboard,
+    span: "gallery",
+  },
+  {
+    name: "CAD Housing",
+    description:
+      "Architectural design projects built in CAD software for my Architectural Design coursework.",
+    link: "https://drive.google.com/drive/folders/1r71Wdb5uY_n4Q6YD1srzxSA3QBqubkqv",
+    tag: "School Project",
+    status: "school",
+    icon: Building2,
+    span: "normal",
+  },
+  {
+    name: "ATLA HubWork",
+    description: "A collaborative school media project. Details coming soon.",
+    tag: "School Project",
+    status: "progress",
+    icon: Users,
+    span: "normal",
+  },
+  {
+    name: "Robotics Builds",
+    description:
+      "Physical robotics projects from my Robotics 1 & 2 courses.",
+    link: "https://drive.google.com/drive/folders/16tLQJV6DddTNoeT5w3bn1fgl0eAHB9K5",
+    tag: "School Project",
+    status: "school",
+    icon: Bot,
+    span: "wide",
+  },
 ];
 
+export const projectsTeaser =
+  "More things in the works. Private, free, and open source — dropping soon.";
+
+// ---- YouTube ----
 export type YoutubeCard = {
   title: string;
   body: string;
@@ -196,38 +243,7 @@ export const youtubeCards: YoutubeCard[] = [
   },
 ];
 
-export type Project = {
-  name: string;
-  tag: string;
-  description: string;
-  icon: LucideIcon;
-  link?: string;
-};
-
-export const projects: Project[] = [
-  {
-    name: "Browser Tool Suite",
-    tag: "9 privacy-first tools",
-    description:
-      "A collection of nine tools that run 100% in the browser. No accounts, no tracking, no data leaving your machine. Built so they'd actually be useful, not just demos.",
-    icon: Wrench,
-  },
-  {
-    name: "YouTube Content Engine",
-    tag: "Script → shoot → edit → ship",
-    description:
-      "The full pipeline I use to take a video from an idea in notes to a published upload — scripting, thumbnail design, editing, and a posting rhythm I can actually keep.",
-    icon: Youtube,
-  },
-  {
-    name: "Dojo Lesson Planner",
-    tag: "Built for the karate studio",
-    description:
-      "A small tool I built to plan karate classes for different age groups and belt levels — because teaching off the back of a napkin gets old fast.",
-    icon: Sword,
-  },
-];
-
+// ---- Education ----
 export type Education = {
   title: string;
   org: string;
@@ -255,52 +271,50 @@ export const education: Education[] = [
     icon: Youtube,
   },
   {
-    title: "Self-Taught Web Development",
-    org: "Projects, docs, and shipping",
+    title: "Digital Media Coursework",
+    org: "Timpview High School",
     period: "Ongoing",
-    icon: Code2,
+    icon: Clapperboard,
   },
 ];
 
-export type SkillGroup = {
-  category: string;
+// ---- Skills: honest feature blocks (no fake tech stack) ----
+export type SkillBlock = {
   icon: LucideIcon;
-  skills: string[];
+  title: string;
+  body: string;
 };
 
-export const skillGroups: SkillGroup[] = [
+export const skillBlocks: SkillBlock[] = [
   {
-    category: "Build",
+    icon: Bot,
+    title: "AI-Assisted Development",
+    body: "I use AI tools to build real things — and I know how to tell when the output is wrong. That's the skill. Anyone can prompt; fewer people can ship.",
+  },
+  {
     icon: Code2,
-    skills: [
-      "JavaScript / TypeScript",
-      "React & Next.js",
-      "Tailwind CSS",
-      "Python",
-      "Framer Motion",
-    ],
+    title: "Python",
+    body: "Comfortable writing scripts, automating tasks, and building personal projects.",
   },
   {
-    category: "Create",
-    icon: Layers,
-    skills: [
-      "Video Editing",
-      "Scripting",
-      "Thumbnail Design",
-      "Audience Retention",
-      "Content Strategy",
-    ],
+    icon: Palette,
+    title: "Digital Design & Media",
+    body: "Motion graphics, video editing, thumbnails, layout — certified through Utah State Board of Education.",
   },
   {
-    category: "Show Up",
+    icon: Cpu,
+    title: "Robotics & CAD",
+    body: "Hands-on hardware and architectural design through school coursework.",
+  },
+  {
+    icon: Award,
+    title: "Karate — Black Belt",
+    body: "Discipline, teaching, and not quitting when things get hard.",
+  },
+  {
     icon: Users,
-    skills: [
-      "Martial Arts Instruction",
-      "Public Speaking",
-      "Customer Service",
-      "Leadership",
-      "Time Management",
-    ],
+    title: "Customer Service",
+    body: "Real job, real customers, real pressure. Day's Market, Apr 2026–present.",
   },
 ];
 
@@ -310,3 +324,6 @@ export const contactSocials = [
   { label: "Buy Me a Coffee", href: socials.buymeacoffee, key: "coffee" as const },
   { label: "YouTube", href: socials.youtube, key: "youtube" as const },
 ];
+
+// re-export a couple of icons used directly by footer/elsewhere
+export const footerIcons = { Globe, ExternalLink };

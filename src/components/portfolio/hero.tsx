@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -114,18 +115,24 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
           className="relative mx-auto"
         >
+          {/* glow ring behind the circular photo */}
           <div
             aria-hidden
-            className="absolute -inset-3 rounded-[2rem] bg-amber-400/20 blur-2xl"
+            className="absolute -inset-4 rounded-full bg-amber-400/25 blur-2xl"
           />
-          <div className="relative aspect-[4/5] w-64 overflow-hidden rounded-[1.75rem] border border-border/60 bg-muted shadow-xl sm:w-72 md:w-80">
+          {/* circular crop via border-radius: 50% + overflow: hidden on wrapper */}
+          <div
+            className="relative aspect-square w-60 overflow-hidden rounded-full border-4 border-background bg-muted shadow-xl sm:w-72 md:w-80"
+            style={{ imageRendering: "high-quality" }}
+          >
             <Image
               src="/profile.jpg"
               alt={`${profile.name} — professional portrait`}
               fill
               priority
+              quality={100}
               sizes="(max-width: 768px) 18rem, 20rem"
-              className="object-cover object-center"
+              className="object-cover object-top"
             />
           </div>
           {/* small floating tag — breaks the grid intentionally */}
@@ -133,7 +140,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.9, ease: EASE }}
-            className="absolute -bottom-4 -left-6 rounded-xl border border-border/60 bg-background/95 px-4 py-2.5 shadow-lg backdrop-blur"
+            className="absolute -bottom-2 -right-2 rounded-xl border border-border/60 bg-background/95 px-4 py-2.5 shadow-lg backdrop-blur sm:-right-6"
           >
             <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
               Currently
