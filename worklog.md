@@ -304,3 +304,27 @@ Stage Summary:
 - Browser-verified via DOM: all 8 cards have correct buttons (Echo Heist=Play, SpellFall/PixelParty/Arcadian/Avatar/School Animations=View Project, CAD=Open PDF, Robotics=View); row spans confirmed (Echo 3x1, SpellFall 2x1, PixelParty 1x1, School Animations 2x2, CAD/Robotics 2x1).
 - VLM-verified: Avatar Archive description fully visible with button; Arcadian King button close to content; CAD/Robotics image-backed with buttons visible, no clipping.
 - Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 19f846b).
+
+---
+Task ID: 13
+Agent: Main (Z.ai Code)
+Task: Part 13 — replace Hummingbird with MergePDF, full optimization pass.
+
+Work Log:
+- portfolio-data.ts: replaced "Hummingbird" with "MergePDF" in toolsBanner.pills; removed dead exports (contactSocials, footerIcons) and unused imports (Globe, ExternalLink).
+- Deleted src/components/portfolio/robotics-gallery.tsx (unused — robotics is image-backed in projects.tsx).
+- globals.css: added overflow-x: hidden on body to prevent horizontal scroll on mobile.
+- hero.tsx: replaced fixed text-5xl/6xl/7xl with clamp(1.8rem, 5vw, 3.5rem) so name never wraps awkwardly on small screens.
+- projects.tsx: added loading="lazy" + descriptive alt to CAD/Robotics background images.
+- animations-gallery.tsx: added loading="lazy" to Image, preload="none" to video.
+- sidebar-nav.tsx: hamburger button bumped from h-10 w-10 (40px) to h-11 w-11 (44px) for tap target; drawer links bumped from px-3 py-2.5 to px-6 py-4 text-base for comfortable tapping.
+- Committed (e1fcb44) and pushed to GitHub, token scrubbed.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Browser-verified:
+  - Tools pills: ShrinkRay, ConvertIt, MergePDF, Cutout, DevToys, ExifErase, LinkClean, FileBeam, BlurIt (Hummingbird gone, MergePDF present).
+  - Mobile (390px): overflow-x false (no horizontal scroll), hamburger 44x44px, hero name on one line, projects single-col full-width no clipping, tools banner pills wrap + full-width button.
+  - Drawer: slides in from left, all 6 links (About/Projects/YouTube/Experience/Contact/Back to top) with large tappable padding, close button present.
+- All external links have rel=noopener noreferrer; all images have alt; buttons have aria-labels.
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit e1fcb44).
