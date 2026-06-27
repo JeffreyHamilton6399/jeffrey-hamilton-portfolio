@@ -76,3 +76,34 @@ Stage Summary:
   - Mobile 390px: hero stacks, hamburger menu, all sections single-column, no overflow.
   - Sticky footer via min-h-screen flex flex-col + mt-auto.
 - NOTE for user: email set to jeffreyscotthamilton639@gmail.com (corrected a typo in the input "hamiltion"→"hamilton"); user should verify the exact handle/number.
+
+---
+Task ID: 4
+Agent: Main (Z.ai Code)
+Task: Part 3 — floating sidebar nav, tools hero banner, 7 real projects w/ animations lightbox, experience updates (Day's Market + Karate black belt story + websites), honest skills rewrite, circular high-quality photo.
+
+Work Log:
+- Copied 4 Timpview GIFs to /public/animations/ for the School Animations gallery.
+- Rewrote portfolio-data.ts: 6-item nav, tools banner (headline/subheadline/9 pills/CTA link), 7 projects (SpellFall wide/live, PixelParty live, Arcadian King school, School Animations gallery, CAD Housing school, ATLA HubWork progress/no-link, Robotics Builds wide/school), updated experiences (Karate=Intern&Asst Instructor Mar 2025 + black belt story + oremkarate.com; Day's Market=Bagger→Cashier Apr 2026 + daysmarket.com), 6 honest skill blocks (removed JS/TS/React/Next.js/Tailwind claims), education updated (Timpview digital media).
+- Created sidebar-nav.tsx: floating left dot rail (fixed, vertically centered), animated progress line via useScroll+useSpring scaleY, active dot filled amber + glow ring, hover tooltip labels, mobile hamburger top-left + slide-in drawer with AnimatePresence. Floating theme toggle top-right.
+- Rewrote tools.tsx: single full-width dark banner (zinc-950) with amber glow, grid texture, "9 Privacy-First Browser Tools" headline, 9 inline pills, amber "Explore All Tools →" CTA → jeffrey-hamilton-tools.vercel.app.
+- Created animations-gallery.tsx: 4-tile grid of Timpview GIFs, click opens full-screen lightbox modal (X close, prev/next arrows, keyboard nav Escape/←/→), DROP ANIMATION FILES HERE comment.
+- Rewrote projects.tsx: 7 real projects in 3-col grid with wide/gallery span variants, status badges (Live=emerald, School=muted, In Progress=amber), School Animations card embeds AnimationsGallery, "More things in the works..." teaser at bottom.
+- Updated experience.tsx: added website links (oremkarate.com, daysmarket.com) with ExternalLink icons.
+- Rewrote skills.tsx: "What I Actually Work With" — 6 honest feature blocks, no skill bars/percentages, no fake tech stack.
+- Fixed hero photo: circular crop (border-radius via rounded-full + overflow-hidden), quality={100}, priority, object-cover object-top, image-rendering: high-quality, amber glow ring behind.
+- next.config.ts: added images.qualities [75, 100] to support quality=100.
+- page.tsx: removed Header + AiDevWork, added SidebarNav, md:pl-14 wrapper for sidebar clearance.
+- Deleted unused header.tsx and ai-dev-work.tsx.
+- NOTE: dev server gets reaped by sandbox ~8s after each bash call ends; mitigated by restarting fresh + chaining all verification in single calls.
+
+Stage Summary:
+- Lint clean. Browser-verified end-to-end:
+  - Hero: circular high-quality photo confirmed sharp; left sidebar dots confirmed; NO top tab bar; theme toggle top-right.
+  - Tools: single dark banner with headline, 9 pills, "Explore All Tools" CTA — confirmed.
+  - Projects: all 7 confirmed (SpellFall/Live, PixelParty/Live, Arcadian King/School, School Animations w/ 4 animation tiles, CAD Housing/School, ATLA HubWork/In Progress, Robotics Builds/School) + teaser line.
+  - Lightbox: clicking animation tile opens full-screen modal with GIF, X close, prev/next arrows, caption — confirmed.
+  - Experience: 3 cards w/ correct roles/periods, Karate black belt story, website links (oremkarate.com, daysmarket.com) — confirmed.
+  - Skills: "What I Actually Work With" w/ 6 honest blocks, no skill bars, no fake tech — confirmed.
+  - Sidebar: scrolling to Contact fills the 6th dot amber, progress line connects all — confirmed.
+  - Mobile drawer: hamburger opens slide-in nav drawer — confirmed.
