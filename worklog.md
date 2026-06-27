@@ -107,3 +107,23 @@ Stage Summary:
   - Skills: "What I Actually Work With" w/ 6 honest blocks, no skill bars, no fake tech — confirmed.
   - Sidebar: scrolling to Contact fills the 6th dot amber, progress line connects all — confirmed.
   - Mobile drawer: hamburger opens slide-in nav drawer — confirmed.
+
+---
+Task ID: 5
+Agent: Main (Z.ai Code)
+Task: Push project to GitHub for Vercel hosting.
+
+Work Log:
+- Verified existing git repo (branch main, clean tree, sandbox auto-committed all work).
+- Scanned tracked files for secrets/tokens — none found in code.
+- Found .env and upload/ (9.4MB of redundant originals) were tracked; untracked both via git rm --cached, added /upload/ to .gitignore, committed.
+- Authenticated to GitHub API with provided PAT, confirmed user JeffreyHamilton6399.
+- Created public repo: JeffreyHamilton6399/jeffrey-hamilton-portfolio.
+- Added remote with token in URL (temporary), pushed main branch (122 files), then scrubbed token from git config via remote set-url.
+- Verified repo live: all key files present (page.tsx, sidebar-nav, portfolio-data, profile.jpg, 4 animation GIFs, next.config.ts, package.json).
+
+Stage Summary:
+- Repo live at https://github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (public, 122 files).
+- Token scrubbed from local git config after push.
+- Ready for Vercel: import the repo in Vercel, framework auto-detected as Next.js, no env vars needed (site is fully static).
+- ACTION NEEDED: user should revoke the shared PAT and generate a new one for future use.
