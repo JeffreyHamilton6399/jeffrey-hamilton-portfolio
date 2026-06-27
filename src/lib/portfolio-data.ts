@@ -142,7 +142,8 @@ export type ProjectMedia =
   | { kind: "none" }
   | { kind: "animations" }
   | { kind: "robotics" }
-  | { kind: "game"; src: string };
+  | { kind: "game"; src: string }
+  | { kind: "cad"; src: string };
 export type Project = {
   name: string;
   description: string;
@@ -223,6 +224,8 @@ export const projects: Project[] = [
     tag: "School Project",
     status: "school",
     icon: Building2,
+    // Drop CAD-housing.pdf into project root and update src
+    media: { kind: "cad", src: "/cad-housing.png" },
   },
   {
     name: "Robotics Builds",
@@ -236,15 +239,27 @@ export const projects: Project[] = [
   },
 ];
 
-export const projectsTeaser =
-  "More things in the works. Private, free, and open source — dropping soon.";
+export const projectsTeaser = "";
 
-// ---- YouTube: compact slim banner ----
-export const youtubeBanner = {
-  copy: "I've grown a YouTube channel to nearly 3,000 subscribers — editing, scripting, and publishing on a deadline.",
-  cta: "Visit Channel",
-  link: socials.youtube,
+// ---- YouTube: two compact channels (VR + main) ----
+export type YoutubeChannel = {
+  label: string;
+  copy: string;
+  url: string;
 };
+
+export const youtubeChannels: YoutubeChannel[] = [
+  {
+    label: "VR Channel",
+    copy: "My VR-focused channel — grown to over 3,000 subscribers.",
+    url: socials.youtubeVR,
+  },
+  {
+    label: "Main Channel",
+    copy: "My main channel — building in public, tutorials, and random projects.",
+    url: socials.youtube,
+  },
+];
 
 // ---- Education ----
 export type Education = {

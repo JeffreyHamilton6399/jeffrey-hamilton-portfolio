@@ -9,7 +9,7 @@ import { StaggerGroup, StaggerItem } from "./reveal";
 
 export function Education() {
   return (
-    <section id="education" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="education" className="scroll-mt-20 py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Education & Certifications"

@@ -24,7 +24,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 top-0 h-[42rem] bg-gradient-to-b from-amber-50/70 via-background to-background dark:from-amber-950/15"
       />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-24 pt-16 sm:px-6 md:grid-cols-[1.2fr_0.8fr] md:pb-32 md:pt-24">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 md:grid-cols-[1.2fr_0.8fr] md:pb-24 md:pt-20">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 10 }}

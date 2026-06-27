@@ -8,14 +8,14 @@ import { SectionHeading } from "./section-heading";
 
 const facts = [
   { k: "Age", v: "17" },
-  { k: "Belt", v: "Black" },
+  { k: "Graduate", v: "2027" },
   { k: "Working since", v: "2018" },
   { k: "Tools shipped", v: "9" },
 ];
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="about" className="scroll-mt-20 py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="About"
@@ -23,7 +23,7 @@ export function About() {
           align="left"
         />
 
-        <div className="mt-12 grid gap-10 md:grid-cols-12">
+        <div className="mt-10 grid gap-10 md:grid-cols-12">
           {/* Narrative — takes 7 cols, intentionally asymmetric */}
           <Reveal className="md:col-span-7" y={18}>
             <div className="space-y-5 text-lg leading-relaxed text-foreground/85">

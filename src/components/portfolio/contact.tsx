@@ -54,7 +54,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="scroll-mt-20 py-20 sm:py-28">
+    <section id="contact" className="scroll-mt-20 py-16 sm:py-20">
       <div className="mx-auto max-w-2xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Contact"

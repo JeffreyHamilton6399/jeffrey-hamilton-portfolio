@@ -7,6 +7,7 @@ import { X, Play } from "lucide-react";
 
 // REPLACE with actual animation files when provided.
 // Add new entries to this array to show more tiles in the gallery.
+// Defined outside the component so tiles never re-mount on parent renders.
 const animationFiles = [
   { src: "/animations/TimpviewLogo3.gif", label: "Animation 1" },
   { src: "/animations/TimpviewLogo4.gif", label: "Animation 2" },
@@ -16,6 +17,17 @@ const animationFiles = [
 
 export function AnimationsGallery() {
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
+  // Hovered state is a Set so multiple tiles don't interfere — toggled only on enter/leave.
+  const [hovered, setHovered] = React.useState<Set<number>>(new Set());
+
+  const setHover = React.useCallback((i: number, isHover: boolean) => {
+    setHovered((prev) => {
+      const next = new Set(prev);
+      if (isHover) next.add(i);
+      else next.delete(i);
+      return next;
+    });
+  }, []);
 
   const close = React.useCallback(() => setOpenIndex(null), []);
   const showPrev = React.useCallback(() => {
@@ -40,35 +52,53 @@ export function AnimationsGallery() {
 
   return (
     <div>
-      {/* Dark rounded square tiles with play icon overlay */}
+      {/* Dark rounded square tiles with play icon overlay.
+          Hover handled ONLY via onMouseEnter / onMouseLeave — no mousemove. */}
       <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4">
-        {animationFiles.map((file, i) => (
-          <button
-            key={file.label}
-            type="button"
-            onClick={() => setOpenIndex(i)}
-            aria-label={`Open ${file.label} in lightbox`}
-            className="group relative aspect-square overflow-hidden rounded-lg border border-white/10 bg-zinc-900"
-          >
-            <Image
-              src={file.src}
-              alt={file.label}
-              fill
-              unoptimized
-              sizes="(max-width: 640px) 28vw, 18vw"
-              className="object-cover opacity-80 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100"
-            />
-            {/* play icon overlay */}
-            <span className="absolute inset-0 flex items-center justify-center bg-black/30 transition-colors group-hover:bg-black/50">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-zinc-900 shadow-md transition-transform duration-200 group-hover:scale-110">
-                <Play className="h-4 w-4 translate-x-0.5 fill-current" />
+        {animationFiles.map((file, i) => {
+          const isHovered = hovered.has(i);
+          return (
+            <button
+              key={file.label}
+              type="button"
+              onClick={() => setOpenIndex(i)}
+              onMouseEnter={() => setHover(i, true)}
+              onMouseLeave={() => setHover(i, false)}
+              aria-label={`Open ${file.label} in lightbox`}
+              className="group relative aspect-square overflow-hidden rounded-lg border border-white/10 bg-zinc-900"
+            >
+              <Image
+                src={file.src}
+                alt={file.label}
+                fill
+                unoptimized
+                sizes="(max-width: 640px) 28vw, 18vw"
+                className={`object-cover transition-all duration-300 ${
+                  isHovered
+                    ? "scale-105 opacity-100"
+                    : "scale-100 opacity-80"
+                }`}
+              />
+              {/* play icon overlay */}
+              <span
+                className={`absolute inset-0 flex items-center justify-center transition-colors duration-300 ${
+                  isHovered ? "bg-black/50" : "bg-black/30"
+                }`}
+              >
+                <span
+                  className={`flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-zinc-900 shadow-md transition-transform duration-200 ${
+                    isHovered ? "scale-110" : "scale-100"
+                  }`}
+                >
+                  <Play className="h-4 w-4 translate-x-0.5 fill-current" />
+                </span>
               </span>
-            </span>
-            <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-2 py-1 text-left text-[10px] font-medium text-white">
-              {file.label}
-            </span>
-          </button>
-        ))}
+              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-2 py-1 text-left text-[10px] font-medium text-white">
+                {file.label}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       <AnimatePresence>
