@@ -217,3 +217,29 @@ Stage Summary:
   - YouTube: two side-by-side cards (VR Channel + Main Channel), each with red Watch button, compact.
   - Footer: name once + LinkedIn/Donate/GitHub buttons + Back to Top + copyright.
 - Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 343ef48).
+
+---
+Task ID: 9
+Agent: Main (Z.ai Code)
+Task: Part 7+8 — thin 3-col footer, sidebar back-to-top, autoplay animations, new-tab game, CAD window.open, uniform grid, Avatar Archive cheeky desc.
+
+Work Log:
+- portfolio-data.ts: removed 'game' media kind + cta kind system; Echo Heist now uses link + openNewTab + ctaLabel; Avatar Archive description updated with 'Email me for the source code 😉'.
+- footer.tsx: rebuilt as thin 3-col grid (1fr auto 1fr) — left empty, center 'Jeffrey Hamilton · Updated June 2026', right 3 icon buttons (LinkedIn/Coffee/GitHub) with amber hover glow. Removed back-to-top, tagline, duplicate name.
+- sidebar-nav.tsx: added back-to-top ↑ arrow below the section dots with a divider, tooltip 'Back to top', amber hover, styled like nav dots.
+- animations-gallery.tsx: dropped lightbox entirely; tiles now autoplay loop muted playsinline (GIFs via <Image>, video tag ready for .mp4 with autoplay loop muted playsinline); dark placeholder on error; React.memo wrapper prevents re-mount.
+- projects.tsx: removed GameModal/PlayButton; Echo Heist 'Play' now calls window.open(link, '_blank'); CAD uses window.open('/cad-housing.pdf'); uniform grid (grid-cols-1 sm:grid-cols-2 lg:grid-cols-3) all h-full, button pinned via mt-auto; removed alternating col-span.
+- Deleted game-modal.tsx (no longer needed).
+- Committed (940d77c) and pushed to GitHub, token scrubbed.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Browser-verified:
+  - Footer: thin 3-col bar, center name+date, right 3 icons, left empty, no back-to-top/duplicate/tagline.
+  - Sidebar: 6 items (5 dots + back-to-top arrow with tooltip).
+  - Projects: uniform grid, all cards same width, no col-span.
+  - Echo Heist: 'Play' button (not link), 0 iframes on page, opens via window.open new tab.
+  - CAD Housing: floor-plan image + 'Open PDF' button (window.open).
+  - School Animations: tiles autoplay silently, no lightbox/play overlay.
+  - Avatar Archive: description includes 'Email me for the source code 😉'.
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 940d77c).
