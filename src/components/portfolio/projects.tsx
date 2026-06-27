@@ -101,21 +101,21 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
         ) : null}
 
-        <CardContent className="relative flex h-full flex-col gap-2 p-4">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
-            <Icon className="h-5 w-5" />
+        <CardContent className="relative flex h-full flex-col gap-[0.35rem] p-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
+            <Icon className="h-[1.05rem] w-[1.05rem]" />
           </div>
-          <h3 className="text-base font-bold leading-tight text-foreground">
+          <h3 className="text-[0.95rem] font-bold leading-tight text-foreground">
             {project.name}
           </h3>
           <span
-            className={`w-fit rounded-full px-2.5 py-0.5 text-[0.7rem] font-semibold uppercase tracking-wide ${badge.className}`}
+            className={`w-fit rounded-full px-[0.4rem] py-[0.15rem] text-[0.65rem] font-semibold uppercase tracking-wide ${badge.className}`}
           >
             {badge.label}
           </span>
           {/* Description: flex-shrink-1 so it compresses before the button gets pushed out */}
           <p
-            className={`shrink text-[0.8rem] leading-snug ${
+            className={`shrink text-[0.78rem] leading-[1.4] ${
               isImageCard ? "text-zinc-200" : "text-muted-foreground"
             }`}
           >
@@ -124,14 +124,14 @@ function ProjectCard({ project }: { project: Project }) {
 
           {/* Animations gallery inline (only for School Animations card) */}
           {project.media?.kind === "animations" ? (
-            <div className="mt-1">
+            <div>
               <AnimationsGallery />
             </div>
           ) : null}
 
           {/* Action button — flex-shrink:0 so it never gets compressed/hidden.
-              mt-auto pins it to the bottom, but with tight gap it stays close to content. */}
-          <div className="mt-auto shrink-0 pt-2">
+              mt-auto pins it to the bottom. */}
+          <div className="mt-auto shrink-0">
             {hasLink ? (
               project.openNewTab ? (
                 // Echo Heist — opens local html in new tab
@@ -140,14 +140,14 @@ function ProjectCard({ project }: { project: Project }) {
                   onClick={() =>
                     window.open(project.link, "_blank", "noopener,noreferrer")
                   }
-                  className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                  className={`inline-flex items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold transition-colors ${
                     isImageCard
                       ? "text-amber-400 hover:text-amber-300"
                       : "text-amber-600 hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
                   }`}
                 >
                   {buttonLabel}
-                  <ExternalLink className="h-3.5 w-3.5" />
+                  <ExternalLink className="h-3 w-3" />
                 </button>
               ) : isCad ? (
                 // CAD Housing — opens PDF in new tab
@@ -156,9 +156,9 @@ function ProjectCard({ project }: { project: Project }) {
                   onClick={() =>
                     window.open("/cad-housing.pdf", "_blank", "noopener,noreferrer")
                   }
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-400 transition-colors hover:text-amber-300"
+                  className="inline-flex items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold text-amber-400 transition-colors hover:text-amber-300"
                 >
-                  <FileText className="h-3.5 w-3.5" />
+                  <FileText className="h-3 w-3" />
                   {buttonLabel}
                   <ArrowUpRight className="h-3 w-3" />
                 </button>
@@ -169,10 +169,10 @@ function ProjectCard({ project }: { project: Project }) {
                   onClick={() =>
                     window.open(project.link, "_blank", "noopener,noreferrer")
                   }
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-400 transition-colors hover:text-amber-300"
+                  className="inline-flex items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold text-amber-400 transition-colors hover:text-amber-300"
                 >
                   {buttonLabel}
-                  <ArrowUpRight className="h-3.5 w-3.5" />
+                  <ArrowUpRight className="h-3 w-3" />
                 </button>
               ) : (
                 // Default — regular link
@@ -180,19 +180,19 @@ function ProjectCard({ project }: { project: Project }) {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                  className={`inline-flex items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold transition-colors ${
                     isImageCard
                       ? "text-amber-400 hover:text-amber-300"
                       : "text-amber-600 hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
                   }`}
                 >
                   {buttonLabel}
-                  <ArrowUpRight className="h-3.5 w-3.5" />
+                  <ArrowUpRight className="h-3 w-3" />
                 </a>
               )
             ) : (
-              <span className="inline-flex cursor-not-allowed items-center gap-1.5 text-sm font-semibold text-muted-foreground/50">
-                <Lock className="h-3.5 w-3.5" />
+              <span className="inline-flex cursor-not-allowed items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold text-muted-foreground/50">
+                <Lock className="h-3 w-3" />
                 Coming Soon
               </span>
             )}

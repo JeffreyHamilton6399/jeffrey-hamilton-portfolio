@@ -187,7 +187,7 @@ export const projects: Project[] = [
   {
     name: "PixelParty",
     description:
-      "A multiplayer pixel drawing game — jump in, claim your canvas, make something chaotic.",
+      "Jump in. Claim your canvas. Make something chaotic.",
     link: "https://pixelparty-eight.vercel.app",
     tag: "Live Project",
     status: "live",
@@ -207,7 +207,7 @@ export const projects: Project[] = [
   {
     name: "Avatar Archive",
     description:
-      "Everything ATLA — episodes, lore, books, characters. Email me for the source code 😉",
+      "Everything Avatar: The Last Airbender in one place — episodes, lore, books, characters. Email me for access 😉",
     link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
     tag: "Live Project",
     status: "live",
