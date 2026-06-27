@@ -307,6 +307,30 @@ export const education: Education[] = [
   },
 ];
 
+// ---- Certificates carousel ----
+// Drop certificate PDFs into /public/certificates/
+// Name them: cert-1.pdf, cert-2.pdf, etc.
+// PNG previews (cert-1.png, cert-2.png) are rendered first-page screenshots.
+// Update the certificates array below with name and filename.
+// Drive folder: https://drive.google.com/drive/folders/10O-VkD9rSmgf5kZ1UqJyy7lvyIOEgNCX
+export type Certificate = {
+  name: string;
+  pdf: string;
+  preview: string;
+};
+
+export const certificates: Certificate[] = [
+  { name: "Architectural Design 2", pdf: "/certificates/cert-1.pdf", preview: "/certificates/cert-1.png" },
+  { name: "CAD Architectural Design I", pdf: "/certificates/cert-2.pdf", preview: "/certificates/cert-2.png" },
+  { name: "Computer Programming 1", pdf: "/certificates/cert-3.pdf", preview: "/certificates/cert-3.png" },
+  { name: "Computer Programming 2 (Java)", pdf: "/certificates/cert-4.pdf", preview: "/certificates/cert-4.png" },
+  { name: "Digital Media 1", pdf: "/certificates/cert-5.pdf", preview: "/certificates/cert-5.png" },
+  { name: "Digital Media 2", pdf: "/certificates/cert-6.pdf", preview: "/certificates/cert-6.png" },
+  { name: "Game Development Fundamentals", pdf: "/certificates/cert-7.pdf", preview: "/certificates/cert-7.png" },
+  { name: "Robotics 1", pdf: "/certificates/cert-8.pdf", preview: "/certificates/cert-8.png" },
+  { name: "Unmanned Aerial Systems", pdf: "/certificates/cert-9.pdf", preview: "/certificates/cert-9.png" },
+];
+
 // ---- Skills: honest feature blocks (no fake tech stack) ----
 export type SkillBlock = {
   icon: LucideIcon;

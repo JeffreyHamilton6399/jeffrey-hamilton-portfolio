@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { education } from "@/lib/portfolio-data";
 import { SectionHeading } from "./section-heading";
 import { StaggerGroup, StaggerItem } from "./reveal";
+import { CertificateCarousel } from "./certificate-carousel";
 
 export function Education() {
   return (
@@ -50,6 +51,9 @@ export function Education() {
             );
           })}
         </StaggerGroup>
+
+        {/* Certificate carousel — horizontal scroll of certificate previews */}
+        <CertificateCarousel />
       </div>
     </section>
   );

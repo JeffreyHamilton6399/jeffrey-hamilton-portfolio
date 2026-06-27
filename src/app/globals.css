@@ -162,3 +162,8 @@
     transform: scale(0.97);
   }
 }
+
+/* Hide scrollbar on certificate carousel */
+.cert-carousel::-webkit-scrollbar {
+  display: none;
+}
