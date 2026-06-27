@@ -1,7 +1,8 @@
 "use client";
 
+import * as React from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Lock } from "lucide-react";
+import { ArrowUpRight, Lock, Play, ExternalLink } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { projects, projectsTeaser, type Project } from "@/lib/portfolio-data";
@@ -9,6 +10,9 @@ import { SectionHeading } from "./section-heading";
 import { StaggerGroup, StaggerItem } from "./reveal";
 import { Reveal } from "./reveal";
 import { ToolsBanner } from "./tools";
+import { AnimationsGallery } from "./animations-gallery";
+import { RoboticsGallery } from "./robotics-gallery";
+import { GameModal } from "./game-modal";
 
 const statusBadge: Record<
   Project["status"],
@@ -34,6 +38,7 @@ function ProjectCard({ project }: { project: Project }) {
   const Icon = project.icon;
   const badge = statusBadge[project.status];
   const hasLink = Boolean(project.link);
+  const cta = project.cta;
 
   return (
     <motion.div
@@ -57,16 +62,41 @@ function ProjectCard({ project }: { project: Project }) {
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             {project.description}
           </p>
-          {/* link button — always at bottom, same position every card */}
+
+          {/* Inline media (gallery / robot photo) — same vertical slot every card */}
+          {project.media && project.media.kind === "animations" ? (
+            <div className="mt-4">
+              <AnimationsGallery />
+            </div>
+          ) : null}
+          {project.media && project.media.kind === "robotics" ? (
+            <div className="mt-4">
+              <RoboticsGallery />
+            </div>
+          ) : null}
+
+          {/* Action button — always at the bottom, same position every card */}
           <div className="mt-auto pt-5">
-            {hasLink ? (
+            {cta?.kind === "play" ? (
+              <PlayButton project={project} />
+            ) : cta?.kind === "link" && hasLink ? (
               <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
               >
-                View
+                {cta.label}
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            ) : hasLink ? (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
+              >
+                View Project
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             ) : (
@@ -79,6 +109,34 @@ function ProjectCard({ project }: { project: Project }) {
         </CardContent>
       </Card>
     </motion.div>
+  );
+}
+
+/** Button that opens the Echo Heist (or any single-HTML game) in an iframe modal. */
+function PlayButton({ project }: { project: Project }) {
+  const [open, setOpen] = React.useState(false);
+  const src =
+    project.media && project.media.kind === "game" ? project.media.src : "";
+  const label = project.cta?.label ?? "Play";
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
+      >
+        {label}
+        <Play className="h-3.5 w-3.5 fill-current" />
+      </button>
+      <GameModal
+        open={open}
+        onClose={() => setOpen(false)}
+        src={src}
+        title={project.name}
+        fallbackLink={project.link}
+      />
+    </>
   );
 }
 

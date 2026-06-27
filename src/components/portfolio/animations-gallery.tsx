@@ -3,9 +3,9 @@
 import * as React from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Play } from "lucide-react";
 
-// DROP ANIMATION FILES HERE — replace placeholder srcs with your real animation files.
+// REPLACE with actual animation files when provided.
 // Add new entries to this array to show more tiles in the gallery.
 const animationFiles = [
   { src: "/animations/TimpviewLogo3.gif", label: "Animation 1" },
@@ -27,7 +27,6 @@ export function AnimationsGallery() {
     setOpenIndex((i) => (i === null ? i : (i + 1) % animationFiles.length));
   }, []);
 
-  // keyboard nav
   React.useEffect(() => {
     if (openIndex === null) return;
     const onKey = (e: KeyboardEvent) => {
@@ -41,33 +40,36 @@ export function AnimationsGallery() {
 
   return (
     <div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      {/* Dark rounded square tiles with play icon overlay */}
+      <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4">
         {animationFiles.map((file, i) => (
           <button
             key={file.label}
             type="button"
             onClick={() => setOpenIndex(i)}
             aria-label={`Open ${file.label} in lightbox`}
-            className="group relative aspect-video overflow-hidden rounded-lg border border-border/60 bg-muted"
+            className="group relative aspect-square overflow-hidden rounded-lg border border-white/10 bg-zinc-900"
           >
             <Image
               src={file.src}
               alt={file.label}
               fill
               unoptimized
-              sizes="(max-width: 640px) 45vw, 20vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 640px) 28vw, 18vw"
+              className="object-cover opacity-80 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100"
             />
-            <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-2 py-1.5 text-left text-[11px] font-medium text-white">
+            {/* play icon overlay */}
+            <span className="absolute inset-0 flex items-center justify-center bg-black/30 transition-colors group-hover:bg-black/50">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-zinc-900 shadow-md transition-transform duration-200 group-hover:scale-110">
+                <Play className="h-4 w-4 translate-x-0.5 fill-current" />
+              </span>
+            </span>
+            <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-2 py-1 text-left text-[10px] font-medium text-white">
               {file.label}
             </span>
           </button>
         ))}
       </div>
-      <p className="mt-3 text-xs text-muted-foreground">
-        Click any tile to view it full-size. Animation files are placeholders —
-        drop your own in <code className="rounded bg-muted px-1 py-0.5">/public/animations/</code>.
-      </p>
 
       <AnimatePresence>
         {openIndex !== null ? (
@@ -76,7 +78,7 @@ export function AnimationsGallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
             onClick={close}
             role="dialog"
             aria-modal="true"

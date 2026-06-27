@@ -4,7 +4,6 @@ import {
   Dumbbell,
   Store,
   Youtube,
-  Clock,
   Bot,
   Code2,
   Palette,
@@ -18,6 +17,7 @@ import {
   GraduationCap,
   Globe,
   ExternalLink,
+  Swords,
 } from "lucide-react";
 
 export const profile = {
@@ -138,6 +138,11 @@ export const toolsBanner = {
 
 // ---- Projects ----
 export type ProjectStatus = "live" | "school" | "progress";
+export type ProjectMedia =
+  | { kind: "none" }
+  | { kind: "animations" }
+  | { kind: "robotics" }
+  | { kind: "game"; src: string };
 export type Project = {
   name: string;
   description: string;
@@ -145,9 +150,25 @@ export type Project = {
   tag: string;
   status: ProjectStatus;
   icon: LucideIcon;
+  // Override the default "View"/"Coming Soon" button
+  cta?: { label: string; kind: "link" | "play" };
+  // Inline media shown inside the card body
+  media?: ProjectMedia;
 };
 
 export const projects: Project[] = [
+  {
+    name: "Echo Heist",
+    description:
+      "A browser-based game built entirely in a single HTML file. No install, no setup — just open and play.",
+    // Drop echo-heist.html into project root and update src here.
+    // If a hosted URL is provided instead, set link to that URL and remove media + cta.
+    media: { kind: "game", src: "/echo-heist.html" },
+    tag: "Live Project · Playable",
+    status: "live",
+    icon: Gamepad2,
+    cta: { label: "Play", kind: "play" },
+  },
   {
     name: "SpellFall",
     description:
@@ -169,11 +190,20 @@ export const projects: Project[] = [
   {
     name: "Arcadian King",
     description:
-      "A game project developed as part of my digital media coursework.",
+      "A full Unity game project built as part of my digital media coursework.",
     link: "https://drive.google.com/drive/folders/15Z6Z5LzGXDxmJrTZn3WV1Nbb9D4_GRyx",
-    tag: "School Project",
+    tag: "School Project · Unity",
     status: "school",
     icon: Gamepad2,
+  },
+  {
+    name: "Avatar Archive",
+    description:
+      "Everything Avatar: The Last Airbender in one place — books, episodes, lore, characters. If it's ATLA, it's here.",
+    link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
+    tag: "Live Project",
+    status: "live",
+    icon: Swords,
   },
   {
     name: "School Animations",
@@ -183,6 +213,7 @@ export const projects: Project[] = [
     tag: "School Project",
     status: "school",
     icon: Clapperboard,
+    media: { kind: "animations" },
   },
   {
     name: "CAD Housing",
@@ -194,13 +225,6 @@ export const projects: Project[] = [
     icon: Building2,
   },
   {
-    name: "ATLA HubWork",
-    description: "A collaborative school media project. Details coming soon.",
-    tag: "School Project",
-    status: "progress",
-    icon: Users,
-  },
-  {
     name: "Robotics Builds",
     description:
       "Physical robotics projects from my Robotics 1 & 2 courses.",
@@ -208,31 +232,19 @@ export const projects: Project[] = [
     tag: "School Project",
     status: "school",
     icon: Bot,
+    media: { kind: "robotics" },
   },
 ];
 
 export const projectsTeaser =
   "More things in the works. Private, free, and open source — dropping soon.";
 
-// ---- YouTube ----
-export type YoutubeCard = {
-  title: string;
-  body: string;
-  icon: LucideIcon;
+// ---- YouTube: compact slim banner ----
+export const youtubeBanner = {
+  copy: "I've grown a YouTube channel to nearly 3,000 subscribers — editing, scripting, and publishing on a deadline.",
+  cta: "Visit Channel",
+  link: socials.youtube,
 };
-
-export const youtubeCards: YoutubeCard[] = [
-  {
-    title: "Nearly 3,000 Subscribers",
-    body: "Grew a YouTube channel from zero to nearly 3,000 subscribers — learning video editing, scripting, thumbnails, and audience retention along the way.",
-    icon: Youtube,
-  },
-  {
-    title: "Crunch-Time Creator",
-    body: "YouTube taught me how to produce under pressure — planning, filming, editing, and publishing on tight deadlines.",
-    icon: Clock,
-  },
-];
 
 // ---- Education ----
 export type Education = {
