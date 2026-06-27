@@ -328,3 +328,22 @@ Stage Summary:
   - Drawer: slides in from left, all 6 links (About/Projects/YouTube/Experience/Contact/Back to top) with large tappable padding, close button present.
 - All external links have rel=noopener noreferrer; all images have alt; buttons have aria-labels.
 - Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit e1fcb44).
+
+---
+Task ID: 14
+Agent: Main (Z.ai Code)
+Task: Part 14 — CAD links to Drive, mobile nav removed entirely, floating back-to-top.
+
+Work Log:
+- portfolio-data.ts: CAD Housing ctaLabel changed from "Open PDF" to "View Project" (link stays Drive folder).
+- projects.tsx: CAD button now calls window.open(project.link) to Drive folder (was window.open('/cad-housing.pdf')); removed unused FileText import.
+- sidebar-nav.tsx: removed hamburger button + entire AnimatePresence drawer + drawerOpen state + Menu/X imports; removed back-to-top from sidebar dots; added floating back-to-top button (fixed bottom-8 right-8, amber circle, fades in after 400px scroll via motion opacity/pointerEvents, hidden on mobile via md:flex).
+- Committed (e98c336) and pushed to GitHub, token scrubbed.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Browser-verified:
+  - CAD button: "View Project" (not "Open PDF"), links to Drive.
+  - Back-to-top desktop: visible after scroll, opacity 1, pointerEvents auto, bottom-right amber circle.
+  - Mobile: hamburger gone (false), drawer gone, back-to-top hidden (display none).
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit e98c336).
