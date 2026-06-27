@@ -288,3 +288,19 @@ Stage Summary:
   - Mobile (390px): hero stacks vertically centered, typewriter wraps, buttons stack; projects single-col full-width auto-height no clipping; tools banner pills wrap + full-width button; footer 2 centered rows; contact form full-width inputs 44px+ tall + full-width Send button.
   - Sidebar hidden on mobile, hamburger drawer works.
 - Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 97031c6).
+
+---
+Task ID: 12
+Agent: Main (Z.ai Code)
+Task: Part 11 — restore CAD/Robotics links, shrink live cards, fix text overflow, global card rules.
+
+Work Log:
+- portfolio-data.ts: Echo Heist 3x1, SpellFall 2x1, PixelParty 1x1 (all shrunk from row 2 to row 1); Avatar Archive shortened to 'Everything ATLA — episodes, lore, books, characters. Email me for the source code 😉'; added ctaLabel 'Open PDF' to CAD Housing and 'View' to Robotics Builds.
+- projects.tsx: rewrote card button logic — CAD uses window.open('/cad-housing.pdf'), Robotics uses window.open(drive link), Echo Heist uses window.open(echo-heist.html); all image cards use buttons (not <a>) for window.open; global card rules: gap-2, p-4, description shrink-1 (flex-shrink:1), button shrink-0 (flex-shrink:0); all cards overflow-hidden; description font 0.8rem on all cards; tag font 0.7rem; title font-base font-bold leading-tight; grid auto-rows-[220px].
+- Committed (19f846b) and pushed to GitHub, token scrubbed.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Browser-verified via DOM: all 8 cards have correct buttons (Echo Heist=Play, SpellFall/PixelParty/Arcadian/Avatar/School Animations=View Project, CAD=Open PDF, Robotics=View); row spans confirmed (Echo 3x1, SpellFall 2x1, PixelParty 1x1, School Animations 2x2, CAD/Robotics 2x1).
+- VLM-verified: Avatar Archive description fully visible with button; Arcadian King button close to content; CAD/Robotics image-backed with buttons visible, no clipping.
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 19f846b).
