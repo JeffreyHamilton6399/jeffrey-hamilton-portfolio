@@ -34,15 +34,7 @@ const statusBadge: Record<
 /** Robotics image — displayed as card background with text overlay */
 const roboticsImage = "/robot-vex.jpg";
 
-function handleCardClick(project: Project) {
-  if (!project.link) return;
-  if (project.openNewTab) {
-    window.open(project.link, "_blank", "noopener,noreferrer");
-  }
-}
-
-/** Desktop grid span classes based on the project's span config (6-col base).
- *  Static map so Tailwind's JIT can detect and generate these classes. */
+/** Desktop grid span classes — static map so Tailwind JIT generates them. */
 const COL_SPAN: Record<number, string> = {
   1: "lg:col-span-1",
   2: "lg:col-span-2",
@@ -57,9 +49,7 @@ const ROW_SPAN: Record<number, string> = {
   3: "lg:row-span-3",
 };
 function spanClasses(project: Project): string {
-  return `${COL_SPAN[project.span.col] ?? ""} ${
-    ROW_SPAN[project.span.row] ?? ""
-  }`;
+  return `${COL_SPAN[project.span.col] ?? ""} ${ROW_SPAN[project.span.row] ?? ""}`;
 }
 
 function ProjectCard({ project }: { project: Project }) {
@@ -69,6 +59,8 @@ function ProjectCard({ project }: { project: Project }) {
   const buttonLabel = project.ctaLabel ?? "View Project";
   const isImageCard =
     project.media?.kind === "cad" || project.media?.kind === "robotics";
+  const isCad = project.media?.kind === "cad";
+  const isRobotics = project.media?.kind === "robotics";
 
   return (
     <motion.div
@@ -77,15 +69,15 @@ function ProjectCard({ project }: { project: Project }) {
       className={`${spanClasses(project)} h-full`}
     >
       <Card
-        className={`group relative flex h-full flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
-          isImageCard ? "overflow-hidden bg-zinc-950" : "overflow-visible"
+        className={`group relative flex h-full flex-col overflow-hidden border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
+          isImageCard ? "bg-zinc-950" : ""
         }`}
       >
         {/* Background image for CAD / Robotics cards */}
-        {project.media?.kind === "cad" ? (
+        {isCad ? (
           <div className="absolute inset-0">
             <Image
-              src={project.media.src}
+              src={project.media!.src}
               alt={project.name}
               fill
               unoptimized
@@ -95,7 +87,7 @@ function ProjectCard({ project }: { project: Project }) {
             <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/70 to-zinc-950/30" />
           </div>
         ) : null}
-        {project.media?.kind === "robotics" ? (
+        {isRobotics ? (
           <div className="absolute inset-0">
             <Image
               src={roboticsImage}
@@ -109,20 +101,21 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
         ) : null}
 
-        <CardContent className="relative flex h-full flex-col p-5">
+        <CardContent className="relative flex h-full flex-col gap-2 p-4">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
             <Icon className="h-5 w-5" />
           </div>
-          <h3 className="mt-3 text-base font-semibold text-foreground">
+          <h3 className="text-base font-bold leading-tight text-foreground">
             {project.name}
           </h3>
           <span
-            className={`mt-2 w-fit rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${badge.className}`}
+            className={`w-fit rounded-full px-2.5 py-0.5 text-[0.7rem] font-semibold uppercase tracking-wide ${badge.className}`}
           >
             {badge.label}
           </span>
+          {/* Description: flex-shrink-1 so it compresses before the button gets pushed out */}
           <p
-            className={`mt-2 text-sm leading-relaxed ${
+            className={`shrink text-[0.8rem] leading-snug ${
               isImageCard ? "text-zinc-200" : "text-muted-foreground"
             }`}
           >
@@ -131,18 +124,22 @@ function ProjectCard({ project }: { project: Project }) {
 
           {/* Animations gallery inline (only for School Animations card) */}
           {project.media?.kind === "animations" ? (
-            <div className="mt-3">
+            <div className="mt-1">
               <AnimationsGallery />
             </div>
           ) : null}
 
-          {/* Action button — pinned to bottom via mt-auto */}
-          <div className="mt-auto pt-4">
+          {/* Action button — flex-shrink:0 so it never gets compressed/hidden.
+              mt-auto pins it to the bottom, but with tight gap it stays close to content. */}
+          <div className="mt-auto shrink-0 pt-2">
             {hasLink ? (
               project.openNewTab ? (
+                // Echo Heist — opens local html in new tab
                 <button
                   type="button"
-                  onClick={() => handleCardClick(project)}
+                  onClick={() =>
+                    window.open(project.link, "_blank", "noopener,noreferrer")
+                  }
                   className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
                     isImageCard
                       ? "text-amber-400 hover:text-amber-300"
@@ -152,23 +149,33 @@ function ProjectCard({ project }: { project: Project }) {
                   {buttonLabel}
                   <ExternalLink className="h-3.5 w-3.5" />
                 </button>
-              ) : project.media?.kind === "cad" ? (
+              ) : isCad ? (
+                // CAD Housing — opens PDF in new tab
                 <button
                   type="button"
                   onClick={() =>
-                    window.open(
-                      "/cad-housing.pdf",
-                      "_blank",
-                      "noopener,noreferrer"
-                    )
+                    window.open("/cad-housing.pdf", "_blank", "noopener,noreferrer")
                   }
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-400 transition-colors hover:text-amber-300"
                 >
                   <FileText className="h-3.5 w-3.5" />
-                  Open PDF
+                  {buttonLabel}
                   <ArrowUpRight className="h-3 w-3" />
                 </button>
+              ) : isRobotics ? (
+                // Robotics — opens Drive folder in new tab
+                <button
+                  type="button"
+                  onClick={() =>
+                    window.open(project.link, "_blank", "noopener,noreferrer")
+                  }
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-400 transition-colors hover:text-amber-300"
+                >
+                  {buttonLabel}
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </button>
               ) : (
+                // Default — regular link
                 <a
                   href={project.link}
                   target="_blank"
@@ -213,7 +220,7 @@ export function Projects() {
 
         {/* 6-column grid with varied spans on desktop.
             Mobile: single column, auto height (no fixed rows). */}
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6 lg:auto-rows-[210px]">
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6 lg:auto-rows-[220px]">
           {projects.map((project) => (
             <Reveal
               key={project.name}

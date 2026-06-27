@@ -172,7 +172,7 @@ export const projects: Project[] = [
     tag: "Live Project · Playable",
     status: "live",
     icon: Gamepad2,
-    span: { col: 3, row: 2 },
+    span: { col: 3, row: 1 },
   },
   {
     name: "SpellFall",
@@ -182,7 +182,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Type,
-    span: { col: 2, row: 2 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "PixelParty",
@@ -192,7 +192,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Palette,
-    span: { col: 1, row: 2 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "Arcadian King",
@@ -207,7 +207,7 @@ export const projects: Project[] = [
   {
     name: "Avatar Archive",
     description:
-      "Everything ATLA in one place — lore, episodes, books, characters. Email me for the source code 😉",
+      "Everything ATLA — episodes, lore, books, characters. Email me for the source code 😉",
     link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
     tag: "Live Project",
     status: "live",
@@ -230,6 +230,7 @@ export const projects: Project[] = [
     description:
       "Architectural design projects built in CAD software for my Architectural Design coursework.",
     link: "https://drive.google.com/drive/folders/1r71Wdb5uY_n4Q6YD1srzxSA3QBqubkqv",
+    ctaLabel: "Open PDF",
     tag: "School Project",
     status: "school",
     icon: Building2,
@@ -242,6 +243,7 @@ export const projects: Project[] = [
     description:
       "Physical robotics projects from my Robotics 1 & 2 courses.",
     link: "https://drive.google.com/drive/folders/16tLQJV6DddTNoeT5w3bn1fgl0eAHB9K5",
+    ctaLabel: "View",
     tag: "School Project",
     status: "school",
     icon: Bot,
