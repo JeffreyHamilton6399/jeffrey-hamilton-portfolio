@@ -189,3 +189,31 @@ Stage Summary:
   - Footer: only name + Back to Top + copyright. No monogram/socials/tagline/Vercel line.
 - NOTE: Echo Heist iframe shows 'localhost refused to connect' in sandbox preview (cross-origin iframe restriction) but will work on Vercel same-origin deployment. Static file confirmed served at /echo-heist.html.
 - Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 2c812b3).
+
+---
+Task ID: 8
+Agent: Main (Z.ai Code)
+Task: Part 6 — bug fixes (animation hover, game modal size), CAD PDF image, two YouTube channels, footer buttons, alternating grid, spacing tighten.
+
+Work Log:
+- Converted upload/FIRST FLOOR PLAN LOT 10.pdf -> public/cad-housing.png via pdftoppm (also kept cad-housing.pdf for "View Full" link).
+- portfolio-data.ts: added 'cad' ProjectMedia kind; CAD Housing card now has media {kind:'cad', src:'/cad-housing.png'}; replaced youtubeBanner with youtubeChannels array (VR Channel over 3,000 subs + Main Channel); set projectsTeaser to empty string.
+- animations-gallery.tsx: FIXED HOVER BUG — moved animationFiles array outside component (prevents re-mount); hover state is now a Set<number> toggled ONLY via onMouseEnter/onMouseLeave (was re-triggering on every mousemove); removed all onMouseMove handlers.
+- game-modal.tsx: FIXED SIZE — now near-fullscreen (h-[90vh] w-[90vw] max-w-6xl), solid black bg (bg-black), iframe fills modal (h-[calc(90vh-2rem)] w-full border-none), large high-contrast close button (h-12 w-12, bg-white/20, border-white/40, shadow-lg, backdrop-blur, z-20), body scroll locked.
+- youtube.tsx: rewritten as two side-by-side compact cards (VR Channel + Main Channel), each with red Watch button, grid sm:grid-cols-2.
+- footer.tsx: name appears ONCE, then LinkedIn/Donate/GitHub buttons in a row (with icons), then Back to Top, then copyright. Removed duplicate name.
+- projects.tsx: alternating grid — every 3rd card (index 2,5) gets lg:col-span-2; live projects get amber left-border accent; added CadPreview component (static image + View Full link); removed teaser line.
+- about.tsx: removed 'Belt: Black' fact, replaced with 'Graduate: 2027'.
+- Spacing tightened ~25%: all sections py-20 sm:py-28 -> py-16 sm:py-20; hero pb-24 pt-16 -> pb-16 pt-12 (md: pb-24 pt-20); youtube py-10 sm:py-12 -> py-8 sm:py-10.
+- Committed (343ef48) and pushed to GitHub, token scrubbed.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Browser-verified:
+  - About: facts are Age 17, Graduate 2027, Working since 2018, Tools shipped 9 (Belt gone).
+  - Projects: alternating grid confirmed (PixelParty=3rd and School Animations=6th span 2 cols); CAD Housing shows floor-plan image with View Full link; teaser line gone; live cards have amber left border.
+  - Echo Heist modal: near-fullscreen solid black, iframe fills screen, large visible close button (48px, high contrast), Escape closes.
+  - Animation tiles: stable, no flickering, hover works cleanly via enter/leave only.
+  - YouTube: two side-by-side cards (VR Channel + Main Channel), each with red Watch button, compact.
+  - Footer: name once + LinkedIn/Donate/GitHub buttons + Back to Top + copyright.
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 343ef48).
