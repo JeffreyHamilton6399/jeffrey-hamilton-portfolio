@@ -347,3 +347,22 @@ Stage Summary:
   - Back-to-top desktop: visible after scroll, opacity 1, pointerEvents auto, bottom-right amber circle.
   - Mobile: hamburger gone (false), drawer gone, back-to-top hidden (display none).
 - Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit e98c336).
+
+---
+Task ID: 15
+Agent: Main (Z.ai Code)
+Task: Part 15 — certificate carousel in Education section with 9 real certificates.
+
+Work Log:
+- Copied 9 certificate PDFs from upload/ to public/certificates/ (cert-1.pdf through cert-9.pdf), named: Architectural Design 2, CAD Architectural Design I, Computer Programming 1, Computer Programming 2 (Java), Digital Media 1, Digital Media 2, Game Development Fundamentals, Robotics 1, Unmanned Aerial Systems.
+- Converted each PDF first page to PNG preview via pdftoppm -r 100 (cert-1.png through cert-9.png).
+- portfolio-data.ts: added Certificate type + certificates array with name, pdf path, preview path. Drive folder link in comments.
+- certificate-carousel.tsx: new component — horizontal scroll with scroll-snap-type:x mandatory, left/right arrow buttons (desktop only, hidden on mobile via sm:flex), smooth scrollBy between cards, hover overlay with View button (group-hover:opacity-100), dark placeholder on image error, certificate name always visible at bottom with gradient. Card sizes: 200x260px desktop, 160x210px mobile. Scrollbar hidden via CSS.
+- education.tsx: imported and added CertificateCarousel below the education cards grid.
+- globals.css: added .cert-carousel::-webkit-scrollbar { display: none; }
+- Committed (9497321) and pushed to GitHub, token scrubbed.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Browser-verified: 9 carousel cards present, 2 arrows on desktop, 0 visible arrows on mobile, heading "Certifications", mobile card size 160x210px, desktop cards 200x260px, snap scroll working, View button + overlay confirmed in DOM (opacity-0 group-hover:opacity-100).
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 9497321).
