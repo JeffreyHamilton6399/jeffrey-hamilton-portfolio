@@ -2,6 +2,7 @@ import { SidebarNav } from "@/components/portfolio/sidebar-nav";
 import { Hero } from "@/components/portfolio/hero";
 import { About } from "@/components/portfolio/about";
 import { Projects } from "@/components/portfolio/projects";
+import { MinecraftMods } from "@/components/portfolio/minecraft-mods";
 import { YouTube } from "@/components/portfolio/youtube";
 import { Experience } from "@/components/portfolio/experience";
 import { Education } from "@/components/portfolio/education";
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <About />
         <Projects />
+        <MinecraftMods />
         <YouTube />
         <Experience />
         <Education />

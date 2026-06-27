@@ -16,6 +16,10 @@ import {
   Building2,
   GraduationCap,
   Swords,
+  Boxes,
+  Keyboard,
+  MessageSquare,
+  ListOrdered,
 } from "lucide-react";
 
 export const profile = {
@@ -251,6 +255,47 @@ export const projects: Project[] = [
 ];
 
 export const projectsTeaser = "";
+
+// ---- Minecraft mods & modpacks (Modrinth) ----
+export type ModStatus = "public" | "review";
+export type ModProject = {
+  name: string;
+  slug: string;
+  kind: "mod" | "modpack";
+  status: ModStatus;
+  icon: LucideIcon;
+};
+
+export const modProjects: ModProject[] = [
+  {
+    name: "Clean & Fast",
+    slug: "eRqJeBz7",
+    kind: "modpack",
+    status: "public",
+    icon: Boxes,
+  },
+  {
+    name: "KeybindSync",
+    slug: "g2Bsv5wQ",
+    kind: "mod",
+    status: "public",
+    icon: Keyboard,
+  },
+  {
+    name: "SmartChat Macros",
+    slug: "ka0QIooy",
+    kind: "mod",
+    status: "public",
+    icon: MessageSquare,
+  },
+  {
+    name: "TablistPlus",
+    slug: "cvSaXweW",
+    kind: "mod",
+    status: "review",
+    icon: ListOrdered,
+  },
+];
 
 // ---- YouTube: two compact channels (VR + main) ----
 export type YoutubeChannel = {
