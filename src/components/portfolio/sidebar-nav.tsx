@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowUp } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -99,6 +99,26 @@ export function SidebarNav() {
               </Link>
             );
           })}
+
+          {/* divider before back-to-top */}
+          <span aria-hidden className="my-1 h-px w-3 bg-border" />
+
+          {/* Back to top — pinned below the dots */}
+          <Link
+            href="#top"
+            className="group relative flex h-4 w-4 items-center justify-center"
+            aria-label="Back to top"
+          >
+            <motion.span
+              whileHover={{ y: -2 }}
+              className="flex h-4 w-4 items-center justify-center rounded-full border border-muted-foreground/40 text-muted-foreground transition-colors duration-300 group-hover:border-amber-500 group-hover:text-amber-500"
+            >
+              <ArrowUp className="h-2.5 w-2.5" />
+            </motion.span>
+            <span className="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border/70 bg-background/95 px-2.5 py-1 text-xs font-medium text-foreground opacity-0 shadow-sm backdrop-blur transition-all duration-200 group-hover:left-7 group-hover:opacity-100">
+              Back to top
+            </span>
+          </Link>
         </div>
       </nav>
 

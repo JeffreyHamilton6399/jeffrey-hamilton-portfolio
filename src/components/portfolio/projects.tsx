@@ -1,9 +1,8 @@
 "use client";
 
-import * as React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Lock, Play, ExternalLink, FileText } from "lucide-react";
+import { ArrowUpRight, Lock, ExternalLink, FileText } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { projects, type Project } from "@/lib/portfolio-data";
@@ -13,7 +12,6 @@ import { Reveal } from "./reveal";
 import { ToolsBanner } from "./tools";
 import { AnimationsGallery } from "./animations-gallery";
 import { RoboticsGallery } from "./robotics-gallery";
-import { GameModal } from "./game-modal";
 
 const statusBadge: Record<
   Project["status"],
@@ -35,19 +33,20 @@ const statusBadge: Record<
   },
 };
 
-/** Alternating grid: every 3rd card spans 2 columns to break the rhythm. */
-function colSpanClass(index: number): string {
-  // index is 0-based; every 3rd card (index 2, 5, 8...) spans 2 cols on desktop
-  return (index + 1) % 3 === 0 ? "lg:col-span-2" : "lg:col-span-1";
+function handleCardClick(project: Project) {
+  if (!project.link) return;
+  if (project.openNewTab) {
+    // Opens local html files (like echo-heist.html) in a new tab
+    window.open(project.link, "_blank", "noopener,noreferrer");
+  }
+  // else: regular <a> handles it
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project }: { project: Project }) {
   const Icon = project.icon;
   const badge = statusBadge[project.status];
   const hasLink = Boolean(project.link);
-  const cta = project.cta;
-  const isLive = project.status === "live";
-  const isWide = (index + 1) % 3 === 0;
+  const buttonLabel = project.ctaLabel ?? "View Project";
 
   return (
     <motion.div
@@ -55,27 +54,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       transition={{ duration: 0.2, ease: "easeOut" }}
       className="h-full"
     >
-      <Card
-        className={`group flex h-full flex-col overflow-hidden border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
-          isLive ? "border-l-2 border-l-amber-500/60" : ""
-        }`}
-      >
+      <Card className="group flex h-full flex-col overflow-hidden border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30">
         <CardContent className="flex h-full flex-col p-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
-              <Icon className="h-5 w-5" />
-            </div>
-            {/* Wide cards get a larger name */}
-            <h3
-              className={`font-semibold ${
-                isWide ? "text-xl" : "text-lg"
-              }`}
-            >
-              {project.name}
-            </h3>
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
+            <Icon className="h-5 w-5" />
           </div>
+          <h3 className="mt-4 text-lg font-semibold">{project.name}</h3>
           <span
-            className={`mt-3 w-fit rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${badge.className}`}
+            className={`mt-2 w-fit rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${badge.className}`}
           >
             {badge.label}
           </span>
@@ -83,7 +69,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {project.description}
           </p>
 
-          {/* Inline media — natural heights vary per card */}
+          {/* Inline media */}
           {project.media?.kind === "animations" ? (
             <div className="mt-4">
               <AnimationsGallery />
@@ -100,30 +86,29 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </div>
           ) : null}
 
-          {/* Action button — bottom of every card */}
+          {/* Action button — pinned to bottom via mt-auto */}
           <div className="mt-auto pt-5">
-            {cta?.kind === "play" ? (
-              <PlayButton project={project} />
-            ) : cta?.kind === "link" && hasLink ? (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
-              >
-                {cta.label}
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
-            ) : hasLink ? (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
-              >
-                View Project
-                <ArrowUpRight className="h-3.5 w-3.5" />
-              </a>
+            {hasLink ? (
+              project.openNewTab ? (
+                <button
+                  type="button"
+                  onClick={() => handleCardClick(project)}
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
+                >
+                  {buttonLabel}
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </button>
+              ) : (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
+                >
+                  {buttonLabel}
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              )
             ) : (
               <span className="inline-flex cursor-not-allowed items-center gap-1.5 text-sm font-semibold text-muted-foreground/50">
                 <Lock className="h-3.5 w-3.5" />
@@ -137,7 +122,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
-/** CAD housing: static preview image + "View Full →" opens PDF in new tab. */
+/** CAD housing: static screenshot + "Open PDF →" via window.open */
 function CadPreview({ src, link }: { src: string; link?: string }) {
   return (
     <div>
@@ -147,51 +132,25 @@ function CadPreview({ src, link }: { src: string; link?: string }) {
           alt="CAD housing floor plan"
           fill
           unoptimized
-          sizes="(max-width: 768px) 90vw, 40vw"
+          sizes="(max-width: 768px) 90vw, 30vw"
           className="object-contain"
         />
       </div>
+      {/* Drop cad-housing.pdf into /public and update path */}
       {link ? (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onClick={() =>
+            window.open("/cad-housing.pdf", "_blank", "noopener,noreferrer")
+          }
           className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
           <FileText className="h-3.5 w-3.5" />
-          View Full
+          Open PDF
           <ArrowUpRight className="h-3 w-3" />
-        </a>
+        </button>
       ) : null}
     </div>
-  );
-}
-
-/** Button that opens the Echo Heist (or any single-HTML game) in an iframe modal. */
-function PlayButton({ project }: { project: Project }) {
-  const [open, setOpen] = React.useState(false);
-  const src =
-    project.media && project.media.kind === "game" ? project.media.src : "";
-  const label = project.cta?.label ?? "Play";
-
-  return (
-    <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
-      >
-        {label}
-        <Play className="h-3.5 w-3.5 fill-current" />
-      </button>
-      <GameModal
-        open={open}
-        onClose={() => setOpen(false)}
-        src={src}
-        title={project.name}
-        fallbackLink={project.link}
-      />
-    </>
   );
 }
 
@@ -210,14 +169,14 @@ export function Projects() {
           <ToolsBanner />
         </Reveal>
 
-        {/* Alternating grid: 3 cols, every 3rd card spans 2. Natural heights. */}
+        {/* Uniform grid: auto-fill minmax(300px, 1fr), all cards same height */}
         <StaggerGroup
           className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
           stagger={0.08}
         >
-          {projects.map((project, i) => (
-            <StaggerItem key={project.name} className={`h-full ${colSpanClass(i)}`}>
-              <ProjectCard project={project} index={i} />
+          {projects.map((project) => (
+            <StaggerItem key={project.name} className="h-full">
+              <ProjectCard project={project} />
             </StaggerItem>
           ))}
         </StaggerGroup>

@@ -142,7 +142,6 @@ export type ProjectMedia =
   | { kind: "none" }
   | { kind: "animations" }
   | { kind: "robotics" }
-  | { kind: "game"; src: string }
   | { kind: "cad"; src: string };
 export type Project = {
   name: string;
@@ -151,8 +150,10 @@ export type Project = {
   tag: string;
   status: ProjectStatus;
   icon: LucideIcon;
-  // Override the default "View"/"Coming Soon" button
-  cta?: { label: string; kind: "link" | "play" };
+  // Override the default "View Project" button label
+  ctaLabel?: string;
+  // Open the link in a new tab via window.open (for local html files)
+  openNewTab?: boolean;
   // Inline media shown inside the card body
   media?: ProjectMedia;
 };
@@ -162,13 +163,13 @@ export const projects: Project[] = [
     name: "Echo Heist",
     description:
       "A browser-based game built entirely in a single HTML file. No install, no setup — just open and play.",
-    // Drop echo-heist.html into project root and update src here.
-    // If a hosted URL is provided instead, set link to that URL and remove media + cta.
-    media: { kind: "game", src: "/echo-heist.html" },
+    // Update to hosted URL when available
+    link: "/echo-heist.html",
+    openNewTab: true,
+    ctaLabel: "Play",
     tag: "Live Project · Playable",
     status: "live",
     icon: Gamepad2,
-    cta: { label: "Play", kind: "play" },
   },
   {
     name: "SpellFall",
@@ -200,7 +201,7 @@ export const projects: Project[] = [
   {
     name: "Avatar Archive",
     description:
-      "Everything Avatar: The Last Airbender in one place — books, episodes, lore, characters. If it's ATLA, it's here.",
+      "Everything Avatar: The Last Airbender in one place — books, episodes, lore, characters. If it's ATLA, it's here. Email me for the source code 😉",
     link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
     tag: "Live Project",
     status: "live",
