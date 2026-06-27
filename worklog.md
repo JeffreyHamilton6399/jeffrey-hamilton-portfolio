@@ -160,3 +160,32 @@ Stage Summary:
   - Mobile 390px: hamburger top-left, hero readable, cards stack 1-col, banner full-width.
   - Light mode also renders cleanly.
 - Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit fa230a4).
+
+---
+Task ID: 7
+Agent: Main (Z.ai Code)
+Task: Part 5 — real project media, Echo Heist game modal, Avatar Archive, slim YouTube, minimal footer.
+
+Work Log:
+- Copied upload/echohiest.html → public/echo-heist.html and upload/IMG_5575.PNG → public/robot-vex.jpg.
+- portfolio-data.ts: added Echo Heist (game media + Play cta), Avatar Archive (replaces ATLA HubWork, links to github.io/AvatarArchive), Arcadian King reverted to Drive link with tag 'School Project · Unity'. Added ProjectMedia type (none/animations/robotics/game) + optional cta override. Reordered projects: Echo Heist, SpellFall, PixelParty, Arcadian King, Avatar Archive, School Animations, CAD Housing, Robotics Builds. Replaced youtubeCards (2 cards) with youtubeBanner (single slim copy + cta). Removed unused Clock import.
+- game-modal.tsx: new fullscreen iframe modal for single-HTML games — Escape to close, body scroll lock, optional fallback "Open in new tab" link, allow=autoplay;fullscreen;gamepad.
+- animations-gallery.tsx: restyled tiles as dark rounded SQUARES with play-icon overlay (was video-aspect tiles). Kept lightbox with prev/next + keyboard nav.
+- robotics-gallery.tsx: new component showing VEX robot photo prominently with caption, swipeable-ready (prev/next controls appear when multiple photos added), lightbox on click. Comment: // More robot photos can be added here.
+- projects.tsx: ProjectCard now renders inline media (AnimationsGallery / RoboticsGallery) in body; action button supports Play (opens GameModal), link cta, default 'View Project', or 'Coming Soon'. DOM-verified all 8 cards have correct buttons.
+- youtube.tsx: rewritten as slim single-row banner — one icon, one line of copy, one red 'Visit Channel' button. Compact height (~one card).
+- footer.tsx: stripped to just 'Jeffrey Hamilton' name + 'Back to Top ↑' button + © copyright line. Removed JH monogram, tagline, social icons, 'Built by hand deployed on Vercel'.
+- Committed (2c812b3) and pushed to GitHub, token scrubbed.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Static files verified served: /echo-heist.html, /robot-vex.jpg, /animations/*.gif all 200.
+- Browser-verified:
+  - Projects: all 8 cards present in correct order; Echo Heist first with Play button; ATLA HubWork gone; Arcadian King tag 'School Project · Unity'; Avatar Archive present with View Project link.
+  - Echo Heist Play modal: opens fullscreen, iframe loaded (count=1), title 'Echo Heist' shown, X close + Escape work.
+  - School Animations: dark square tiles with play-icon overlay, lightbox opens with GIF + prev/next arrows.
+  - Robotics Builds: VEX robot photo shown prominently with caption, lightbox opens on click.
+  - YouTube: slim single-row banner, one line + one red button, compact.
+  - Footer: only name + Back to Top + copyright. No monogram/socials/tagline/Vercel line.
+- NOTE: Echo Heist iframe shows 'localhost refused to connect' in sandbox preview (cross-origin iframe restriction) but will work on Vercel same-origin deployment. Static file confirmed served at /echo-heist.html.
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 2c812b3).
