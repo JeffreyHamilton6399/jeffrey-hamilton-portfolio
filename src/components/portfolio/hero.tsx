@@ -7,70 +7,76 @@ import { ArrowDown, Mail, MapPin } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { profile } from "@/lib/portfolio-data";
+import { Typewriter } from "./typewriter";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-gradient-to-b from-amber-50/60 via-background to-background dark:from-amber-950/20"
+      className="relative overflow-hidden"
     >
-      {/* decorative blobs */}
+      {/* subtle warm wash at the top */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-amber-300/30 blur-3xl dark:bg-amber-700/20"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-orange-300/25 blur-3xl dark:bg-orange-800/20"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[42rem] bg-gradient-to-b from-amber-50/70 via-background to-background dark:from-amber-950/15"
       />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 pb-20 pt-12 sm:px-6 md:grid-cols-[1.15fr_0.85fr] md:pb-28 md:pt-20">
-        <div className="order-2 md:order-1">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-24 pt-16 sm:px-6 md:grid-cols-[1.2fr_0.8fr] md:pb-32 md:pt-24">
+        <div>
           <motion.span
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-100/70 px-3 py-1 text-xs font-medium text-amber-800 dark:border-amber-900/60 dark:bg-amber-950/40 dark:text-amber-200"
+            transition={{ duration: 0.4, ease: EASE }}
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
-            Available for new opportunities
+            Open to work &amp; projects
           </motion.span>
 
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+            transition={{ duration: 0.5, delay: 0.05, ease: EASE }}
+            className="mt-5 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl"
           >
-            Hi, I&apos;m{" "}
-            <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-              {profile.name}
-            </span>
+            {profile.firstName}{" "}
+            <span className="text-amber-600 dark:text-amber-500">Hamilton</span>
           </motion.h1>
 
+          {/* Typewriter tagline */}
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.12 }}
-            className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.25 }}
+            className="mt-4 font-mono text-sm text-muted-foreground sm:text-base"
           >
-            {profile.tagline}
+            <Typewriter text={profile.tagline} />
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6, ease: EASE }}
+            className="mt-6 max-w-xl text-base leading-relaxed text-foreground/80 sm:text-lg"
+          >
+            {profile.intro}
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground"
+            transition={{ duration: 0.5, delay: 0.7, ease: EASE }}
+            className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground"
           >
             <span className="inline-flex items-center gap-1.5">
               <MapPin className="h-4 w-4 text-amber-600" />
               {profile.location}
             </span>
-            <span className="hidden h-1 w-1 rounded-full bg-border sm:inline-block" />
             <a
               href={`mailto:${profile.email}`}
               className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
@@ -81,55 +87,59 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.28 }}
+            transition={{ duration: 0.5, delay: 0.8, ease: EASE }}
             className="mt-8 flex flex-wrap gap-3"
           >
             <Button
               asChild
               size="lg"
-              className="bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-md hover:from-amber-600 hover:to-orange-700"
+              className="btn-press bg-amber-500 text-white shadow-md hover:bg-amber-600"
             >
-              <Link href="#experience">
-                View my experience
+              <Link href="#projects">
+                See what I&apos;ve built
                 <ArrowDown className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="#contact">Contact me</Link>
+            <Button asChild size="lg" variant="outline" className="btn-press">
+              <Link href="#contact">Get in touch</Link>
             </Button>
           </motion.div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
+          initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-          className="order-1 mx-auto md:order-2"
+          transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
+          className="relative mx-auto"
         >
-          <div className="relative">
-            <div
-              aria-hidden
-              className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-amber-400/40 to-orange-500/40 blur-xl"
+          <div
+            aria-hidden
+            className="absolute -inset-3 rounded-[2rem] bg-amber-400/20 blur-2xl"
+          />
+          <div className="relative aspect-[4/5] w-64 overflow-hidden rounded-[1.75rem] border border-border/60 bg-muted shadow-xl sm:w-72 md:w-80">
+            <Image
+              src="/profile.jpg"
+              alt={`${profile.name} — professional portrait`}
+              fill
+              priority
+              sizes="(max-width: 768px) 18rem, 20rem"
+              className="object-cover object-center"
             />
-            <div className="relative aspect-[4/5] w-64 overflow-hidden rounded-[1.75rem] border border-border/60 bg-muted shadow-xl sm:w-72 md:w-80">
-              <Image
-                src="/profile.jpg"
-                alt={`${profile.name} professional portrait`}
-                fill
-                priority
-                sizes="(max-width: 768px) 18rem, 20rem"
-                className="object-cover object-center"
-              />
-            </div>
-            <div className="absolute -bottom-4 -left-4 rounded-2xl border border-border/60 bg-background/95 px-4 py-3 shadow-lg backdrop-blur">
-              <p className="text-xs font-medium text-muted-foreground">
-                Currently teaching
-              </p>
-              <p className="text-sm font-semibold">Bobby Lawrence Karate</p>
-            </div>
           </div>
+          {/* small floating tag — breaks the grid intentionally */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.9, ease: EASE }}
+            className="absolute -bottom-4 -left-6 rounded-xl border border-border/60 bg-background/95 px-4 py-2.5 shadow-lg backdrop-blur"
+          >
+            <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+              Currently
+            </p>
+            <p className="text-sm font-semibold">Teaching karate</p>
+          </motion.div>
         </motion.div>
       </div>
     </section>

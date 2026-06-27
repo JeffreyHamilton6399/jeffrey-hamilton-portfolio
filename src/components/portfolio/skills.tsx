@@ -1,87 +1,67 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, Wrench, Shield, type LucideIcon } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { skillGroups } from "@/lib/portfolio-data";
 import { SectionHeading } from "./section-heading";
-
-const iconMap: Record<string, LucideIcon> = {
-  users: Users,
-  wrench: Wrench,
-  shield: Shield,
-};
-
-const accentByIndex = [
-  {
-    bar: "from-amber-500 to-orange-500",
-    chip: "bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-200",
-    icon: "bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300",
-  },
-  {
-    bar: "from-emerald-500 to-teal-500",
-    chip: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200",
-    icon: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300",
-  },
-  {
-    bar: "from-rose-500 to-pink-500",
-    chip: "bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-200",
-    icon: "bg-rose-100 text-rose-700 dark:bg-rose-950/50 dark:text-rose-300",
-  },
-];
+import { StaggerGroup, StaggerItem } from "./reveal";
 
 export function Skills() {
   return (
-    <section id="skills" className="scroll-mt-20 py-20 sm:py-24">
+    <section
+      id="skills"
+      className="scroll-mt-20 border-y border-border/60 bg-muted/30 py-20 sm:py-28"
+    >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow="Skills & strengths"
-          title="What I bring to the table"
-          description="A blend of people skills, hands-on reliability, and the discipline that comes from years of martial arts training."
+          eyebrow="What I Work With"
+          title="The toolbox, more or less."
+          description="Three buckets: what I build with, what I create with, and the stuff you can't really put on a résumé but shows up every day."
         />
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {skillGroups.map((group, i) => {
-            const Icon = iconMap[group.icon] ?? Users;
-            const accent = accentByIndex[i % accentByIndex.length];
+        <StaggerGroup className="mt-12 grid gap-6 md:grid-cols-3" stagger={0.1}>
+          {skillGroups.map((group) => {
+            const Icon = group.icon;
             return (
-              <motion.div
-                key={group.category}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-              >
-                <Card className="group h-full overflow-hidden border-border/60 shadow-sm transition-shadow hover:shadow-md">
-                  <div
-                    className={`h-1.5 w-full bg-gradient-to-r ${accent.bar}`}
-                  />
-                  <CardContent className="p-6">
-                    <div
-                      className={`flex h-12 w-12 items-center justify-center rounded-xl ${accent.icon}`}
-                    >
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="mt-4 text-lg font-semibold">
-                      {group.category}
-                    </h3>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {group.skills.map((skill) => (
-                        <span
-                          key={skill}
-                          className={`rounded-full px-3 py-1 text-xs font-medium ${accent.chip}`}
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+              <StaggerItem key={group.category}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="h-full"
+                >
+                  <Card className="group h-full overflow-hidden border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-md hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30">
+                    <div className="h-1 w-full bg-amber-500" />
+                    <CardContent className="p-6">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <h3 className="mt-4 text-lg font-semibold">
+                        {group.category}
+                      </h3>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {group.skills.map((skill) => (
+                          <motion.span
+                            key={skill}
+                            whileHover={{ scale: 1.08 }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 400,
+                              damping: 17,
+                            }}
+                            className="cursor-default rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground/80 transition-colors hover:border-amber-400 hover:bg-amber-50 hover:text-amber-700 dark:hover:border-amber-700 dark:hover:bg-amber-950/40 dark:hover:text-amber-300"
+                          >
+                            {skill}
+                          </motion.span>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerGroup>
       </div>
     </section>
   );

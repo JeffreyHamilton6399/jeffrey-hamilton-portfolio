@@ -1,47 +1,36 @@
 "use client";
 
-import { motion } from "framer-motion";
+import * as React from "react";
+import { Reveal } from "./reveal";
 
 export function SectionHeading({
   eyebrow,
   title,
   description,
+  align = "center",
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
+  align?: "center" | "left";
 }) {
+  const alignment =
+    align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl text-left";
   return (
-    <div className="mx-auto max-w-2xl text-center">
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.4 }}
-        className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-600 dark:text-amber-500"
-      >
-        {eyebrow}
-      </motion.p>
-      <motion.h2
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.45, delay: 0.05 }}
-        className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl"
-      >
-        {title}
-      </motion.h2>
-      {description ? (
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.45, delay: 0.1 }}
-          className="mt-4 text-base leading-relaxed text-muted-foreground"
-        >
-          {description}
-        </motion.p>
+    <Reveal className={alignment}>
+      {eyebrow ? (
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-600 dark:text-amber-500">
+          {eyebrow}
+        </p>
       ) : null}
-    </div>
+      <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+        {title}
+      </h2>
+      {description ? (
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+          {description}
+        </p>
+      ) : null}
+    </Reveal>
   );
 }

@@ -16,27 +16,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alex Carter — Professional Portfolio",
+  title: "Jeffrey Hamilton — Digital Designer · Blackbelt · Builder",
   description:
-    "Portfolio of Alex Carter, a dedicated young professional with experience across farm operations, martial arts instruction, and retail customer service.",
+    "Portfolio of Jeffrey Hamilton — a 17-year-old designer, developer, martial arts instructor, and YouTube creator. Browser-first tools, shipped projects, and work that just works.",
   keywords: [
-    "Alex Carter",
+    "Jeffrey Hamilton",
     "portfolio",
-    "resume",
+    "digital designer",
+    "developer",
     "martial arts instructor",
-    "customer service",
-    "farm operations",
+    "YouTube creator",
     "Bobby Lawrence Karate",
-    "Day's Market Place",
+    "browser tools",
+    "Next.js",
   ],
-  authors: [{ name: "Alex Carter" }],
+  authors: [{ name: "Jeffrey Hamilton" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
   openGraph: {
-    title: "Alex Carter — Professional Portfolio",
+    title: "Jeffrey Hamilton — Digital Designer · Blackbelt · Builder",
     description:
-      "Hardworking, reliable, and people-focused. Experience across agriculture, martial arts instruction, and retail.",
+      "Designer, developer, blackbelt, and YouTube creator. Browser-first tools and shipped projects.",
     type: "profile",
   },
 };

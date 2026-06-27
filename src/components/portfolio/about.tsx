@@ -1,113 +1,85 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, Heart, Sparkles } from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { profile } from "@/lib/portfolio-data";
+import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
-const values = [
-  {
-    icon: Briefcase,
-    title: "Show up, every day",
-    text: "Reliability is my baseline. Early mornings and consistent effort are second nature to me.",
-  },
-  {
-    icon: Heart,
-    title: "People first",
-    text: "From customers to karate students, I treat everyone with patience, respect, and a positive attitude.",
-  },
-  {
-    icon: Sparkles,
-    title: "Always learning",
-    text: "I pick things up quickly and look for ways to improve — whether it's a new skill or a better process.",
-  },
+const facts = [
+  { k: "Age", v: "17" },
+  { k: "Based", v: "Utah" },
+  { k: "Working since", v: "2018" },
+  { k: "Tools shipped", v: "9" },
 ];
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-20 py-20 sm:py-24">
+    <section id="about" className="scroll-mt-20 py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
-          eyebrow="About me"
-          title="A little about who I am"
+          eyebrow="About"
+          title="A little about me"
+          align="left"
         />
 
-        <div className="mt-12 grid gap-8 md:grid-cols-5">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5 }}
-            className="md:col-span-3"
-          >
-            <Card className="h-full border-border/60 shadow-sm">
-              <CardContent className="p-6 sm:p-8">
-                <p className="text-lg leading-relaxed text-foreground/90">
-                  {profile.summary}
-                </p>
-                <p className="mt-4 leading-relaxed text-muted-foreground">
-                  Whether I&apos;m feeding hens at dawn, leading a karate class
-                  full of energized kids, or helping a customer find what they
-                  need at the market, I bring the same energy:{" "}
-                  <span className="font-medium text-foreground">
-                    be dependable, be kind, and do the work well.
-                  </span>
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+        <div className="mt-12 grid gap-10 md:grid-cols-12">
+          {/* Narrative — takes 7 cols, intentionally asymmetric */}
+          <Reveal className="md:col-span-7" y={18}>
+            <div className="space-y-5 text-lg leading-relaxed text-foreground/85">
+              <p>
+                I&apos;m{" "}
+                <span className="font-semibold text-foreground">
+                  Jeffrey Hamilton
+                </span>
+                . I&apos;m 17, and I&apos;ve been working since I was old enough
+                to carry an egg basket.
+              </p>
+              <p>
+                These days I split my time between teaching karate at Bobby
+                Lawrence, helping out at Day&apos;s Market, building small tools
+                that run in the browser, and making YouTube videos. None of it
+                came from a bootcamp or a fancy program — I just kept showing up
+                and figuring things out.
+              </p>
+              <p className="text-muted-foreground">
+                I like the kind of work where you can point at something at the
+                end of the day and say{" "}
+                <span className="text-foreground">I made that</span>. A clean
+                edit, a kid who finally lands a kick, a tool that loads in under
+                a second — same feeling.
+              </p>
+            </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="md:col-span-2"
-          >
-            <Card className="h-full border-border/60 bg-gradient-to-br from-amber-50 to-orange-50 shadow-sm dark:from-amber-950/30 dark:to-orange-950/20">
-              <CardContent className="grid grid-cols-2 gap-4 p-6 sm:p-8">
-                {profile.stats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-xl border border-border/50 bg-background/60 p-4 text-center"
-                  >
-                    <p className="bg-gradient-to-br from-amber-600 to-orange-600 bg-clip-text text-3xl font-bold text-transparent">
-                      {stat.value}
-                    </p>
-                    <p className="mt-1 text-xs font-medium text-muted-foreground">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
+            <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-4">
+              {facts.map((f) => (
+                <div key={f.k} className="bg-background p-4">
+                  <dt className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                    {f.k}
+                  </dt>
+                  <dd className="mt-1 text-lg font-semibold">{f.v}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-3">
-          {values.map((value, i) => (
-            <motion.div
-              key={value.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.45, delay: i * 0.08 }}
-            >
-              <Card className="h-full border-border/60 shadow-sm transition-shadow hover:shadow-md">
-                <CardContent className="p-6">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300">
-                    <value.icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="mt-4 text-base font-semibold">{value.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {value.text}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+          {/* Big pull-quote — intentionally larger, breaks symmetry */}
+          <Reveal className="md:col-span-5" delay={0.1} y={26}>
+            <figure className="flex h-full flex-col justify-center rounded-2xl border border-amber-200/70 bg-amber-50/60 p-7 dark:border-amber-900/40 dark:bg-amber-950/20">
+              <span
+                aria-hidden
+                className="font-serif text-6xl leading-none text-amber-500"
+              >
+                &ldquo;
+              </span>
+              <blockquote className="-mt-4 text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
+                {profile.quote}
+              </blockquote>
+              <figcaption className="mt-4 text-sm font-medium text-muted-foreground">
+                — {profile.name}
+              </figcaption>
+            </figure>
+          </Reveal>
         </div>
       </div>
     </section>

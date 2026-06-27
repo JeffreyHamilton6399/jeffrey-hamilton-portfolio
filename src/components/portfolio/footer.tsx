@@ -1,30 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { Heart } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  Github,
+  Linkedin,
+  Youtube,
+  Coffee,
+  ArrowUp,
+  type LucideIcon,
+} from "lucide-react";
 
-import { profile, navLinks } from "@/lib/portfolio-data";
+import { profile, socials, navLinks } from "@/lib/portfolio-data";
+
+const footerSocials: { label: string; href: string; icon: LucideIcon }[] = [
+  { label: "GitHub", href: socials.github, icon: Github },
+  { label: "LinkedIn", href: socials.linkedin, icon: Linkedin },
+  { label: "YouTube", href: socials.youtube, icon: Youtube },
+  { label: "Buy Me a Coffee", href: socials.buymeacoffee, icon: Coffee },
+];
 
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-border/60 bg-background">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <div className="flex flex-col items-center gap-6 md:flex-row md:items-start md:justify-between">
-          <div className="text-center md:text-left">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-between">
+          <div className="max-w-xs text-center md:text-left">
             <Link href="#top" className="inline-flex items-center gap-2.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-sm font-bold text-white shadow-sm">
-                {profile.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-sm font-bold text-background">
+                JH
               </span>
               <span className="text-sm font-semibold tracking-tight">
                 {profile.name}
               </span>
             </Link>
-            <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-              {profile.title} — building a future on hard work, discipline, and
-              a genuine love for people.
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {profile.tagline}
             </p>
           </div>
 
@@ -39,17 +50,37 @@ export function Footer() {
               </Link>
             ))}
           </nav>
+
+          <div className="flex items-center gap-2">
+            {footerSocials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-amber-400 hover:text-amber-600 dark:hover:border-amber-700"
+              >
+                <s.icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-center text-xs text-muted-foreground sm:flex-row sm:text-left">
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-6 text-center text-xs text-muted-foreground sm:flex-row sm:text-left">
           <p>
-            © {new Date().getFullYear()} {profile.name}. All rights reserved.
+            © {new Date().getFullYear()} {profile.name}. Built by hand, deployed
+            on Vercel.
           </p>
-          <p className="inline-flex items-center gap-1.5">
-            Built with
-            <Heart className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
-            using Next.js &amp; Tailwind CSS
-          </p>
+          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.96 }}>
+            <Link
+              href="#top"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border/60 px-3 py-1.5 font-medium transition-colors hover:border-amber-400 hover:text-foreground"
+            >
+              Back to top
+              <ArrowUp className="h-3.5 w-3.5" />
+            </Link>
+          </motion.div>
         </div>
       </div>
     </footer>
