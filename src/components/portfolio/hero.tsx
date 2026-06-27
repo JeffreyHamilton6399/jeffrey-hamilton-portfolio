@@ -43,7 +43,8 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05, ease: EASE }}
-            className="mt-5 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl"
+            className="mt-5 font-bold tracking-tight"
+            style={{ fontSize: "clamp(1.8rem, 5vw, 3.5rem)" }}
           >
             {profile.firstName}{" "}
             <span className="text-amber-600 dark:text-amber-500">Hamilton</span>

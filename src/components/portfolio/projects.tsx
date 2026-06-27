@@ -78,9 +78,10 @@ function ProjectCard({ project }: { project: Project }) {
           <div className="absolute inset-0">
             <Image
               src={project.media!.src}
-              alt={project.name}
+              alt={`${project.name} floor plan`}
               fill
               unoptimized
+              loading="lazy"
               sizes="(max-width: 768px) 100vw, 40vw"
               className="object-cover opacity-40 transition-opacity duration-300 group-hover:opacity-55"
             />
@@ -91,9 +92,10 @@ function ProjectCard({ project }: { project: Project }) {
           <div className="absolute inset-0">
             <Image
               src={roboticsImage}
-              alt={project.name}
+              alt={`${project.name} robot`}
               fill
               unoptimized
+              loading="lazy"
               sizes="(max-width: 768px) 100vw, 40vw"
               className="object-cover opacity-45 transition-opacity duration-300 group-hover:opacity-60"
             />

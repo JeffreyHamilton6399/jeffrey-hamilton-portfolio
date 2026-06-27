@@ -124,7 +124,7 @@ export function SidebarNav() {
         type="button"
         onClick={() => setDrawerOpen(true)}
         aria-label="Open navigation menu"
-        className="fixed left-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-lg border border-border/70 bg-background/80 text-foreground shadow-sm backdrop-blur md:hidden"
+        className="fixed left-4 top-4 z-40 flex h-11 w-11 items-center justify-center rounded-lg border border-border/70 bg-background/80 text-foreground shadow-sm backdrop-blur md:hidden"
       >
         <Menu className="h-5 w-5" />
       </button>
@@ -173,7 +173,7 @@ export function SidebarNav() {
                       key={link.id}
                       href={link.href}
                       onClick={() => setDrawerOpen(false)}
-                      className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                      className={`flex items-center gap-3 rounded-lg px-6 py-4 text-base font-medium transition-colors ${
                         isActive
                           ? "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300"
                           : "text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -191,7 +191,7 @@ export function SidebarNav() {
                 <Link
                   href="#top"
                   onClick={() => setDrawerOpen(false)}
-                  className="mt-2 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  className="mt-2 flex items-center gap-3 rounded-lg px-6 py-4 text-base font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                 >
                   <ArrowUp className="h-3.5 w-3.5" />
                   Back to top

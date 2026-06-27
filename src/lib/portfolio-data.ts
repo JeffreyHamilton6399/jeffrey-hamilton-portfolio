@@ -15,8 +15,6 @@ import {
   Clapperboard,
   Building2,
   GraduationCap,
-  Globe,
-  ExternalLink,
   Swords,
 } from "lucide-react";
 
@@ -124,7 +122,7 @@ export const toolsBanner = {
   pills: [
     "ShrinkRay",
     "ConvertIt",
-    "Hummingbird",
+    "MergePDF",
     "Cutout",
     "DevToys",
     "ExifErase",
@@ -348,13 +346,3 @@ export const skillBlocks: SkillBlock[] = [
     body: "Real job, real customers, real pressure. Day's Market, Apr 2026–present.",
   },
 ];
-
-export const contactSocials = [
-  { label: "GitHub", href: socials.github, key: "github" as const },
-  { label: "LinkedIn", href: socials.linkedin, key: "linkedin" as const },
-  { label: "Buy Me a Coffee", href: socials.buymeacoffee, key: "coffee" as const },
-  { label: "YouTube", href: socials.youtube, key: "youtube" as const },
-];
-
-// re-export a couple of icons used directly by footer/elsewhere
-export const footerIcons = { Globe, ExternalLink };

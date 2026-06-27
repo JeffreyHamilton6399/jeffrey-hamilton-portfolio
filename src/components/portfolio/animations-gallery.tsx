@@ -35,6 +35,7 @@ function AnimationTile({
           alt=""
           fill
           unoptimized
+          loading="lazy"
           sizes="(max-width: 640px) 28vw, 18vw"
           className="object-cover"
           onError={() => setFailed(true)}
@@ -46,6 +47,7 @@ function AnimationTile({
           loop
           muted
           playsInline
+          preload="none"
           className="h-full w-full object-cover"
           onError={() => setFailed(true)}
         >
