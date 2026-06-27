@@ -174,8 +174,7 @@ export const projects: Project[] = [
   },
   {
     name: "Echo Heist",
-    description:
-      "A browser-based game built entirely in a single HTML file. No install, no setup — just open and play.",
+    description: "A single-file browser game. No install — just open and play.",
     // Update to hosted URL when available
     link: "/echo-heist.html",
     openNewTab: true,
