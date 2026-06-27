@@ -366,3 +366,19 @@ Stage Summary:
 - Lint clean, dev server 200, no console errors.
 - Browser-verified: 9 carousel cards present, 2 arrows on desktop, 0 visible arrows on mobile, heading "Certifications", mobile card size 160x210px, desktop cards 200x260px, snap scroll working, View button + overlay confirmed in DOM (opacity-0 group-hover:opacity-100).
 - Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 9497321).
+
+---
+Task ID: 16
+Agent: Main (Z.ai Code)
+Task: Add Minecraft Mods section (Modrinth) with 4 mods.
+
+Work Log:
+- portfolio-data.ts: added ModProject type + modProjects array (Clean & Fast modpack, KeybindSync, SmartChat Macros, TablistPlus); added Boxes/Keyboard/MessageSquare/ListOrdered icon imports.
+- minecraft-mods.tsx: new section component — 4-col grid desktop / 2-col tablet / 1-col mobile; public mods link to modrinth.com/{kind}/{slug}; TablistPlus shows 'Under Review' badge + 'Pending review' (no link, grayed); same card styling as projects.
+- page.tsx: added MinecraftMods section between Projects and YouTube.
+- Committed (f981534) and pushed to GitHub, token scrubbed.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Browser-verified: all 4 mod cards present with correct names, badges, and Modrinth links (modrinth.com/modpack/eRqJeBz7, /mod/g2Bsv5wQ, /mod/ka0QIooy); TablistPlus shows 'Under Review' + 'Pending review' with no link. Desktop 4-col grid, mobile single column.
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit f981534).
