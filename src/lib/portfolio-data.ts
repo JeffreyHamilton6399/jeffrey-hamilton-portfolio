@@ -16,10 +16,7 @@ import {
   Building2,
   GraduationCap,
   Swords,
-  Boxes,
-  Keyboard,
-  MessageSquare,
-  ListOrdered,
+  Package,
 } from "lucide-react";
 
 export const profile = {
@@ -165,6 +162,17 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    name: "Minecraft Mods",
+    description:
+      "My Minecraft mods and modpacks — Clean & Fast, KeybindSync, SmartChat Macros, and more. All on Modrinth.",
+    link: "https://modrinth.com/user/JeffreyHamilton",
+    ctaLabel: "Visit Modrinth",
+    tag: "Minecraft · Mods",
+    status: "live",
+    icon: Package,
+    span: { col: 1, row: 1 },
+  },
+  {
     name: "Echo Heist",
     description:
       "A browser-based game built entirely in a single HTML file. No install, no setup — just open and play.",
@@ -176,45 +184,6 @@ export const projects: Project[] = [
     status: "live",
     icon: Gamepad2,
     span: { col: 2, row: 1 },
-  },
-  {
-    name: "Clean & Fast",
-    description: "A performance-focused Minecraft modpack — clean, fast, ready to play.",
-    link: "https://modrinth.com/modpack/eRqJeBz7",
-    ctaLabel: "Modrinth",
-    tag: "Minecraft · Modpack",
-    status: "live",
-    icon: Boxes,
-    span: { col: 1, row: 1 },
-  },
-  {
-    name: "KeybindSync",
-    description: "Syncs Minecraft keybinds across installs.",
-    link: "https://modrinth.com/mod/g2Bsv5wQ",
-    ctaLabel: "Modrinth",
-    tag: "Minecraft · Mod",
-    status: "live",
-    icon: Keyboard,
-    span: { col: 1, row: 1 },
-  },
-  {
-    name: "SmartChat Macros",
-    description: "Chat macros for Minecraft — automate your messages.",
-    link: "https://modrinth.com/mod/ka0QIooy",
-    ctaLabel: "Modrinth",
-    tag: "Minecraft · Mod",
-    status: "live",
-    icon: MessageSquare,
-    span: { col: 1, row: 1 },
-  },
-  {
-    name: "TablistPlus",
-    description: "Enhanced Minecraft tab list. Pending Modrinth review.",
-    // No link — under review on Modrinth
-    tag: "Minecraft · Mod",
-    status: "progress",
-    icon: ListOrdered,
-    span: { col: 1, row: 1 },
   },
   {
     name: "SpellFall",
