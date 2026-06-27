@@ -118,6 +118,14 @@
   }
   body {
     @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  /* Smooth theme transition for card surfaces and key elements */
+  [data-slot="card"],
+  [data-slot="card-content"],
+  [data-slot="input"],
+  [data-slot="textarea"] {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
   html {
     scroll-behavior: smooth;

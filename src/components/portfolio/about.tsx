@@ -8,7 +8,7 @@ import { SectionHeading } from "./section-heading";
 
 const facts = [
   { k: "Age", v: "17" },
-  { k: "Based", v: "Utah" },
+  { k: "Belt", v: "Black" },
   { k: "Working since", v: "2018" },
   { k: "Tools shipped", v: "9" },
 ];

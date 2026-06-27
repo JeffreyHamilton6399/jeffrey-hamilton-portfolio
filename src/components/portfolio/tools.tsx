@@ -5,83 +5,80 @@ import { ArrowUpRight, Lock } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { toolsBanner } from "@/lib/portfolio-data";
-import { Reveal } from "./reveal";
 
-export function Tools() {
+/**
+ * Full-width tools banner — rendered inside the Projects section,
+ * above the project card grid. No section wrapper.
+ */
+export function ToolsBanner() {
   return (
-    <section id="tools" className="scroll-mt-20 py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-amber-500/20 bg-zinc-950 px-6 py-14 text-center shadow-2xl sm:px-12 sm:py-20">
-            {/* accent glow */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full bg-amber-500/30 blur-3xl"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-orange-500/25 blur-3xl"
-            />
-            {/* subtle grid texture */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-[0.06]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-                backgroundSize: "44px 44px",
-              }}
-            />
+    <div className="relative overflow-hidden rounded-3xl border border-amber-500/20 bg-zinc-950 px-6 py-14 text-center shadow-2xl sm:px-12 sm:py-16">
+      {/* accent glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full bg-amber-500/30 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-orange-500/25 blur-3xl"
+      />
+      {/* subtle grid texture */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+        }}
+      />
 
-            <div className="relative">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-300">
-                <Lock className="h-3.5 w-3.5" />
-                Privacy by design
-              </span>
+      <div className="relative">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-300">
+          <Lock className="h-3.5 w-3.5" />
+          Privacy by design
+        </span>
 
-              <h2 className="mx-auto mt-6 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
-                {toolsBanner.headline}
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-zinc-300 sm:text-lg">
-                {toolsBanner.subheadline}
-              </p>
+        <h3 className="mx-auto mt-6 max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          {toolsBanner.headline}
+        </h3>
+        <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-zinc-300">
+          {toolsBanner.subheadline}
+        </p>
 
-              {/* inline tool pills */}
-              <div className="mx-auto mt-8 flex max-w-3xl flex-wrap justify-center gap-2">
-                {toolsBanner.pills.map((pill, i) => (
-                  <motion.span
-                    key={pill}
-                    initial={{ opacity: 0, y: 8 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: i * 0.04 }}
-                    className="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm font-medium text-zinc-200 transition-colors hover:border-amber-400/50 hover:text-amber-300"
-                  >
-                    {pill}
-                  </motion.span>
-                ))}
-              </div>
+        {/* inline tool pills */}
+        <div className="mx-auto mt-7 flex max-w-3xl flex-wrap justify-center gap-2">
+          {toolsBanner.pills.map((pill, i) => (
+            <motion.span
+              key={pill}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: i * 0.04 }}
+              className="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-sm font-medium text-zinc-200 transition-colors hover:border-amber-400/50 hover:text-amber-300"
+            >
+              {pill}
+            </motion.span>
+          ))}
+        </div>
 
-              <div className="mt-10">
-                <Button
-                  asChild
-                  size="lg"
-                  className="btn-press bg-amber-500 text-zinc-950 shadow-lg shadow-amber-500/25 hover:bg-amber-400"
-                >
-                  <a
-                    href={toolsBanner.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {toolsBanner.cta}
-                    <ArrowUpRight className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Reveal>
+        <div className="mt-9">
+          <Button
+            asChild
+            size="lg"
+            className="btn-press bg-amber-500 text-zinc-950 shadow-lg shadow-amber-500/25 hover:bg-amber-400"
+          >
+            <a
+              href={toolsBanner.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {toolsBanner.cta}
+              <ArrowUpRight className="ml-2 h-4 w-4" />
+            </a>
+          </Button>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

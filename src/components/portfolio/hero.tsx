@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowDown, Mail, MapPin } from "lucide-react";
+import { ArrowDown, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { profile } from "@/lib/portfolio-data";
@@ -74,10 +74,6 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.7, ease: EASE }}
             className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground"
           >
-            <span className="inline-flex items-center gap-1.5">
-              <MapPin className="h-4 w-4 text-amber-600" />
-              {profile.location}
-            </span>
             <a
               href={`mailto:${profile.email}`}
               className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"

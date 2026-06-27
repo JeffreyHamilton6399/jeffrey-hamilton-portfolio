@@ -1,19 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Lock } from "lucide-react";
+import { ArrowUpRight, Lock } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { projects, projectsTeaser, type Project } from "@/lib/portfolio-data";
 import { SectionHeading } from "./section-heading";
 import { StaggerGroup, StaggerItem } from "./reveal";
-import { AnimationsGallery } from "./animations-gallery";
-
-const spanClass: Record<Project["span"], string> = {
-  wide: "md:col-span-3",
-  normal: "md:col-span-1",
-  gallery: "md:col-span-3",
-};
+import { Reveal } from "./reveal";
+import { ToolsBanner } from "./tools";
 
 const statusBadge: Record<
   Project["status"],
@@ -38,77 +33,7 @@ const statusBadge: Record<
 function ProjectCard({ project }: { project: Project }) {
   const Icon = project.icon;
   const badge = statusBadge[project.status];
-  const isGallery = project.span === "gallery";
-  const isInProgress = project.status === "progress";
-
-  const Inner = (
-    <Card className="group flex h-full flex-col overflow-hidden border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30">
-      <CardContent
-        className={`flex h-full flex-col p-6 sm:p-7 ${
-          project.span === "wide" ? "md:flex-row md:items-center md:gap-8" : ""
-        }`}
-      >
-        <div
-          className={`flex items-start gap-4 ${
-            project.span === "wide" ? "md:flex-col" : ""
-          }`}
-        >
-          <div
-            className={`flex shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300 ${
-              project.span === "wide" ? "h-16 w-16" : "h-12 w-12"
-            }`}
-          >
-            <Icon className={project.span === "wide" ? "h-8 w-8" : "h-5 w-5"} />
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <h3
-                className={`font-semibold ${
-                  project.span === "wide" ? "text-2xl" : "text-lg"
-                }`}
-              >
-                {project.name}
-              </h3>
-              <span
-                className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${badge.className}`}
-              >
-                {badge.label}
-              </span>
-            </div>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              {project.description}
-            </p>
-          </div>
-        </div>
-
-        {isGallery ? (
-          <div className="mt-6">
-            <AnimationsGallery />
-          </div>
-        ) : null}
-
-        {/* link row */}
-        <div className="mt-auto pt-5">
-          {isInProgress ? (
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-              <Lock className="h-3.5 w-3.5" />
-              Details coming soon
-            </span>
-          ) : project.link ? (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
-            >
-              View project
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          ) : null}
-        </div>
-      </CardContent>
-    </Card>
-  );
+  const hasLink = Boolean(project.link);
 
   return (
     <motion.div
@@ -116,7 +41,43 @@ function ProjectCard({ project }: { project: Project }) {
       transition={{ duration: 0.2, ease: "easeOut" }}
       className="h-full"
     >
-      {Inner}
+      <Card className="group flex h-full flex-col overflow-hidden border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30">
+        <CardContent className="flex h-full flex-col p-6">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
+            <Icon className="h-5 w-5" />
+          </div>
+          <div className="mt-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold">{project.name}</h3>
+          </div>
+          <span
+            className={`mt-2 w-fit rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${badge.className}`}
+          >
+            {badge.label}
+          </span>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            {project.description}
+          </p>
+          {/* link button — always at bottom, same position every card */}
+          <div className="mt-auto pt-5">
+            {hasLink ? (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-600 transition-colors hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
+              >
+                View
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            ) : (
+              <span className="inline-flex cursor-not-allowed items-center gap-1.5 text-sm font-semibold text-muted-foreground/50">
+                <Lock className="h-3.5 w-3.5" />
+                Coming Soon
+              </span>
+            )}
+          </div>
+        </CardContent>
+      </Card>
     </motion.div>
   );
 }
@@ -131,15 +92,18 @@ export function Projects() {
           description="Live web apps, school coursework, and builds from digital media, CAD, and robotics. A mix — because I like building a mix."
         />
 
+        {/* Full-width tools banner — featured, above the grid */}
+        <Reveal className="mt-12">
+          <ToolsBanner />
+        </Reveal>
+
+        {/* Uniform project card grid: 3-col desktop / 2-col tablet / 1-col mobile */}
         <StaggerGroup
-          className="mt-12 grid gap-5 md:grid-cols-3"
+          className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
           stagger={0.08}
         >
           {projects.map((project) => (
-            <StaggerItem
-              key={project.name}
-              className={spanClass[project.span]}
-            >
+            <StaggerItem key={project.name} className="h-full">
               <ProjectCard project={project} />
             </StaggerItem>
           ))}

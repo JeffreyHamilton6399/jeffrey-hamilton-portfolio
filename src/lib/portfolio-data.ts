@@ -40,12 +40,11 @@ export const socials = {
   youtubeVR: "https://www.youtube.com/@JeffreyVR6399",
 };
 
-// The sidebar tracks exactly these 6 sections, in this order.
+// The sidebar tracks exactly these 5 sections, in this order.
 export const navLinks = [
   { href: "#about", label: "About", id: "about" },
-  { href: "#tools", label: "Tools", id: "tools" },
-  { href: "#youtube", label: "YouTube", id: "youtube" },
   { href: "#projects", label: "Projects", id: "projects" },
+  { href: "#youtube", label: "YouTube", id: "youtube" },
   { href: "#experience", label: "Experience", id: "experience" },
   { href: "#contact", label: "Contact", id: "contact" },
 ];
@@ -146,7 +145,6 @@ export type Project = {
   tag: string;
   status: ProjectStatus;
   icon: LucideIcon;
-  span: "wide" | "normal" | "gallery";
 };
 
 export const projects: Project[] = [
@@ -158,7 +156,6 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Type,
-    span: "wide",
   },
   {
     name: "PixelParty",
@@ -168,7 +165,6 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Palette,
-    span: "normal",
   },
   {
     name: "Arcadian King",
@@ -178,7 +174,6 @@ export const projects: Project[] = [
     tag: "School Project",
     status: "school",
     icon: Gamepad2,
-    span: "normal",
   },
   {
     name: "School Animations",
@@ -188,7 +183,6 @@ export const projects: Project[] = [
     tag: "School Project",
     status: "school",
     icon: Clapperboard,
-    span: "gallery",
   },
   {
     name: "CAD Housing",
@@ -198,7 +192,6 @@ export const projects: Project[] = [
     tag: "School Project",
     status: "school",
     icon: Building2,
-    span: "normal",
   },
   {
     name: "ATLA HubWork",
@@ -206,7 +199,6 @@ export const projects: Project[] = [
     tag: "School Project",
     status: "progress",
     icon: Users,
-    span: "normal",
   },
   {
     name: "Robotics Builds",
@@ -216,7 +208,6 @@ export const projects: Project[] = [
     tag: "School Project",
     status: "school",
     icon: Bot,
-    span: "wide",
   },
 ];
 

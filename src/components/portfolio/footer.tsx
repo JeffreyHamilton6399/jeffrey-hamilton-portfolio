@@ -11,7 +11,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-import { profile, socials, navLinks } from "@/lib/portfolio-data";
+import { profile, socials } from "@/lib/portfolio-data";
 
 const footerSocials: { label: string; href: string; icon: LucideIcon }[] = [
   { label: "GitHub", href: socials.github, icon: Github },
@@ -39,18 +39,7 @@ export function Footer() {
             </p>
           </div>
 
-          <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
+          {/* Social links — single instance, footer only */}
           <div className="flex items-center gap-2">
             {footerSocials.map((s) => (
               <a
