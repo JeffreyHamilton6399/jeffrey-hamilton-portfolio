@@ -127,3 +127,36 @@ Stage Summary:
 - Token scrubbed from local git config after push.
 - Ready for Vercel: import the repo in Vercel, framework auto-detected as Next.js, no env vars needed (site is fully static).
 - ACTION NEEDED: user should revoke the shared PAT and generate a new one for future use.
+
+---
+Task ID: 6
+Agent: Main (Z.ai Code)
+Task: Part 4 — dark mode default, cleanup, uniform project grid, tools banner inside projects, stripped contact, 5-dot sidebar.
+
+Work Log:
+- layout.tsx: defaultTheme="dark", enableSystem={false}, removed disableTransitionOnChange (to allow smooth transitions).
+- globals.css: added body transition (background-color/color 0.3s ease) + card/input/textarea surface transitions for smooth theme switching.
+- theme-toggle.tsx: rewrote with framer-motion AnimatePresence — icon rotates + crossfades between Sun/Moon (300ms easeInOut).
+- portfolio-data.ts: navLinks reduced to 5 (removed tools); Project type removed `span` field; all 7 projects now uniform (no wide/gallery variants).
+- hero.tsx: removed MapPin + location line (kept email link only).
+- about.tsx: replaced "Based: Utah" fact with "Belt: Black".
+- contact.tsx: fully stripped — removed email card, location card, "Find Me Online" heading + social buttons; kept only centered form (max-width 560px) with Name/Email/Message/Send.
+- tools.tsx: refactored from standalone section to ToolsBanner component (no section wrapper, no id).
+- projects.tsx: integrated ToolsBanner at top (full-width), uniform card grid (3-col desktop / 2-col tablet / 1-col mobile), all cards same structure (icon, name, badge, description, link), cards without link show grayed "Coming Soon", removed AnimationsGallery usage.
+- page.tsx: removed standalone Tools section, reordered to Hero→About→Projects→YouTube→Experience→Education→Skills→Contact.
+- footer.tsx: removed redundant nav links row (sidebar handles section nav), kept socials as single source + back-to-top.
+- Committed and pushed to GitHub (commit fa230a4), token scrubbed after push.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Browser-verified:
+  - Dark mode default: html class="dark" on load, no flash.
+  - Toggle works: dark→light→dark confirmed, icon animates.
+  - Hero: no "Based in Utah", email visible, circular photo.
+  - Projects: full-width tools banner at top + uniform 3-col card grid, all same height/structure.
+  - ATLA HubWork shows grayed "Coming Soon".
+  - Contact: only centered form, no socials/info cards.
+  - Sidebar: exactly 5 dots confirmed.
+  - Mobile 390px: hamburger top-left, hero readable, cards stack 1-col, banner full-width.
+  - Light mode also renders cleanly.
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit fa230a4).
