@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Menu, X, ArrowUp } from "lucide-react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { ArrowUp } from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
-import { navLinks, profile } from "@/lib/portfolio-data";
+import { navLinks } from "@/lib/portfolio-data";
 
 function useScrollSpy(ids: string[], offset = 140) {
   const [active, setActive] = React.useState<string>(ids[0] ?? "");
@@ -43,7 +43,6 @@ function useScrollSpy(ids: string[], offset = 140) {
 
 export function SidebarNav() {
   const active = useScrollSpy(navLinks.map((n) => n.id));
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
@@ -51,6 +50,15 @@ export function SidebarNav() {
     damping: 26,
     restDelta: 0.001,
   });
+
+  // Floating back-to-top: appears after 400px scroll, hidden on mobile
+  const [showTop, setShowTop] = React.useState(false);
+  React.useEffect(() => {
+    const handleScroll = () => setShowTop(window.scrollY > 400);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -97,20 +105,6 @@ export function SidebarNav() {
               </Link>
             );
           })}
-
-          {/* Back to top — natural spacing, no separator */}
-          <Link
-            href="#top"
-            className="group relative mt-3 flex h-3 w-3 items-center justify-center"
-            aria-label="Back to top"
-          >
-            <span className="flex h-3 w-3 items-center justify-center text-muted-foreground/60 transition-colors duration-200 group-hover:text-amber-500">
-              <ArrowUp className="h-3 w-3" />
-            </span>
-            <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border/70 bg-background/95 px-2 py-0.5 text-xs font-medium text-foreground opacity-0 shadow-sm backdrop-blur transition-all duration-200 group-hover:left-6 group-hover:opacity-100">
-              Back to top
-            </span>
-          </Link>
         </div>
       </nav>
 
@@ -119,93 +113,21 @@ export function SidebarNav() {
         <ThemeToggle />
       </div>
 
-      {/* ---------- Mobile: hamburger top-left + slide-in drawer ---------- */}
-      <button
+      {/* ---------- Floating back-to-top (desktop only, after 400px scroll) ---------- */}
+      <motion.button
         type="button"
-        onClick={() => setDrawerOpen(true)}
-        aria-label="Open navigation menu"
-        className="fixed left-4 top-4 z-40 flex h-11 w-11 items-center justify-center rounded-lg border border-border/70 bg-background/80 text-foreground shadow-sm backdrop-blur md:hidden"
+        onClick={() =>
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        }
+        aria-label="Back to top"
+        initial={false}
+        animate={{ opacity: showTop ? 1 : 0, y: showTop ? 0 : 8 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        style={{ pointerEvents: showTop ? "auto" : "none" }}
+        className="fixed bottom-8 right-8 z-50 hidden h-10 w-10 items-center justify-center rounded-full bg-amber-500 text-white shadow-lg shadow-amber-500/30 transition-colors hover:bg-amber-600 md:flex"
       >
-        <Menu className="h-5 w-5" />
-      </button>
-
-      <AnimatePresence>
-        {drawerOpen ? (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              onClick={() => setDrawerOpen(false)}
-              className="fixed inset-0 z-50 bg-background/60 backdrop-blur-sm md:hidden"
-            />
-            <motion.aside
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "spring", stiffness: 320, damping: 32 }}
-              className="fixed left-0 top-0 z-50 flex h-full w-72 max-w-[82vw] flex-col border-r border-border bg-background p-6 shadow-xl md:hidden"
-            >
-              <div className="flex items-center justify-between">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-sm font-bold text-background">
-                  JH
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setDrawerOpen(false)}
-                  aria-label="Close navigation menu"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-
-              <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                {profile.name}
-              </p>
-
-              <nav className="mt-3 flex flex-col gap-1">
-                {navLinks.map((link) => {
-                  const isActive = active === link.id;
-                  return (
-                    <Link
-                      key={link.id}
-                      href={link.href}
-                      onClick={() => setDrawerOpen(false)}
-                      className={`flex items-center gap-3 rounded-lg px-6 py-4 text-base font-medium transition-colors ${
-                        isActive
-                          ? "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300"
-                          : "text-muted-foreground hover:bg-accent hover:text-foreground"
-                      }`}
-                    >
-                      <span
-                        className={`h-2 w-2 rounded-full ${
-                          isActive ? "bg-amber-500" : "bg-muted-foreground/30"
-                        }`}
-                      />
-                      {link.label}
-                    </Link>
-                  );
-                })}
-                <Link
-                  href="#top"
-                  onClick={() => setDrawerOpen(false)}
-                  className="mt-2 flex items-center gap-3 rounded-lg px-6 py-4 text-base font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                >
-                  <ArrowUp className="h-3.5 w-3.5" />
-                  Back to top
-                </Link>
-              </nav>
-
-              <div className="mt-auto flex items-center justify-between pt-6">
-                <span className="text-xs text-muted-foreground">Theme</span>
-                <ThemeToggle />
-              </div>
-            </motion.aside>
-          </>
-        ) : null}
-      </AnimatePresence>
+        <ArrowUp className="h-4 w-4" />
+      </motion.button>
     </>
   );
 }

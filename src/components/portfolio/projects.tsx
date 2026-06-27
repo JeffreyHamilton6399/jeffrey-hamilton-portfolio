@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Lock, ExternalLink, FileText } from "lucide-react";
+import { ArrowUpRight, Lock, ExternalLink } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { projects, type Project } from "@/lib/portfolio-data";
@@ -152,15 +152,14 @@ function ProjectCard({ project }: { project: Project }) {
                   <ExternalLink className="h-3 w-3" />
                 </button>
               ) : isCad ? (
-                // CAD Housing — opens PDF in new tab
+                // CAD Housing — links to Drive folder (PDF is background only)
                 <button
                   type="button"
                   onClick={() =>
-                    window.open("/cad-housing.pdf", "_blank", "noopener,noreferrer")
+                    window.open(project.link, "_blank", "noopener,noreferrer")
                   }
                   className="inline-flex items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold text-amber-400 transition-colors hover:text-amber-300"
                 >
-                  <FileText className="h-3 w-3" />
                   {buttonLabel}
                   <ArrowUpRight className="h-3 w-3" />
                 </button>

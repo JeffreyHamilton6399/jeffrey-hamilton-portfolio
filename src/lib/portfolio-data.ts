@@ -228,11 +228,11 @@ export const projects: Project[] = [
     description:
       "Architectural design projects built in CAD software for my Architectural Design coursework.",
     link: "https://drive.google.com/drive/folders/1r71Wdb5uY_n4Q6YD1srzxSA3QBqubkqv",
-    ctaLabel: "Open PDF",
+    ctaLabel: "View Project",
     tag: "School Project",
     status: "school",
     icon: Building2,
-    // Drop CAD-housing.pdf into project root and update src
+    // Drop cad-housing.pdf into /public — used as card background only (rendered to png)
     media: { kind: "cad", src: "/cad-housing.png" },
     span: { col: 2, row: 1 },
   },
