@@ -170,7 +170,7 @@ export const projects: Project[] = [
     tag: "Minecraft · Mods",
     status: "live",
     icon: Package,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "Echo Heist",
@@ -183,7 +183,7 @@ export const projects: Project[] = [
     tag: "Live Project · Playable",
     status: "live",
     icon: Gamepad2,
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "SpellFall",
