@@ -265,3 +265,26 @@ Stage Summary:
   - Robotics Builds: robot photo as background with text overlay.
   - Sidebar: transparent, hollow/filled dots, no separator, back-to-top with natural spacing, hidden on mobile.
 - Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 354c7f1).
+
+---
+Task ID: 11
+Agent: Main (Z.ai Code)
+Task: Part 10 — JH favicon, mobile polish, card text fixes (Avatar Archive, Echo Heist, PixelParty).
+
+Work Log:
+- Created public/favicon.svg (32x32, slate bg #0f172a, amber JH text #f59e0b) and public/favicon.ico (multi-size 16/32/48 via PIL). Updated layout.tsx icons array to reference both.
+- portfolio-data.ts: shortened Avatar Archive description to 'Everything ATLA in one place — lore, episodes, books, characters. Email me for the source code 😉'; increased PixelParty span to {col:1, row:2}.
+- projects.tsx: removed min-h-[200px] from Card (was creating Echo Heist gap); non-image cards now use overflow-visible (was overflow-hidden, clipping PixelParty text); image cards (CAD/Robotics) keep overflow-hidden for background images.
+- footer.tsx: mobile now stacks to 2 centered rows (flex-col items-center) — row 1 name+date, row 2 icon buttons; 3-col grid only on md+.
+- contact.tsx: inputs h-11 (44px tap target), textarea min-h-[120px], Send button w-full on mobile (sm:w-auto).
+- tools.tsx: CTA button w-full on mobile (sm:w-auto), added px-4 mobile padding.
+- Committed (97031c6) and pushed to GitHub, token scrubbed.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Favicon: both favicon.svg and favicon.ico serve 200, referenced in <head> with correct types.
+- Browser-verified:
+  - Desktop: PixelParty full description visible + View Project button (overflow visible); Avatar Archive shortened desc + button visible; Echo Heist minimal gap to Play button.
+  - Mobile (390px): hero stacks vertically centered, typewriter wraps, buttons stack; projects single-col full-width auto-height no clipping; tools banner pills wrap + full-width button; footer 2 centered rows; contact form full-width inputs 44px+ tall + full-width Send button.
+  - Sidebar hidden on mobile, hamburger drawer works.
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 97031c6).
