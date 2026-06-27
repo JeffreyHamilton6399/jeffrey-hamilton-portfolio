@@ -243,3 +243,25 @@ Stage Summary:
   - School Animations: tiles autoplay silently, no lightbox/play overlay.
   - Avatar Archive: description includes 'Email me for the source code 😉'.
 - Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 940d77c).
+
+---
+Task ID: 10
+Agent: Main (Z.ai Code)
+Task: Part 9 — remove animation tile text, varied 6-col project grid with image-backed cards, clean transparent sidebar.
+
+Work Log:
+- animations-gallery.tsx: removed all text labels (no title, no number, no overlay text); tiles are just silent autoplay video/GIF with object-cover; plain dark rectangle (no icon, no label) on load failure; removed Film icon import.
+- portfolio-data.ts: added `span: {col, row}` to Project type; assigned spans: Echo Heist 3x2, SpellFall 2x2, PixelParty 1x1, Arcadian King 2x1, Avatar Archive 2x1, School Animations 2x2, CAD Housing 2x1, Robotics Builds 2x1.
+- projects.tsx: 6-column grid (lg:grid-cols-6 lg:auto-rows-[200px]) with varied spans via static COL_SPAN/ROW_SPAN maps (so Tailwind JIT generates classes); CAD + Robotics cards now use image as background with dark gradient overlay + text on top; School Animations keeps inline gallery; button pinned bottom via mt-auto; mobile collapses to 1 col. Removed RoboticsGallery import (robotics now image-backed).
+- sidebar-nav.tsx: rebuilt clean — transparent (no bg/border/box), smaller dots (h-2 w-2) hollow when inactive / filled amber when active, labels as tooltips on hover only, muted track + animated amber progress fill, back-to-top arrow with mt-3 natural spacing (no separator line), hidden on mobile (md:block).
+- Committed (354c7f1) and pushed to GitHub, token scrubbed.
+
+Stage Summary:
+- Lint clean, dev server 200, no console errors.
+- Browser-verified:
+  - Animation tiles: no text labels, just autoplaying GIFs filling tiles.
+  - Projects grid: varied sizes confirmed (Echo Heist largest 3x2, SpellFall 2x2, PixelParty small 1x1); tools banner full-width above.
+  - CAD Housing: floor-plan image as background with dark gradient + readable text overlay + Open PDF button (DOM-confirmed).
+  - Robotics Builds: robot photo as background with text overlay.
+  - Sidebar: transparent, hollow/filled dots, no separator, back-to-top with natural spacing, hidden on mobile.
+- Pushed to github.com/JeffreyHamilton6399/jeffrey-hamilton-portfolio (commit 354c7f1).
