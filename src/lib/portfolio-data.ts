@@ -156,6 +156,8 @@ export type Project = {
   openNewTab?: boolean;
   // Inline media shown inside the card body
   media?: ProjectMedia;
+  // Grid span on desktop (6-col base). Mobile always collapses to 1 col.
+  span: { col: number; row: number };
 };
 
 export const projects: Project[] = [
@@ -170,6 +172,7 @@ export const projects: Project[] = [
     tag: "Live Project · Playable",
     status: "live",
     icon: Gamepad2,
+    span: { col: 3, row: 2 },
   },
   {
     name: "SpellFall",
@@ -179,6 +182,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Type,
+    span: { col: 2, row: 2 },
   },
   {
     name: "PixelParty",
@@ -188,6 +192,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Palette,
+    span: { col: 1, row: 1 },
   },
   {
     name: "Arcadian King",
@@ -197,6 +202,7 @@ export const projects: Project[] = [
     tag: "School Project · Unity",
     status: "school",
     icon: Gamepad2,
+    span: { col: 2, row: 1 },
   },
   {
     name: "Avatar Archive",
@@ -206,6 +212,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Swords,
+    span: { col: 2, row: 1 },
   },
   {
     name: "School Animations",
@@ -216,6 +223,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Clapperboard,
     media: { kind: "animations" },
+    span: { col: 2, row: 2 },
   },
   {
     name: "CAD Housing",
@@ -227,6 +235,7 @@ export const projects: Project[] = [
     icon: Building2,
     // Drop CAD-housing.pdf into project root and update src
     media: { kind: "cad", src: "/cad-housing.png" },
+    span: { col: 2, row: 1 },
   },
   {
     name: "Robotics Builds",
@@ -237,6 +246,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Bot,
     media: { kind: "robotics" },
+    span: { col: 2, row: 1 },
   },
 ];
 

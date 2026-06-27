@@ -2,17 +2,15 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { Film } from "lucide-react";
 
-// DROP ANIMATION FILES HERE and replace src paths.
-// GIFs autoplay natively. For .mp4/.webm files, a <video> tag is used
-// with autoplay loop muted playsinline so they play silently like a GIF.
-// Add new entries to show more tiles.
+// Drop animation files here — no titles needed.
+// GIFs autoplay natively. For .mp4/.webm files, set type to "video"
+// and a <video autoplay loop muted playsinline> tag is used.
 const animationFiles = [
-  { src: "/animations/TimpviewLogo3.gif", label: "Animation 1", type: "gif" as const },
-  { src: "/animations/TimpviewLogo4.gif", label: "Animation 2", type: "gif" as const },
-  { src: "/animations/TimpviewLogo5.gif", label: "Animation 3", type: "gif" as const },
-  { src: "/animations/TimpviewLogo6TBirdTV.gif", label: "Animation 4", type: "gif" as const },
+  { src: "/animations/TimpviewLogo3.gif", type: "gif" as const },
+  { src: "/animations/TimpviewLogo4.gif", type: "gif" as const },
+  { src: "/animations/TimpviewLogo5.gif", type: "gif" as const },
+  { src: "/animations/TimpviewLogo6TBirdTV.gif", type: "gif" as const },
 ];
 
 function AnimationTile({
@@ -23,23 +21,18 @@ function AnimationTile({
   const [failed, setFailed] = React.useState(false);
 
   if (failed) {
-    // Dark placeholder shown if file fails to load
+    // Plain dark rectangle — no label, no icon, nothing
     return (
-      <div className="relative aspect-square overflow-hidden rounded-lg border border-white/10 bg-zinc-900">
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-zinc-600">
-          <Film className="h-5 w-5" />
-          <span className="text-[10px] font-medium">{file.label}</span>
-        </div>
-      </div>
+      <div className="relative aspect-square overflow-hidden rounded-lg bg-zinc-900" />
     );
   }
 
   return (
-    <div className="relative aspect-square overflow-hidden rounded-lg border border-white/10 bg-zinc-900">
+    <div className="relative aspect-square overflow-hidden rounded-lg bg-zinc-900">
       {file.type === "gif" ? (
         <Image
           src={file.src}
-          alt={file.label}
+          alt=""
           fill
           unoptimized
           sizes="(max-width: 640px) 28vw, 18vw"
@@ -59,9 +52,6 @@ function AnimationTile({
           <source src={file.src} type="video/mp4" />
         </video>
       )}
-      <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-2 py-1 text-left text-[10px] font-medium text-white">
-        {file.label}
-      </span>
     </div>
   );
 }
@@ -69,9 +59,9 @@ function AnimationTile({
 // Memoized so tiles never re-mount on parent renders.
 const Tiles = React.memo(function Tiles() {
   return (
-    <div className="grid grid-cols-3 gap-2.5 sm:grid-cols-4">
-      {animationFiles.map((file) => (
-        <AnimationTile key={file.label} file={file} />
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      {animationFiles.map((file, i) => (
+        <AnimationTile key={i} file={file} />
       ))}
     </div>
   );

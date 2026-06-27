@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Menu, X, ArrowUp } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { navLinks, profile } from "@/lib/portfolio-data";
 
@@ -55,18 +54,18 @@ export function SidebarNav() {
 
   return (
     <>
-      {/* ---------- Desktop: floating left dot rail ---------- */}
+      {/* ---------- Desktop: transparent floating dot rail ---------- */}
       <nav
         aria-label="Section navigation"
-        className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 md:block"
+        className="fixed left-6 top-1/2 z-40 hidden -translate-y-1/2 md:block"
       >
-        <div className="relative flex flex-col items-center gap-5">
-          {/* muted track */}
+        <div className="relative flex flex-col items-center gap-4">
+          {/* muted track — same color as inactive dots */}
           <div
             aria-hidden
-            className="absolute left-1/2 top-1 h-full w-px -translate-x-1/2 bg-border"
+            className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-muted-foreground/25"
           />
-          {/* animated progress fill */}
+          {/* animated progress fill — accent color, fills as user scrolls */}
           <motion.div
             aria-hidden
             style={{ scaleY: progress }}
@@ -79,43 +78,36 @@ export function SidebarNav() {
               <Link
                 key={link.id}
                 href={link.href}
-                className="group relative flex h-4 w-4 items-center justify-center"
+                className="group relative flex h-3 w-3 items-center justify-center"
                 aria-label={link.label}
                 aria-current={isActive ? "true" : undefined}
               >
-                {/* dot */}
-                <motion.span
-                  layoutId={`dot-${link.id}`}
-                  className={`block h-2.5 w-2.5 rounded-full border transition-colors duration-300 ${
+                {/* dot — hollow when inactive, filled accent when active */}
+                <span
+                  className={`block h-2 w-2 rounded-full border transition-colors duration-200 ${
                     isActive
-                      ? "border-amber-500 bg-amber-500 shadow-[0_0_0_4px_rgba(245,158,11,0.18)]"
-                      : "border-muted-foreground/40 bg-background group-hover:border-amber-500/70"
+                      ? "border-amber-500 bg-amber-500"
+                      : "border-muted-foreground/40 bg-transparent group-hover:border-amber-500/70"
                   }`}
                 />
-                {/* hover tooltip label */}
-                <span className="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border/70 bg-background/95 px-2.5 py-1 text-xs font-medium text-foreground opacity-0 shadow-sm backdrop-blur transition-all duration-200 group-hover:left-7 group-hover:opacity-100">
+                {/* tooltip label — appears on hover only */}
+                <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border/70 bg-background/95 px-2 py-0.5 text-xs font-medium text-foreground opacity-0 shadow-sm backdrop-blur transition-all duration-200 group-hover:left-6 group-hover:opacity-100">
                   {link.label}
                 </span>
               </Link>
             );
           })}
 
-          {/* divider before back-to-top */}
-          <span aria-hidden className="my-1 h-px w-3 bg-border" />
-
-          {/* Back to top — pinned below the dots */}
+          {/* Back to top — natural spacing, no separator */}
           <Link
             href="#top"
-            className="group relative flex h-4 w-4 items-center justify-center"
+            className="group relative mt-3 flex h-3 w-3 items-center justify-center"
             aria-label="Back to top"
           >
-            <motion.span
-              whileHover={{ y: -2 }}
-              className="flex h-4 w-4 items-center justify-center rounded-full border border-muted-foreground/40 text-muted-foreground transition-colors duration-300 group-hover:border-amber-500 group-hover:text-amber-500"
-            >
-              <ArrowUp className="h-2.5 w-2.5" />
-            </motion.span>
-            <span className="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border/70 bg-background/95 px-2.5 py-1 text-xs font-medium text-foreground opacity-0 shadow-sm backdrop-blur transition-all duration-200 group-hover:left-7 group-hover:opacity-100">
+            <span className="flex h-3 w-3 items-center justify-center text-muted-foreground/60 transition-colors duration-200 group-hover:text-amber-500">
+              <ArrowUp className="h-3 w-3" />
+            </span>
+            <span className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border/70 bg-background/95 px-2 py-0.5 text-xs font-medium text-foreground opacity-0 shadow-sm backdrop-blur transition-all duration-200 group-hover:left-6 group-hover:opacity-100">
               Back to top
             </span>
           </Link>
@@ -196,12 +188,18 @@ export function SidebarNav() {
                     </Link>
                   );
                 })}
+                <Link
+                  href="#top"
+                  onClick={() => setDrawerOpen(false)}
+                  className="mt-2 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                >
+                  <ArrowUp className="h-3.5 w-3.5" />
+                  Back to top
+                </Link>
               </nav>
 
               <div className="mt-auto flex items-center justify-between pt-6">
-                <span className="text-xs text-muted-foreground">
-                  Theme
-                </span>
+                <span className="text-xs text-muted-foreground">Theme</span>
                 <ThemeToggle />
               </div>
             </motion.aside>
