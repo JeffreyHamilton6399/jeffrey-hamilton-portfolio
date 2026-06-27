@@ -40,6 +40,7 @@ export const socials = {
   buymeacoffee: "https://buymeacoffee.com/jeffreyscof",
   youtube: "https://www.youtube.com/@Jeffrey_Creates",
   youtubeVR: "https://www.youtube.com/@JeffreyVR6399",
+  modrinth: "https://modrinth.com/user/JeffreyHamilton",
 };
 
 // The sidebar tracks exactly these 5 sections, in this order.
@@ -174,7 +175,46 @@ export const projects: Project[] = [
     tag: "Live Project · Playable",
     status: "live",
     icon: Gamepad2,
-    span: { col: 3, row: 1 },
+    span: { col: 2, row: 1 },
+  },
+  {
+    name: "Clean & Fast",
+    description: "A performance-focused Minecraft modpack — clean, fast, ready to play.",
+    link: "https://modrinth.com/modpack/eRqJeBz7",
+    ctaLabel: "Modrinth",
+    tag: "Minecraft · Modpack",
+    status: "live",
+    icon: Boxes,
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "KeybindSync",
+    description: "Syncs Minecraft keybinds across installs.",
+    link: "https://modrinth.com/mod/g2Bsv5wQ",
+    ctaLabel: "Modrinth",
+    tag: "Minecraft · Mod",
+    status: "live",
+    icon: Keyboard,
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "SmartChat Macros",
+    description: "Chat macros for Minecraft — automate your messages.",
+    link: "https://modrinth.com/mod/ka0QIooy",
+    ctaLabel: "Modrinth",
+    tag: "Minecraft · Mod",
+    status: "live",
+    icon: MessageSquare,
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "TablistPlus",
+    description: "Enhanced Minecraft tab list. Pending Modrinth review.",
+    // No link — under review on Modrinth
+    tag: "Minecraft · Mod",
+    status: "progress",
+    icon: ListOrdered,
+    span: { col: 1, row: 1 },
   },
   {
     name: "SpellFall",
@@ -255,47 +295,6 @@ export const projects: Project[] = [
 ];
 
 export const projectsTeaser = "";
-
-// ---- Minecraft mods & modpacks (Modrinth) ----
-export type ModStatus = "public" | "review";
-export type ModProject = {
-  name: string;
-  slug: string;
-  kind: "mod" | "modpack";
-  status: ModStatus;
-  icon: LucideIcon;
-};
-
-export const modProjects: ModProject[] = [
-  {
-    name: "Clean & Fast",
-    slug: "eRqJeBz7",
-    kind: "modpack",
-    status: "public",
-    icon: Boxes,
-  },
-  {
-    name: "KeybindSync",
-    slug: "g2Bsv5wQ",
-    kind: "mod",
-    status: "public",
-    icon: Keyboard,
-  },
-  {
-    name: "SmartChat Macros",
-    slug: "ka0QIooy",
-    kind: "mod",
-    status: "public",
-    icon: MessageSquare,
-  },
-  {
-    name: "TablistPlus",
-    slug: "cvSaXweW",
-    kind: "mod",
-    status: "review",
-    icon: ListOrdered,
-  },
-];
 
 // ---- YouTube: two compact channels (VR + main) ----
 export type YoutubeChannel = {

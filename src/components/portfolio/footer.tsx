@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Linkedin, Coffee, Github } from "lucide-react";
+import { Linkedin, Coffee, Github, Package } from "lucide-react";
 
 import { profile, socials } from "@/lib/portfolio-data";
 
@@ -9,6 +9,7 @@ const footerButtons = [
   { label: "LinkedIn", href: socials.linkedin, icon: Linkedin },
   { label: "Donate", href: socials.buymeacoffee, icon: Coffee },
   { label: "GitHub", href: socials.github, icon: Github },
+  { label: "Modrinth", href: socials.modrinth, icon: Package },
 ];
 
 // Manually update this date when you redeploy.
