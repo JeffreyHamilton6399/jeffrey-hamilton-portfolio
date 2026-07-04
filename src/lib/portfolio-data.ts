@@ -218,7 +218,7 @@ export const projects: Project[] = [
   },
   {
     name: "Counterpoint",
-    description: "An AI that spars with you on any topic — debate, refine, and sharpen your take.",
+    description: "An AI model that spars with you about certain topics.",
     link: "https://counterpoint-six.vercel.app/",
     tag: "Live Project",
     status: "live",
