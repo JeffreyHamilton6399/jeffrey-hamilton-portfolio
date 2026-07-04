@@ -158,8 +158,11 @@ export type Project = {
   openNewTab?: boolean;
   // Inline media shown inside the card body
   media?: ProjectMedia;
-  // Grid span on desktop (6-col base). Mobile always collapses to 1 col.
+  // Grid span on desktop (6-col base).
   span: { col: number; row: number };
+  // Compact cards render as half-width on mobile (2-col grid),
+  // hiding the description for a clean icon + name + button look.
+  mobileCompact?: boolean;
 };
 
 export const projects: Project[] = [
@@ -185,6 +188,18 @@ export const projects: Project[] = [
     status: "live",
     icon: Gamepad2,
     span: { col: 1, row: 1 },
+    mobileCompact: true,
+  },
+  {
+    name: "PixelParty",
+    description:
+      "Jump in. Claim your canvas. Make something chaotic.",
+    link: "https://pixelparty-eight.vercel.app",
+    tag: "Live Project",
+    status: "live",
+    icon: Palette,
+    span: { col: 1, row: 1 },
+    mobileCompact: true,
   },
   {
     name: "SpellFall",
@@ -197,16 +212,6 @@ export const projects: Project[] = [
     span: { col: 2, row: 1 },
   },
   {
-    name: "PixelParty",
-    description:
-      "Jump in. Claim your canvas. Make something chaotic.",
-    link: "https://pixelparty-eight.vercel.app",
-    tag: "Live Project",
-    status: "live",
-    icon: Palette,
-    span: { col: 1, row: 1 },
-  },
-  {
     name: "Bulletin",
     description:
       "A classifieds board — post, browse, and find what you need.",
@@ -215,6 +220,7 @@ export const projects: Project[] = [
     status: "live",
     icon: Newspaper,
     span: { col: 1, row: 1 },
+    mobileCompact: true,
   },
   {
     name: "Counterpoint",
@@ -224,6 +230,7 @@ export const projects: Project[] = [
     status: "live",
     icon: MessagesSquare,
     span: { col: 1, row: 1 },
+    mobileCompact: true,
   },
   {
     name: "Arcadian King",

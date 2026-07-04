@@ -66,7 +66,7 @@ function ProjectCard({ project }: { project: Project }) {
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className={`${spanClasses(project)} h-full`}
+      className="h-full"
     >
       <Card
         className={`group relative flex h-full flex-col overflow-hidden border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
@@ -115,11 +115,11 @@ function ProjectCard({ project }: { project: Project }) {
           >
             {badge.label}
           </span>
-          {/* Description: flex-shrink-1 so it compresses before the button gets pushed out */}
+          {/* Description: hidden on mobile for compact cards */}
           <p
             className={`shrink text-[0.78rem] leading-[1.4] ${
               isImageCard ? "text-zinc-200" : "text-muted-foreground"
-            }`}
+            } ${project.mobileCompact ? "hidden sm:block" : ""}`}
           >
             {project.description}
           </p>
@@ -219,13 +219,17 @@ export function Projects() {
           <ToolsBanner />
         </Reveal>
 
-        {/* 6-column grid with varied spans on desktop.
-            Mobile: single column, auto height (no fixed rows). */}
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-6 lg:auto-rows-[220px]">
+        {/* Mobile: 2-col grid (compact cards = half width, others = full width).
+            Desktop: 6-col grid with varied spans. */}
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-6 lg:auto-rows-[220px]">
           {projects.map((project) => (
             <Reveal
               key={project.name}
-              className={`h-full ${spanClasses(project)}`}
+              className={`h-full ${
+                project.mobileCompact
+                  ? "col-span-1 sm:col-span-1"
+                  : "col-span-2 sm:col-span-1"
+              } ${spanClasses(project)}`}
             >
               <ProjectCard project={project} />
             </Reveal>
