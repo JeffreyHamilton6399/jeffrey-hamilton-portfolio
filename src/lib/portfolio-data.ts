@@ -17,6 +17,8 @@ import {
   GraduationCap,
   Swords,
   Package,
+  Newspaper,
+  Music,
 } from "lucide-react";
 
 export const profile = {
@@ -202,6 +204,26 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Palette,
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "Bulletin",
+    description:
+      "A classifieds board — post, browse, and find what you need.",
+    link: "https://bulletin-classifieds.vercel.app/",
+    tag: "Live Project",
+    status: "live",
+    icon: Newspaper,
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "Counterpoint",
+    description:
+      "A music app built to explore harmony and composition.",
+    link: "https://counterpoint-six.vercel.app/",
+    tag: "Live Project",
+    status: "live",
+    icon: Music,
     span: { col: 1, row: 1 },
   },
   {
