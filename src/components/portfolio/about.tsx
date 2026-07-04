@@ -15,7 +15,7 @@ const facts = [
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-20 py-16 sm:py-20">
+    <section id="about" className="scroll-mt-20 py-12 sm:py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="About"
@@ -23,10 +23,10 @@ export function About() {
           align="left"
         />
 
-        <div className="mt-10 grid gap-10 md:grid-cols-12">
+        <div className="mt-8 grid gap-8 md:mt-10 md:grid-cols-12 md:gap-10">
           {/* Narrative — takes 7 cols, intentionally asymmetric */}
           <Reveal className="md:col-span-7" y={18}>
-            <div className="space-y-5 text-lg leading-relaxed text-foreground/85">
+            <div className="space-y-4 text-base leading-relaxed text-foreground/85 sm:space-y-5 sm:text-lg">
               <p>
                 I&apos;m{" "}
                 <span className="font-semibold text-foreground">

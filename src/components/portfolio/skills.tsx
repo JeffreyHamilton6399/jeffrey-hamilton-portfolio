@@ -10,7 +10,7 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="scroll-mt-20 border-y border-border/60 bg-muted/30 py-16 sm:py-20"
+      className="scroll-mt-20 border-y border-border/60 bg-muted/30 py-12 sm:py-16 md:py-20"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <SectionHeading

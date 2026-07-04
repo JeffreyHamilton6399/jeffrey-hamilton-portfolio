@@ -23,9 +23,9 @@ export function CertificateCarousel() {
   };
 
   return (
-    <Reveal className="mt-10">
+    <Reveal className="mt-8 sm:mt-10">
       {/* Heading */}
-      <div className="mb-3 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between sm:mb-3">
         <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
           Certifications
         </h3>

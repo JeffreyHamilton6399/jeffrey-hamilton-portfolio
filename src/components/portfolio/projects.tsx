@@ -206,7 +206,7 @@ function ProjectCard({ project }: { project: Project }) {
 
 export function Projects() {
   return (
-    <section id="projects" className="scroll-mt-20 py-16 sm:py-20">
+    <section id="projects" className="scroll-mt-20 py-12 sm:py-16 md:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Projects"
@@ -215,13 +215,13 @@ export function Projects() {
         />
 
         {/* Full-width tools banner — featured, above the grid */}
-        <Reveal className="mt-10">
+        <Reveal className="mt-8 sm:mt-10">
           <ToolsBanner />
         </Reveal>
 
         {/* 6-column grid with varied spans on desktop.
             Mobile: single column, auto height (no fixed rows). */}
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6 lg:auto-rows-[220px]">
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-6 lg:auto-rows-[220px]">
           {projects.map((project) => (
             <Reveal
               key={project.name}

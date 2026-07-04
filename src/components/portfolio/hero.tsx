@@ -24,7 +24,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 top-0 h-[42rem] bg-gradient-to-b from-amber-50/70 via-background to-background dark:from-amber-950/15"
       />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 md:grid-cols-[1.2fr_0.8fr] md:pb-24 md:pt-20">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-8 px-4 pb-16 pt-10 sm:px-6 sm:gap-12 sm:pb-24 sm:pt-20 md:grid-cols-[1.2fr_0.8fr]">
         <div>
           <motion.span
             initial={{ opacity: 0, y: 10 }}
@@ -55,7 +55,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.25 }}
-            className="mt-4 font-mono text-sm text-muted-foreground sm:text-base"
+            className="mt-3 font-mono text-xs text-muted-foreground sm:mt-4 sm:text-base"
           >
             <Typewriter text={profile.tagline} />
           </motion.p>
@@ -88,19 +88,19 @@ export function Hero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8, ease: EASE }}
-            className="mt-8 flex flex-wrap gap-3"
+            className="mt-6 flex flex-col gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-3"
           >
             <Button
               asChild
               size="lg"
-              className="btn-press bg-amber-500 text-white shadow-md hover:bg-amber-600"
+              className="btn-press w-full bg-amber-500 text-white shadow-md hover:bg-amber-600 sm:w-auto"
             >
               <Link href="#projects">
                 See what I&apos;ve built
                 <ArrowDown className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="btn-press">
+            <Button asChild size="lg" variant="outline" className="btn-press w-full sm:w-auto">
               <Link href="#contact">Get in touch</Link>
             </Button>
           </motion.div>
