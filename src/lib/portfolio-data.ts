@@ -18,7 +18,7 @@ import {
   Swords,
   Package,
   Newspaper,
-  Music,
+  MessagesSquare,
 } from "lucide-react";
 
 export const profile = {
@@ -222,7 +222,7 @@ export const projects: Project[] = [
     link: "https://counterpoint-six.vercel.app/",
     tag: "Live Project",
     status: "live",
-    icon: Music,
+    icon: MessagesSquare,
     span: { col: 1, row: 1 },
   },
   {
@@ -254,7 +254,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Clapperboard,
     media: { kind: "animations" },
-    span: { col: 2, row: 2 },
+    span: { col: 4, row: 2 },
   },
   {
     name: "CAD Housing",
