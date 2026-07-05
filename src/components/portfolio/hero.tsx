@@ -142,7 +142,7 @@ export function Hero() {
             <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
               Currently
             </p>
-            <p className="text-sm font-semibold">Teaching karate</p>
+            <p className="text-sm font-semibold">Building mods</p>
           </motion.div>
         </motion.div>
       </div>

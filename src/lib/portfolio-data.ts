@@ -5,7 +5,6 @@ import {
   Store,
   Youtube,
   Bot,
-  Code2,
   Palette,
   Cpu,
   Award,
@@ -383,11 +382,6 @@ export const skillBlocks: SkillBlock[] = [
     icon: Bot,
     title: "AI-Assisted Development",
     body: "I use AI tools to build real things — and I know how to tell when the output is wrong. That's the skill. Anyone can prompt; fewer people can ship.",
-  },
-  {
-    icon: Code2,
-    title: "Python",
-    body: "Comfortable writing scripts, automating tasks, and building personal projects.",
   },
   {
     icon: Palette,
