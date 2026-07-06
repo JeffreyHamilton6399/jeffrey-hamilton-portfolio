@@ -18,6 +18,7 @@ import {
   Package,
   Newspaper,
   MessagesSquare,
+  Music,
 } from "lucide-react";
 
 export const profile = {
@@ -249,6 +250,15 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Swords,
+    span: { col: 2, row: 1 },
+  },
+  {
+    name: "AI Music",
+    description: "Original tracks made with AI — beats, loops, and full songs.",
+    link: "https://drive.google.com/drive/folders/1FEBMf_0n5hFSyTncZp58bVYQxpnPn_-g",
+    tag: "Creative · AI",
+    status: "live",
+    icon: Music,
     span: { col: 2, row: 1 },
   },
   {
