@@ -28,7 +28,7 @@ function AnimationTile({
   }
 
   return (
-    <div className="relative aspect-square overflow-hidden rounded-lg bg-zinc-900">
+    <div className="relative h-20 overflow-hidden rounded-lg bg-zinc-900 sm:h-24">
       {file.type === "gif" ? (
         <Image
           src={file.src}
@@ -61,7 +61,7 @@ function AnimationTile({
 // Memoized so tiles never re-mount on parent renders.
 const Tiles = React.memo(function Tiles() {
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+    <div className="grid grid-cols-4 gap-1.5">
       {animationFiles.map((file, i) => (
         <AnimationTile key={i} file={file} />
       ))}

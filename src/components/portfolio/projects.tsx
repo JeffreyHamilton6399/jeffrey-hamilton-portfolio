@@ -69,8 +69,8 @@ function ProjectCard({ project }: { project: Project }) {
       className="h-full"
     >
       <Card
-        className={`group relative flex h-full flex-col overflow-hidden border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
-          isImageCard ? "bg-zinc-950" : ""
+        className={`group relative flex h-full flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
+          isImageCard ? "overflow-hidden bg-zinc-950" : "overflow-visible"
         }`}
       >
         {/* Background image for CAD / Robotics cards */}

@@ -270,7 +270,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Clapperboard,
     media: { kind: "animations" },
-    span: { col: 4, row: 2 },
+    span: { col: 4, row: 3 },
   },
   {
     name: "CAD Housing",
@@ -283,14 +283,14 @@ export const projects: Project[] = [
     icon: Building2,
     // Drop cad-housing.pdf into /public — used as card background only (rendered to png)
     media: { kind: "cad", src: "/cad-housing.png" },
-    span: { col: 2, row: 1 },
+    span: { col: 2, row: 2 },
   },
   {
     name: "Robotics Builds",
     description:
       "Physical robotics projects from my Robotics 1 & 2 courses.",
     link: "https://drive.google.com/drive/folders/16tLQJV6DddTNoeT5w3bn1fgl0eAHB9K5",
-    ctaLabel: "View",
+    ctaLabel: "View Project",
     tag: "School Project",
     status: "school",
     icon: Bot,
