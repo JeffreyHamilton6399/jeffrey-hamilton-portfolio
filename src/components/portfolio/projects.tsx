@@ -178,7 +178,7 @@ function ProjectCard({ project }: { project: Project }) {
 
 export function Projects() {
   return (
-    <section id="projects" className="scroll-mt-20 py-12 sm:py-16 md:py-20">
+    <section id="projects" className="scroll-mt-20 pt-12 pb-8 sm:pt-16 sm:pb-12 md:pt-20 md:pb-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Projects"
