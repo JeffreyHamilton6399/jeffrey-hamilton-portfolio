@@ -39,7 +39,7 @@ const COL_SPAN: Record<number, string> = {
   1: "lg:col-span-1",
   2: "lg:col-span-2",
   3: "lg:col-span-3",
-  6: "lg:col-span-6",
+  4: "lg:col-span-4",
 };
 
 function ProjectCard({ project }: { project: Project }) {
@@ -208,9 +208,8 @@ export function Projects() {
           <ToolsBanner />
         </Reveal>
 
-        {/* Varied grid — 6-col base on desktop, cards span 1-2 cols based on content.
-            Auto height so text never clips. Mobile: 2-col with compact cards half-width. */}
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:gap-5 lg:grid-cols-6">
+        {/* 4-col grid on desktop with varied 1-2 col spans. Every row fills completely. */}
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:gap-5 lg:grid-cols-4">
           {projects.map((project) => {
             const desktopSpan = COL_SPAN[project.span.col] ?? "lg:col-span-2";
             const mobileSpan = project.mobileCompact

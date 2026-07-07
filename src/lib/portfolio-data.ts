@@ -203,7 +203,8 @@ export const projects: Project[] = [
     tag: "Live Project · Playable",
     status: "live",
     icon: Gamepad2,
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
+    mobileCompact: true,
   },
   {
     name: "PixelParty",
@@ -213,7 +214,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Palette,
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
     mobileCompact: true,
   },
   {
@@ -224,7 +225,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Type,
-    span: { col: 3, row: 1 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "Bulletin",
@@ -234,7 +235,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Newspaper,
-    span: { col: 3, row: 1 },
+    span: { col: 1, row: 1 },
     mobileCompact: true,
   },
   {
@@ -244,7 +245,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: MessagesSquare,
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
     mobileCompact: true,
   },
   {
@@ -255,7 +256,7 @@ export const projects: Project[] = [
     tag: "School Project · Unity",
     status: "school",
     icon: Gamepad2,
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "Avatar Archive",
@@ -265,7 +266,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Swords,
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "Music",
@@ -298,7 +299,7 @@ export const projects: Project[] = [
     icon: Building2,
     // Drop cad-housing.pdf into /public — used as card background only (rendered to png)
     media: { kind: "cad", src: "/cad-housing.png" },
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "Robotics Builds",
@@ -310,7 +311,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Bot,
     media: { kind: "robotics" },
-    span: { col: 6, row: 1 },
+    span: { col: 1, row: 1 },
   },
 ];
 
