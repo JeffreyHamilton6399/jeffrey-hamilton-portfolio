@@ -7,6 +7,8 @@ import Image from "next/image";
 // GIFs autoplay natively. For .mp4/.webm files, set type to "video"
 // and a <video autoplay loop muted playsinline> tag is used.
 const animationFiles = [
+  { src: "/animations/TimpviewLogo1.gif", type: "gif" as const },
+  { src: "/animations/TimpviewLogo2.gif", type: "gif" as const },
   { src: "/animations/TimpviewLogo3.gif", type: "gif" as const },
   { src: "/animations/TimpviewLogo4.gif", type: "gif" as const },
   { src: "/animations/TimpviewLogo5.gif", type: "gif" as const },
@@ -21,14 +23,13 @@ function AnimationTile({
   const [failed, setFailed] = React.useState(false);
 
   if (failed) {
-    // Plain dark rectangle — no label, no icon, nothing
     return (
-      <div className="relative aspect-square overflow-hidden rounded-lg bg-zinc-900" />
+      <div className="relative h-20 w-32 shrink-0 overflow-hidden rounded-lg bg-zinc-900 sm:h-24 sm:w-40" />
     );
   }
 
   return (
-    <div className="relative h-20 overflow-hidden rounded-lg bg-zinc-900 sm:h-24">
+    <div className="relative h-20 w-32 shrink-0 overflow-hidden rounded-lg bg-zinc-900 sm:h-24 sm:w-40">
       {file.type === "gif" ? (
         <Image
           src={file.src}
@@ -36,12 +37,11 @@ function AnimationTile({
           fill
           unoptimized
           loading="lazy"
-          sizes="(max-width: 640px) 28vw, 18vw"
+          sizes="160px"
           className="object-cover"
           onError={() => setFailed(true)}
         />
       ) : (
-        // For .mp4/.webm files — autoplay silently like a GIF
         <video
           autoPlay
           loop
@@ -58,17 +58,17 @@ function AnimationTile({
   );
 }
 
-// Memoized so tiles never re-mount on parent renders.
-const Tiles = React.memo(function Tiles() {
+/** Scrollable carousel of animation tiles — swipe/scroll horizontally, no buttons. */
+export function AnimationsGallery() {
   return (
-    <div className="grid grid-cols-4 gap-1.5">
+    <div
+      className="flex gap-2 overflow-x-auto pb-1"
+      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+    >
+      <style>{`.animations-scroll::-webkit-scrollbar { display: none; }`}</style>
       {animationFiles.map((file, i) => (
         <AnimationTile key={i} file={file} />
       ))}
     </div>
   );
-});
-
-export function AnimationsGallery() {
-  return <Tiles />;
 }

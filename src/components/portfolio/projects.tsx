@@ -120,12 +120,10 @@ function ProjectCard({ project }: { project: Project }) {
             </div>
           ) : null}
 
-          {/* Action button — flex-shrink:0 so it never gets compressed/hidden.
-              mt-auto pins it to the bottom. */}
-          <div className="mt-auto shrink-0">
-            {hasLink ? (
-              project.openNewTab ? (
-                // Echo Heist — opens local html in new tab
+          {/* Action button — hidden if no link (e.g. School Animations is a gallery only) */}
+          {hasLink ? (
+            <div className="mt-auto shrink-0">
+              {project.openNewTab ? (
                 <button
                   type="button"
                   onClick={() =>
@@ -140,20 +138,7 @@ function ProjectCard({ project }: { project: Project }) {
                   {buttonLabel}
                   <ExternalLink className="h-3 w-3" />
                 </button>
-              ) : isCad ? (
-                // CAD Housing — links to Drive folder (PDF is background only)
-                <button
-                  type="button"
-                  onClick={() =>
-                    window.open(project.link, "_blank", "noopener,noreferrer")
-                  }
-                  className="inline-flex items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold text-amber-400 transition-colors hover:text-amber-300"
-                >
-                  {buttonLabel}
-                  <ArrowUpRight className="h-3 w-3" />
-                </button>
-              ) : isRobotics ? (
-                // Robotics — opens Drive folder in new tab
+              ) : isCad || isRobotics ? (
                 <button
                   type="button"
                   onClick={() =>
@@ -165,7 +150,6 @@ function ProjectCard({ project }: { project: Project }) {
                   <ArrowUpRight className="h-3 w-3" />
                 </button>
               ) : (
-                // Default — regular link
                 <a
                   href={project.link}
                   target="_blank"
@@ -179,14 +163,9 @@ function ProjectCard({ project }: { project: Project }) {
                   {buttonLabel}
                   <ArrowUpRight className="h-3 w-3" />
                 </a>
-              )
-            ) : (
-              <span className="inline-flex cursor-not-allowed items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold text-muted-foreground/50">
-                <Lock className="h-3 w-3" />
-                Coming Soon
-              </span>
-            )}
-          </div>
+              )}
+            </div>
+          ) : null}
         </CardContent>
       </Card>
     </motion.div>

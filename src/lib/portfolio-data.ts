@@ -211,6 +211,7 @@ export const projects: Project[] = [
     description:
       "Jump in. Claim your canvas. Make something chaotic.",
     link: "https://pixelparty-eight.vercel.app",
+    ctaLabel: "Play",
     tag: "Live Project",
     status: "live",
     icon: Palette,
@@ -222,6 +223,7 @@ export const projects: Project[] = [
     description:
       "A browser-based word game built for fun and replayability. Type fast, think faster.",
     link: "https://spellfall.vercel.app",
+    ctaLabel: "Play",
     tag: "Live Project",
     status: "live",
     icon: Type,
@@ -242,6 +244,7 @@ export const projects: Project[] = [
     name: "Counterpoint",
     description: "An AI model that spars with you about certain topics.",
     link: "https://counterpoint-six.vercel.app/",
+    ctaLabel: "Chat",
     tag: "Live Project",
     status: "live",
     icon: MessagesSquare,
@@ -253,6 +256,7 @@ export const projects: Project[] = [
     description:
       "A full Unity game project built as part of my digital media coursework.",
     link: "https://drive.google.com/drive/folders/15Z6Z5LzGXDxmJrTZn3WV1Nbb9D4_GRyx",
+    ctaLabel: "Play",
     tag: "School Project · Unity",
     status: "school",
     icon: Gamepad2,
@@ -272,6 +276,7 @@ export const projects: Project[] = [
     name: "Music",
     description: "Original tracks — beats, loops, and full songs.",
     link: "https://drive.google.com/drive/folders/1FEBMf_0n5hFSyTncZp58bVYQxpnPn_-g",
+    ctaLabel: "Listen",
     tag: "Creative",
     status: "live",
     icon: Music,
@@ -281,7 +286,6 @@ export const projects: Project[] = [
     name: "School Animations",
     description:
       "Motion graphics and animations created for Timpview's digital media program.",
-    link: "https://drive.google.com/drive/folders/1O0zvlk09MEzY3aKWY9ww-3gbG3ieK3HN",
     tag: "School Project",
     status: "school",
     icon: Clapperboard,
