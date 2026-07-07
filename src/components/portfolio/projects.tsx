@@ -34,24 +34,6 @@ const statusBadge: Record<
 /** Robotics image — displayed as card background with text overlay */
 const roboticsImage = "/robot-vex.jpg";
 
-/** Desktop grid span classes — static map so Tailwind JIT generates them. */
-const COL_SPAN: Record<number, string> = {
-  1: "lg:col-span-1",
-  2: "lg:col-span-2",
-  3: "lg:col-span-3",
-  4: "lg:col-span-4",
-  5: "lg:col-span-5",
-  6: "lg:col-span-6",
-};
-const ROW_SPAN: Record<number, string> = {
-  1: "lg:row-span-1",
-  2: "lg:row-span-2",
-  3: "lg:row-span-3",
-};
-function spanClasses(project: Project): string {
-  return `${COL_SPAN[project.span.col] ?? ""} ${ROW_SPAN[project.span.row] ?? ""}`;
-}
-
 function ProjectCard({ project }: { project: Project }) {
   const Icon = project.icon;
   const badge = statusBadge[project.status];
@@ -66,7 +48,6 @@ function ProjectCard({ project }: { project: Project }) {
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className="h-full"
     >
       <Card
         className={`group relative flex h-full flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
@@ -115,11 +96,11 @@ function ProjectCard({ project }: { project: Project }) {
           >
             {badge.label}
           </span>
-          {/* Description: hidden on mobile for compact cards */}
+          {/* Description */}
           <p
             className={`shrink text-[0.78rem] leading-[1.4] ${
               isImageCard ? "text-zinc-200" : "text-muted-foreground"
-            } ${project.mobileCompact ? "hidden sm:block" : ""}`}
+            }`}
           >
             {project.description}
           </p>
@@ -219,17 +200,13 @@ export function Projects() {
           <ToolsBanner />
         </Reveal>
 
-        {/* Mobile: 2-col grid (compact cards = half width, others = full width).
-            Desktop: 6-col grid with varied spans. */}
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-6 lg:auto-rows-[220px]">
+        {/* Uniform 3-column grid on desktop, 2-col on tablet, 2-col on mobile.
+            All cards same size, auto height so text never clips. */}
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-8 sm:gap-5 lg:grid-cols-3">
           {projects.map((project) => (
             <Reveal
               key={project.name}
-              className={`h-full ${
-                project.mobileCompact
-                  ? "col-span-1 sm:col-span-1"
-                  : "col-span-2 sm:col-span-1"
-              } ${spanClasses(project)}`}
+              className="col-span-2 sm:col-span-1 lg:col-span-1"
             >
               <ProjectCard project={project} />
             </Reveal>
