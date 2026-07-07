@@ -34,20 +34,6 @@ const statusBadge: Record<
 /** Robotics image — displayed as card background with text overlay */
 const roboticsImage = "/robot-vex.jpg";
 
-/**
- * Span classes for the 6-col desktop grid.
- * Cards span 2 or 3 columns. grid-auto-flow: dense fills any gaps automatically.
- */
-const SPAN: Record<number, string> = {
-  2: "lg:col-span-2",
-  3: "lg:col-span-3",
-  4: "lg:col-span-4",
-};
-const ROW_SPAN: Record<number, string> = {
-  1: "lg:row-span-1",
-  2: "lg:row-span-2",
-};
-
 function ProjectCard({ project }: { project: Project }) {
   const Icon = project.icon;
   const badge = statusBadge[project.status];
@@ -197,25 +183,13 @@ export function Projects() {
           <ToolsBanner />
         </Reveal>
 
-        {/* Varied grid — 6-col base on desktop, cards span 2-3 cols.
-            grid-auto-flow: dense fills gaps automatically so no blank space.
-            2-col tablet, 1-col mobile. */}
-        <div
-          className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-6 lg:auto-rows-[180px]"
-          style={{ gridAutoFlow: "dense" }}
-        >
-          {projects.map((project) => {
-            const span = SPAN[project.span.col] ?? "lg:col-span-2";
-            const rowSpan = ROW_SPAN[project.span.row] ?? "lg:row-span-1";
-            return (
-              <Reveal
-                key={project.name}
-                className={`col-span-1 sm:col-span-1 ${span} ${rowSpan}`}
-              >
-                <ProjectCard project={project} />
-              </Reveal>
-            );
-          })}
+        {/* Clean 3-col grid, auto height, no forced sizing */}
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+          {projects.map((project) => (
+            <Reveal key={project.name}>
+              <ProjectCard project={project} />
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
