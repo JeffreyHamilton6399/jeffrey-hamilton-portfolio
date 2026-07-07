@@ -256,7 +256,7 @@ export const projects: Project[] = [
     description:
       "A full Unity game project built as part of my digital media coursework.",
     link: "https://drive.google.com/drive/folders/15Z6Z5LzGXDxmJrTZn3WV1Nbb9D4_GRyx",
-    ctaLabel: "Play",
+    ctaLabel: "Download",
     tag: "School Project · Unity",
     status: "school",
     icon: Gamepad2,
