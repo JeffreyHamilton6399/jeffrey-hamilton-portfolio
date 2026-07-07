@@ -8,6 +8,9 @@ import { certificates } from "@/lib/portfolio-data";
 import { Reveal } from "./reveal";
 
 export function CertificateCarousel() {
+  // Duplicate for seamless loop
+  const looped = [...certificates, ...certificates];
+
   return (
     <Reveal className="mt-8 sm:mt-10">
       {/* Heading */}
@@ -20,18 +23,28 @@ export function CertificateCarousel() {
         </span>
       </div>
 
-      {/* Scrollable carousel — swipe/scroll horizontally, no arrows */}
-      <div
-        className="cert-carousel flex gap-4 overflow-x-auto pb-2"
-        style={{
-          scrollSnapType: "x mandatory",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
-      >
-        {certificates.map((cert) => (
-          <CertCard key={cert.name} cert={cert} />
-        ))}
+      {/* Auto-scrolling carousel — moves slowly left, infinite loop, pauses on hover */}
+      <div className="cert-scroll relative overflow-hidden">
+        <style>{`
+          @keyframes cert-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .cert-track {
+            display: flex;
+            gap: 1rem;
+            width: max-content;
+            animation: cert-marquee 60s linear infinite;
+          }
+          .cert-scroll:hover .cert-track {
+            animation-play-state: paused;
+          }
+        `}</style>
+        <div className="cert-track">
+          {looped.map((cert, i) => (
+            <CertCard key={i} cert={cert} />
+          ))}
+        </div>
       </div>
     </Reveal>
   );
@@ -50,7 +63,6 @@ function CertCard({
       target="_blank"
       rel="noopener noreferrer"
       className="group relative h-[210px] w-[160px] shrink-0 cursor-pointer overflow-hidden rounded-lg border border-border/60 bg-zinc-950 shadow-sm transition-transform duration-200 hover:-translate-y-1 sm:h-[260px] sm:w-[200px]"
-      style={{ scrollSnapAlign: "start" }}
     >
       {failed ? (
         <div className="flex h-full w-full items-center justify-center bg-zinc-900 p-4 text-center">

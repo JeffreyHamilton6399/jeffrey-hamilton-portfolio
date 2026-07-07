@@ -4,8 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 
 // Drop animation files here — no titles needed.
-// GIFs autoplay natively. For .mp4/.webm files, set type to "video"
-// and a <video autoplay loop muted playsinline> tag is used.
+// GIFs autoplay natively. For .mp4/.webm files, set type to "video".
 const animationFiles = [
   { src: "/animations/TimpviewLogo1.gif", type: "gif" as const },
   { src: "/animations/TimpviewLogo2.gif", type: "gif" as const },
@@ -58,24 +57,33 @@ function AnimationTile({
   );
 }
 
-/** Scrollable carousel of animation tiles — swipe/scroll horizontally. */
+/** Auto-scrolling carousel — tiles move slowly left, infinite loop. */
 export function AnimationsGallery() {
-  const scrollRef = React.useRef<HTMLDivElement>(null);
+  // Duplicate the files so the loop is seamless
+  const looped = [...animationFiles, ...animationFiles];
 
   return (
-    <div
-      ref={scrollRef}
-      className="animations-scroll flex gap-2 overflow-x-auto pb-2"
-      style={{
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-        WebkitOverflowScrolling: "touch",
-      }}
-    >
-      <style>{`.animations-scroll::-webkit-scrollbar { display: none; }`}</style>
-      {animationFiles.map((file, i) => (
-        <AnimationTile key={i} file={file} />
-      ))}
+    <div className="animations-scroll relative overflow-hidden">
+      <style>{`
+        @keyframes animations-marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animations-track {
+          display: flex;
+          gap: 0.5rem;
+          width: max-content;
+          animation: animations-marquee 40s linear infinite;
+        }
+        .animations-scroll:hover .animations-track {
+          animation-play-state: paused;
+        }
+      `}</style>
+      <div className="animations-track">
+        {looped.map((file, i) => (
+          <AnimationTile key={i} file={file} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -191,7 +191,7 @@ export const projects: Project[] = [
     tag: "Minecraft · Mods",
     status: "live",
     icon: Package,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "Echo Heist",
@@ -227,7 +227,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Type,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "Bulletin",
@@ -280,7 +280,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Clapperboard,
     media: { kind: "animations" },
-    span: { col: 4, row: 1 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "Avatar Archive",
@@ -290,7 +290,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Swords,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "CAD Housing",
@@ -303,7 +303,7 @@ export const projects: Project[] = [
     icon: Building2,
     // Drop cad-housing.pdf into /public — used as card background only (rendered to png)
     media: { kind: "cad", src: "/cad-housing.png" },
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "Robotics Builds",
