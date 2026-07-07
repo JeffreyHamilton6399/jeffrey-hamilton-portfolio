@@ -55,10 +55,9 @@ function ProjectCard({ project }: { project: Project }) {
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className="h-full"
     >
       <Card
-        className={`group relative flex h-full flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
+        className={`group relative flex flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
           isImageCard ? "overflow-hidden bg-zinc-950" : "overflow-visible"
         }`}
       >
@@ -92,7 +91,7 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
         ) : null}
 
-        <CardContent className="relative flex h-full flex-col gap-[0.35rem] p-3">
+        <CardContent className="relative flex flex-col gap-[0.35rem] p-3">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
             <Icon className="h-[1.05rem] w-[1.05rem]" />
           </div>
@@ -219,7 +218,7 @@ export function Projects() {
             return (
               <Reveal
                 key={project.name}
-                className={`h-full ${mobileSpan} ${desktopSpan}`}
+                className={`${mobileSpan} ${desktopSpan}`}
               >
                 <ProjectCard project={project} />
               </Reveal>

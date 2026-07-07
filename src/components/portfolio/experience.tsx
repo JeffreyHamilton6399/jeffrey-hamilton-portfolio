@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Check, Calendar, MapPin, ExternalLink } from "lucide-react";
+import * as React from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { experiences, type Experience } from "@/lib/portfolio-data";
@@ -117,6 +118,13 @@ function ExperienceCard({ exp, index }: { exp: Experience; index: number }) {
 }
 
 export function Experience() {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
     <section
       id="experience"
@@ -126,13 +134,20 @@ export function Experience() {
         <SectionHeading
           eyebrow="Where I've Shown Up"
           title="Work that taught me something."
-          description="Three very different worlds — a farm, a dojo, and a market. Each one hammered in the same lesson: show up, do the work, don't be a jerk about it."
+          description="Four very different worlds — a farm, a dojo, a market, and my church. Each one hammered in the same lesson: show up, do the work, don't be a jerk about it."
         />
 
-        <div className="relative mt-14">
+        <div ref={containerRef} className="relative mt-14">
+          {/* muted track */}
           <div
             aria-hidden
-            className="absolute left-[13px] top-2 bottom-2 w-px bg-gradient-to-b from-amber-300 via-border to-transparent sm:left-[27px]"
+            className="absolute left-[13px] top-2 bottom-2 w-px bg-border sm:left-[27px]"
+          />
+          {/* animated progress fill — fills as you scroll through the timeline */}
+          <motion.div
+            aria-hidden
+            style={{ height: lineHeight }}
+            className="absolute left-[13px] top-2 w-px bg-gradient-to-b from-amber-500 to-orange-500 sm:left-[27px]"
           />
           <div className="flex flex-col gap-8">
             {experiences.map((exp, i) => (
