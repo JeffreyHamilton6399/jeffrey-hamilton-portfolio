@@ -41,6 +41,7 @@ const roboticsImage = "/robot-vex.jpg";
 const SPAN: Record<number, string> = {
   2: "lg:col-span-2",
   3: "lg:col-span-3",
+  4: "lg:col-span-4",
 };
 
 function ProjectCard({ project }: { project: Project }) {
@@ -125,9 +126,9 @@ function ProjectCard({ project }: { project: Project }) {
             </div>
           ) : null}
 
-          {/* Action button — hidden if no link (e.g. School Animations is a gallery only) */}
+          {/* Action button — sits right under the text, no gap */}
           {hasLink ? (
-            <div className="mt-auto shrink-0 pt-2">
+            <div className="shrink-0 pt-2">
               {project.openNewTab ? (
                 <button
                   type="button"

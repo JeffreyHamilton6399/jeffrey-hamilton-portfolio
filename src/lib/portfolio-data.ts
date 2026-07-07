@@ -182,17 +182,17 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  // Row 1: [3,3] — featured projects
+  // Featured — biggest cards first
   {
-    name: "Minecraft Mods",
-    description:
-      "My Minecraft mods and modpacks — Clean & Fast, KeybindSync, SmartChat Macros, and more. All on Modrinth.",
-    link: "https://modrinth.com/user/JeffreyHamilton",
-    ctaLabel: "Visit Modrinth",
-    tag: "Minecraft · Mods",
+    name: "Echo Heist",
+    description: "A single-file browser game. No install — just open and play.",
+    link: "/echo-heist.html",
+    openNewTab: true,
+    ctaLabel: "Play",
+    tag: "Live Project · Playable",
     status: "live",
-    icon: Package,
-    span: { col: 3, row: 1 },
+    icon: Gamepad2,
+    span: { col: 4, row: 1 },
   },
   {
     name: "SpellFall",
@@ -203,21 +203,9 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Type,
-    span: { col: 3, row: 1 },
-  },
-  // Row 2: [2,2,2] — compact projects
-  {
-    name: "Echo Heist",
-    description: "A single-file browser game. No install — just open and play.",
-    link: "/echo-heist.html",
-    openNewTab: true,
-    ctaLabel: "Play",
-    tag: "Live Project · Playable",
-    status: "live",
-    icon: Gamepad2,
     span: { col: 2, row: 1 },
-    mobileCompact: true,
   },
+  // Compact row
   {
     name: "PixelParty",
     description:
@@ -241,28 +229,6 @@ export const projects: Project[] = [
     span: { col: 2, row: 1 },
     mobileCompact: true,
   },
-  // Row 3: [3,3] — featured projects
-  {
-    name: "Avatar Archive",
-    description:
-      "Everything Avatar: The Last Airbender in one place — episodes, lore, books, characters. Email me for access 😉",
-    link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
-    tag: "Live Project",
-    status: "live",
-    icon: Swords,
-    span: { col: 3, row: 1 },
-  },
-  {
-    name: "School Animations",
-    description:
-      "Motion graphics and animations created for Timpview's digital media program.",
-    tag: "School Project",
-    status: "school",
-    icon: Clapperboard,
-    media: { kind: "animations" },
-    span: { col: 3, row: 1 },
-  },
-  // Row 4: [2,2,2] — compact projects
   {
     name: "Counterpoint",
     description: "An AI model that spars with you about certain topics.",
@@ -274,6 +240,50 @@ export const projects: Project[] = [
     span: { col: 2, row: 1 },
     mobileCompact: true,
   },
+  // Wide content cards
+  {
+    name: "Minecraft Mods",
+    description:
+      "My Minecraft mods and modpacks — Clean & Fast, KeybindSync, SmartChat Macros, and more. All on Modrinth.",
+    link: "https://modrinth.com/user/JeffreyHamilton",
+    ctaLabel: "Visit Modrinth",
+    tag: "Minecraft · Mods",
+    status: "live",
+    icon: Package,
+    span: { col: 3, row: 1 },
+  },
+  {
+    name: "Avatar Archive",
+    description:
+      "Everything Avatar: The Last Airbender in one place — episodes, lore, books, characters. Email me for access 😉",
+    link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
+    tag: "Live Project",
+    status: "live",
+    icon: Swords,
+    span: { col: 3, row: 1 },
+  },
+  // Media cards
+  {
+    name: "School Animations",
+    description:
+      "Motion graphics and animations created for Timpview's digital media program.",
+    tag: "School Project",
+    status: "school",
+    icon: Clapperboard,
+    media: { kind: "animations" },
+    span: { col: 3, row: 1 },
+  },
+  {
+    name: "Music",
+    description: "Original tracks — beats, loops, and full songs.",
+    link: "https://drive.google.com/drive/folders/1FEBMf_0n5hFSyTncZp58bVYQxpnPn_-g",
+    ctaLabel: "Listen",
+    tag: "Creative",
+    status: "live",
+    icon: Music,
+    span: { col: 3, row: 1 },
+  },
+  // School projects — image backed
   {
     name: "Arcadian King",
     description:
@@ -286,17 +296,6 @@ export const projects: Project[] = [
     span: { col: 2, row: 1 },
   },
   {
-    name: "Music",
-    description: "Original tracks — beats, loops, and full songs.",
-    link: "https://drive.google.com/drive/folders/1FEBMf_0n5hFSyTncZp58bVYQxpnPn_-g",
-    ctaLabel: "Listen",
-    tag: "Creative",
-    status: "live",
-    icon: Music,
-    span: { col: 2, row: 1 },
-  },
-  // Row 5: [3,3] — image-backed school projects
-  {
     name: "CAD Housing",
     description:
       "Architectural design projects built in CAD software for my Architectural Design coursework.",
@@ -305,9 +304,8 @@ export const projects: Project[] = [
     tag: "School Project",
     status: "school",
     icon: Building2,
-    // Drop cad-housing.pdf into /public — used as card background only (rendered to png)
     media: { kind: "cad", src: "/cad-housing.png" },
-    span: { col: 3, row: 1 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "Robotics Builds",
@@ -319,7 +317,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Bot,
     media: { kind: "robotics" },
-    span: { col: 3, row: 1 },
+    span: { col: 2, row: 1 },
   },
 ];
 
