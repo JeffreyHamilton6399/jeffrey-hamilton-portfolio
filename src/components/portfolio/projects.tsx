@@ -55,6 +55,7 @@ function ProjectCard({ project }: { project: Project }) {
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
+      className="h-full"
     >
       <Card
         className={`group relative flex h-full flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
@@ -105,7 +106,7 @@ function ProjectCard({ project }: { project: Project }) {
           </span>
           {/* Description: hidden on mobile for compact cards */}
           <p
-            className={`shrink text-[0.78rem] leading-[1.4] ${
+            className={`text-[0.78rem] leading-[1.4] ${
               isImageCard ? "text-zinc-200" : "text-muted-foreground"
             } ${project.mobileCompact ? "hidden sm:block" : ""}`}
           >
@@ -218,7 +219,7 @@ export function Projects() {
             return (
               <Reveal
                 key={project.name}
-                className={`${mobileSpan} ${desktopSpan}`}
+                className={`h-full ${mobileSpan} ${desktopSpan}`}
               >
                 <ProjectCard project={project} />
               </Reveal>
