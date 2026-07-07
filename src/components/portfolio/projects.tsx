@@ -39,6 +39,7 @@ const COL_SPAN: Record<number, string> = {
   1: "lg:col-span-1",
   2: "lg:col-span-2",
   3: "lg:col-span-3",
+  6: "lg:col-span-6",
 };
 
 function ProjectCard({ project }: { project: Project }) {

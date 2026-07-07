@@ -203,8 +203,7 @@ export const projects: Project[] = [
     tag: "Live Project · Playable",
     status: "live",
     icon: Gamepad2,
-    span: { col: 1, row: 1 },
-    mobileCompact: true,
+    span: { col: 2, row: 1 },
   },
   {
     name: "PixelParty",
@@ -214,7 +213,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Palette,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
     mobileCompact: true,
   },
   {
@@ -225,7 +224,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Type,
-    span: { col: 2, row: 1 },
+    span: { col: 3, row: 1 },
   },
   {
     name: "Bulletin",
@@ -235,7 +234,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Newspaper,
-    span: { col: 1, row: 1 },
+    span: { col: 3, row: 1 },
     mobileCompact: true,
   },
   {
@@ -245,7 +244,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: MessagesSquare,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
     mobileCompact: true,
   },
   {
@@ -311,7 +310,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Bot,
     media: { kind: "robotics" },
-    span: { col: 2, row: 1 },
+    span: { col: 6, row: 1 },
   },
 ];
 
