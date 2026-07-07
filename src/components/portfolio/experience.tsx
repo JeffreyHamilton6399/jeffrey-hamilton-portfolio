@@ -119,11 +119,27 @@ function ExperienceCard({ exp, index }: { exp: Experience; index: number }) {
 
 export function Experience() {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"],
-  });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const [lineHeight, setLineHeight] = React.useState("0%");
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const el = containerRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      // Progress: 0 when section top is at center of viewport, 1 when section bottom is at center
+      const sectionTop = rect.top;
+      const sectionBottom = rect.bottom;
+      const center = windowHeight / 2;
+      const total = sectionBottom - sectionTop;
+      const scrolled = center - sectionTop;
+      const progress = Math.max(0, Math.min(1, scrolled / total));
+      setLineHeight(`${progress * 100}%`);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <section
@@ -144,10 +160,10 @@ export function Experience() {
             className="absolute left-[13px] top-2 bottom-2 w-px bg-border sm:left-[27px]"
           />
           {/* animated progress fill — fills as you scroll through the timeline */}
-          <motion.div
+          <div
             aria-hidden
-            style={{ height: lineHeight }}
             className="absolute left-[13px] top-2 w-px bg-gradient-to-b from-amber-500 to-orange-500 sm:left-[27px]"
+            style={{ height: lineHeight }}
           />
           <div className="flex flex-col gap-8">
             {experiences.map((exp, i) => (
