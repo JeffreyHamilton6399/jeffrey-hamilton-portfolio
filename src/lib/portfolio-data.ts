@@ -19,6 +19,7 @@ import {
   Newspaper,
   MessagesSquare,
   Music,
+  Church,
 } from "lucide-react";
 
 export const profile = {
@@ -115,6 +116,21 @@ export const experiences: Experience[] = [
       "Staying sharp when the line gets long",
     ],
     website: { label: "daysmarket.com", url: "https://www.daysmarket.com/" },
+  },
+  {
+    company: "The Church of Jesus Christ of Latter-day Saints",
+    role: "Volunteer",
+    period: "2021 — Present",
+    location: "Community",
+    icon: Church,
+    accent: "amber",
+    description:
+      "Volunteering through my church — helping with community service projects, events, and whatever needs doing. It's taught me to show up when it's not about me.",
+    highlights: [
+      "Community service projects and events",
+      "Showing up consistently for others",
+      "Learning to lead and follow",
+    ],
   },
 ];
 
@@ -378,39 +394,4 @@ export const certificates: Certificate[] = [
   { name: "Game Development Fundamentals", pdf: "/certificates/cert-7.pdf", preview: "/certificates/cert-7.png" },
   { name: "Robotics 1", pdf: "/certificates/cert-8.pdf", preview: "/certificates/cert-8.png" },
   { name: "Unmanned Aerial Systems", pdf: "/certificates/cert-9.pdf", preview: "/certificates/cert-9.png" },
-];
-
-// ---- Skills: honest feature blocks (no fake tech stack) ----
-export type SkillBlock = {
-  icon: LucideIcon;
-  title: string;
-  body: string;
-};
-
-export const skillBlocks: SkillBlock[] = [
-  {
-    icon: Bot,
-    title: "AI-Assisted Development",
-    body: "I use AI tools to build real things — and I know how to tell when the output is wrong. That's the skill. Anyone can prompt; fewer people can ship.",
-  },
-  {
-    icon: Palette,
-    title: "Digital Design & Media",
-    body: "Motion graphics, video editing, thumbnails, layout — certified through Utah State Board of Education.",
-  },
-  {
-    icon: Cpu,
-    title: "Robotics & CAD",
-    body: "Hands-on hardware and architectural design through school coursework.",
-  },
-  {
-    icon: Award,
-    title: "Karate — Black Belt",
-    body: "Discipline, teaching, and not quitting when things get hard.",
-  },
-  {
-    icon: Users,
-    title: "Customer Service",
-    body: "Real job, real customers, real pressure. Day's Market, Apr 2026–present.",
-  },
 ];
