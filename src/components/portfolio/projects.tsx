@@ -43,6 +43,10 @@ const SPAN: Record<number, string> = {
   3: "lg:col-span-3",
   4: "lg:col-span-4",
 };
+const ROW_SPAN: Record<number, string> = {
+  1: "lg:row-span-1",
+  2: "lg:row-span-2",
+};
 
 function ProjectCard({ project }: { project: Project }) {
   const Icon = project.icon;
@@ -58,9 +62,10 @@ function ProjectCard({ project }: { project: Project }) {
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
+      className="h-full"
     >
       <Card
-        className={`group relative flex flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
+        className={`group relative flex h-full flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
           isImageCard ? "overflow-hidden bg-zinc-950" : "overflow-visible"
         }`}
       >
@@ -94,7 +99,7 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
         ) : null}
 
-        <CardContent className="relative flex flex-col gap-[0.35rem] p-4">
+        <CardContent className="relative flex h-full flex-col gap-[0.35rem] p-4">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
             <Icon className="h-5 w-5" />
           </div>
@@ -125,9 +130,9 @@ function ProjectCard({ project }: { project: Project }) {
             </div>
           ) : null}
 
-          {/* Action button — sits right under the text, no gap */}
+          {/* Action button — pinned to bottom of card */}
           {hasLink ? (
-            <div className="shrink-0 pt-2">
+            <div className="mt-auto shrink-0 pt-2">
               {project.openNewTab ? (
                 <button
                   type="button"
@@ -196,15 +201,16 @@ export function Projects() {
             grid-auto-flow: dense fills gaps automatically so no blank space.
             2-col tablet, 1-col mobile. */}
         <div
-          className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-6"
+          className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-6 lg:auto-rows-[180px]"
           style={{ gridAutoFlow: "dense" }}
         >
           {projects.map((project) => {
             const span = SPAN[project.span.col] ?? "lg:col-span-2";
+            const rowSpan = ROW_SPAN[project.span.row] ?? "lg:row-span-1";
             return (
               <Reveal
                 key={project.name}
-                className={`col-span-1 sm:col-span-1 ${span}`}
+                className={`col-span-1 sm:col-span-1 ${span} ${rowSpan}`}
               >
                 <ProjectCard project={project} />
               </Reveal>
