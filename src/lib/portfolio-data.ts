@@ -182,6 +182,7 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  // Row 1: [3,3] — featured projects
   {
     name: "Minecraft Mods",
     description:
@@ -191,19 +192,30 @@ export const projects: Project[] = [
     tag: "Minecraft · Mods",
     status: "live",
     icon: Package,
-    span: { col: 1, row: 1 },
+    span: { col: 3, row: 1 },
   },
+  {
+    name: "SpellFall",
+    description:
+      "A browser-based word game built for fun and replayability. Type fast, think faster.",
+    link: "https://spellfall.vercel.app",
+    ctaLabel: "Play",
+    tag: "Live Project",
+    status: "live",
+    icon: Type,
+    span: { col: 3, row: 1 },
+  },
+  // Row 2: [2,2,2] — compact projects
   {
     name: "Echo Heist",
     description: "A single-file browser game. No install — just open and play.",
-    // Update to hosted URL when available
     link: "/echo-heist.html",
     openNewTab: true,
     ctaLabel: "Play",
     tag: "Live Project · Playable",
     status: "live",
     icon: Gamepad2,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
     mobileCompact: true,
   },
   {
@@ -215,19 +227,8 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Palette,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
     mobileCompact: true,
-  },
-  {
-    name: "SpellFall",
-    description:
-      "A browser-based word game built for fun and replayability. Type fast, think faster.",
-    link: "https://spellfall.vercel.app",
-    ctaLabel: "Play",
-    tag: "Live Project",
-    status: "live",
-    icon: Type,
-    span: { col: 1, row: 1 },
   },
   {
     name: "Bulletin",
@@ -237,9 +238,31 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Newspaper,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
     mobileCompact: true,
   },
+  // Row 3: [3,3] — featured projects
+  {
+    name: "Avatar Archive",
+    description:
+      "Everything Avatar: The Last Airbender in one place — episodes, lore, books, characters. Email me for access 😉",
+    link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
+    tag: "Live Project",
+    status: "live",
+    icon: Swords,
+    span: { col: 3, row: 1 },
+  },
+  {
+    name: "School Animations",
+    description:
+      "Motion graphics and animations created for Timpview's digital media program.",
+    tag: "School Project",
+    status: "school",
+    icon: Clapperboard,
+    media: { kind: "animations" },
+    span: { col: 3, row: 1 },
+  },
+  // Row 4: [2,2,2] — compact projects
   {
     name: "Counterpoint",
     description: "An AI model that spars with you about certain topics.",
@@ -248,7 +271,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: MessagesSquare,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
     mobileCompact: true,
   },
   {
@@ -260,7 +283,7 @@ export const projects: Project[] = [
     tag: "School Project · Unity",
     status: "school",
     icon: Gamepad2,
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "Music",
@@ -270,28 +293,9 @@ export const projects: Project[] = [
     tag: "Creative",
     status: "live",
     icon: Music,
-    span: { col: 1, row: 1 },
-  },
-  {
-    name: "Avatar Archive",
-    description:
-      "Everything Avatar: The Last Airbender in one place — episodes, lore, books, characters. Email me for access 😉",
-    link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
-    tag: "Live Project",
-    status: "live",
-    icon: Swords,
     span: { col: 2, row: 1 },
   },
-  {
-    name: "School Animations",
-    description:
-      "Motion graphics and animations created for Timpview's digital media program.",
-    tag: "School Project",
-    status: "school",
-    icon: Clapperboard,
-    media: { kind: "animations" },
-    span: { col: 2, row: 1 },
-  },
+  // Row 5: [3,3] — image-backed school projects
   {
     name: "CAD Housing",
     description:
@@ -303,7 +307,7 @@ export const projects: Project[] = [
     icon: Building2,
     // Drop cad-housing.pdf into /public — used as card background only (rendered to png)
     media: { kind: "cad", src: "/cad-housing.png" },
-    span: { col: 2, row: 1 },
+    span: { col: 3, row: 1 },
   },
   {
     name: "Robotics Builds",
@@ -315,7 +319,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Bot,
     media: { kind: "robotics" },
-    span: { col: 2, row: 1 },
+    span: { col: 3, row: 1 },
   },
 ];
 

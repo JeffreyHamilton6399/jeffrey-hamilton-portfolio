@@ -34,6 +34,15 @@ const statusBadge: Record<
 /** Robotics image — displayed as card background with text overlay */
 const roboticsImage = "/robot-vex.jpg";
 
+/**
+ * Span classes for the 6-col desktop grid.
+ * Cards span 2 or 3 columns. grid-auto-flow: dense fills any gaps automatically.
+ */
+const SPAN: Record<number, string> = {
+  2: "lg:col-span-2",
+  3: "lg:col-span-3",
+};
+
 function ProjectCard({ project }: { project: Project }) {
   const Icon = project.icon;
   const badge = statusBadge[project.status];
@@ -48,9 +57,10 @@ function ProjectCard({ project }: { project: Project }) {
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
+      className="h-full"
     >
       <Card
-        className={`group relative flex flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
+        className={`group relative flex h-full flex-col border-border/60 shadow-sm transition-shadow duration-200 hover:shadow-lg hover:shadow-amber-500/10 hover:ring-1 hover:ring-amber-500/30 ${
           isImageCard ? "overflow-hidden bg-zinc-950" : "overflow-visible"
         }`}
       >
@@ -84,24 +94,24 @@ function ProjectCard({ project }: { project: Project }) {
           </div>
         ) : null}
 
-        <CardContent className="relative flex flex-col gap-[0.35rem] p-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
-            <Icon className="h-[1.05rem] w-[1.05rem]" />
+        <CardContent className="relative flex h-full flex-col gap-[0.35rem] p-4">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-700 transition-transform duration-200 group-hover:scale-110 dark:bg-amber-950/50 dark:text-amber-300">
+            <Icon className="h-5 w-5" />
           </div>
-          <h3 className="text-[0.95rem] font-bold leading-tight text-foreground">
+          <h3 className="text-base font-bold leading-tight text-foreground">
             {project.name}
           </h3>
           {/* Only show status badge for school projects */}
           {project.status === "school" ? (
             <span
-              className={`w-fit rounded-full px-[0.4rem] py-[0.15rem] text-[0.65rem] font-semibold uppercase tracking-wide ${badge.className}`}
+              className={`w-fit rounded-full px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide ${badge.className}`}
             >
               {badge.label}
             </span>
           ) : null}
           {/* Description */}
           <p
-            className={`text-[0.78rem] leading-[1.4] ${
+            className={`text-sm leading-relaxed ${
               isImageCard ? "text-zinc-200" : "text-muted-foreground"
             }`}
           >
@@ -117,21 +127,21 @@ function ProjectCard({ project }: { project: Project }) {
 
           {/* Action button — hidden if no link (e.g. School Animations is a gallery only) */}
           {hasLink ? (
-            <div className="mt-auto shrink-0">
+            <div className="mt-auto shrink-0 pt-2">
               {project.openNewTab ? (
                 <button
                   type="button"
                   onClick={() =>
                     window.open(project.link, "_blank", "noopener,noreferrer")
                   }
-                  className={`inline-flex items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold transition-colors ${
+                  className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
                     isImageCard
                       ? "text-amber-400 hover:text-amber-300"
                       : "text-amber-600 hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
                   }`}
                 >
                   {buttonLabel}
-                  <ExternalLink className="h-3 w-3" />
+                  <ExternalLink className="h-3.5 w-3.5" />
                 </button>
               ) : isCad || isRobotics ? (
                 <button
@@ -139,24 +149,24 @@ function ProjectCard({ project }: { project: Project }) {
                   onClick={() =>
                     window.open(project.link, "_blank", "noopener,noreferrer")
                   }
-                  className="inline-flex items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold text-amber-400 transition-colors hover:text-amber-300"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-400 transition-colors hover:text-amber-300"
                 >
                   {buttonLabel}
-                  <ArrowUpRight className="h-3 w-3" />
+                  <ArrowUpRight className="h-3.5 w-3.5" />
                 </button>
               ) : (
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center gap-1.5 px-[0.65rem] py-[0.3rem] text-[0.78rem] font-semibold transition-colors ${
+                  className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
                     isImageCard
                       ? "text-amber-400 hover:text-amber-300"
                       : "text-amber-600 hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400"
                   }`}
                 >
                   {buttonLabel}
-                  <ArrowUpRight className="h-3 w-3" />
+                  <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
               )}
             </div>
@@ -182,13 +192,24 @@ export function Projects() {
           <ToolsBanner />
         </Reveal>
 
-        {/* Uniform 3-col grid on desktop, 2-col tablet, 1-col mobile. All cards same size. */}
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-          {projects.map((project) => (
-            <Reveal key={project.name}>
-              <ProjectCard project={project} />
-            </Reveal>
-          ))}
+        {/* Varied grid — 6-col base on desktop, cards span 2-3 cols.
+            grid-auto-flow: dense fills gaps automatically so no blank space.
+            2-col tablet, 1-col mobile. */}
+        <div
+          className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5 lg:auto-rows-fr lg:grid-cols-6"
+          style={{ gridAutoFlow: "dense" }}
+        >
+          {projects.map((project) => {
+            const span = SPAN[project.span.col] ?? "lg:col-span-2";
+            return (
+              <Reveal
+                key={project.name}
+                className={`col-span-1 sm:col-span-1 ${span} h-full`}
+              >
+                <ProjectCard project={project} />
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
