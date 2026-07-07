@@ -182,7 +182,6 @@ export type Project = {
 };
 
 export const projects: Project[] = [
-  // Featured — biggest cards first
   {
     name: "Echo Heist",
     description: "A single-file browser game. No install — just open and play.",
@@ -192,7 +191,10 @@ export const projects: Project[] = [
     tag: "Live Project · Playable",
     status: "live",
     icon: Gamepad2,
-    span: { col: 4, row: 1 },
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "SpellFall",
     description:
       "A browser-based word game built for fun and replayability. Type fast, think faster.",
     link: "https://spellfall.vercel.app",
@@ -200,9 +202,8 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Type,
-    span: { col: 2, row: 2 },
+    span: { col: 1, row: 1 },
   },
-  // Compact row
   {
     name: "PixelParty",
     description:
@@ -212,8 +213,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Palette,
-    span: { col: 2, row: 2 },
-    mobileCompact: true,
+    span: { col: 1, row: 1 },
   },
   {
     name: "Bulletin",
@@ -223,8 +223,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Newspaper,
-    span: { col: 2, row: 1 },
-    mobileCompact: true,
+    span: { col: 1, row: 1 },
   },
   {
     name: "Counterpoint",
@@ -234,10 +233,8 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: MessagesSquare,
-    span: { col: 2, row: 1 },
-    mobileCompact: true,
+    span: { col: 1, row: 1 },
   },
-  // Wide content cards
   {
     name: "Minecraft Mods",
     description:
@@ -247,16 +244,18 @@ export const projects: Project[] = [
     tag: "Minecraft · Mods",
     status: "live",
     icon: Package,
-    span: { col: 3, row: 1 },
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "Avatar Archive",
     description:
       "Everything Avatar: The Last Airbender in one place — episodes, lore, books, characters. Email me for access 😉",
     link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
     tag: "Live Project",
     status: "live",
     icon: Swords,
-    span: { col: 3, row: 1 },
+    span: { col: 1, row: 1 },
   },
-  // Media cards
   {
     name: "School Animations",
     description:
@@ -265,7 +264,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Clapperboard,
     media: { kind: "animations" },
-    span: { col: 3, row: 1 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "Music",
@@ -275,9 +274,8 @@ export const projects: Project[] = [
     tag: "Creative",
     status: "live",
     icon: Music,
-    span: { col: 3, row: 1 },
+    span: { col: 1, row: 1 },
   },
-  // School projects — image backed
   {
     name: "Arcadian King",
     description:
@@ -287,7 +285,7 @@ export const projects: Project[] = [
     tag: "School Project · Unity",
     status: "school",
     icon: Gamepad2,
-    span: { col: 2, row: 2 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "CAD Housing",
@@ -299,7 +297,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Building2,
     media: { kind: "cad", src: "/cad-housing.png" },
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "Robotics Builds",
@@ -311,7 +309,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Bot,
     media: { kind: "robotics" },
-    span: { col: 2, row: 2 },
+    span: { col: 1, row: 1 },
   },
 ];
 
