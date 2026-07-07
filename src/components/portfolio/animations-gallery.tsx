@@ -24,12 +24,12 @@ function AnimationTile({
 
   if (failed) {
     return (
-      <div className="relative h-20 w-32 shrink-0 overflow-hidden rounded-lg bg-zinc-900 sm:h-24 sm:w-40" />
+      <div className="h-24 w-36 shrink-0 rounded-lg bg-zinc-900 sm:h-28 sm:w-44" />
     );
   }
 
   return (
-    <div className="relative h-20 w-32 shrink-0 overflow-hidden rounded-lg bg-zinc-900 sm:h-24 sm:w-40">
+    <div className="relative h-24 w-36 shrink-0 overflow-hidden rounded-lg bg-zinc-900 sm:h-28 sm:w-44">
       {file.type === "gif" ? (
         <Image
           src={file.src}
@@ -37,7 +37,7 @@ function AnimationTile({
           fill
           unoptimized
           loading="lazy"
-          sizes="160px"
+          sizes="180px"
           className="object-cover"
           onError={() => setFailed(true)}
         />
@@ -58,12 +58,19 @@ function AnimationTile({
   );
 }
 
-/** Scrollable carousel of animation tiles — swipe/scroll horizontally, no buttons. */
+/** Scrollable carousel of animation tiles — swipe/scroll horizontally. */
 export function AnimationsGallery() {
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <div
-      className="flex gap-2 overflow-x-auto pb-1"
-      style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      ref={scrollRef}
+      className="animations-scroll flex gap-2 overflow-x-auto pb-2"
+      style={{
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+        WebkitOverflowScrolling: "touch",
+      }}
     >
       <style>{`.animations-scroll::-webkit-scrollbar { display: none; }`}</style>
       {animationFiles.map((file, i) => (

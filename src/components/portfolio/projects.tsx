@@ -40,6 +40,7 @@ const COL_SPAN: Record<number, string> = {
   2: "lg:col-span-2",
   3: "lg:col-span-3",
   4: "lg:col-span-4",
+  6: "lg:col-span-6",
 };
 
 function ProjectCard({ project }: { project: Project }) {
@@ -99,11 +100,14 @@ function ProjectCard({ project }: { project: Project }) {
           <h3 className="text-[0.95rem] font-bold leading-tight text-foreground">
             {project.name}
           </h3>
-          <span
-            className={`w-fit rounded-full px-[0.4rem] py-[0.15rem] text-[0.65rem] font-semibold uppercase tracking-wide ${badge.className}`}
-          >
-            {badge.label}
-          </span>
+          {/* Only show status badge for school projects */}
+          {project.status === "school" ? (
+            <span
+              className={`w-fit rounded-full px-[0.4rem] py-[0.15rem] text-[0.65rem] font-semibold uppercase tracking-wide ${badge.className}`}
+            >
+              {badge.label}
+            </span>
+          ) : null}
           {/* Description: hidden on mobile for compact cards */}
           <p
             className={`text-[0.78rem] leading-[1.4] ${

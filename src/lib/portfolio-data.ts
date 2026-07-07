@@ -191,7 +191,7 @@ export const projects: Project[] = [
     tag: "Minecraft · Mods",
     status: "live",
     icon: Package,
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "Echo Heist",
@@ -227,7 +227,7 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Type,
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "Bulletin",
@@ -263,16 +263,6 @@ export const projects: Project[] = [
     span: { col: 1, row: 1 },
   },
   {
-    name: "Avatar Archive",
-    description:
-      "Everything Avatar: The Last Airbender in one place — episodes, lore, books, characters. Email me for access 😉",
-    link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
-    tag: "Live Project",
-    status: "live",
-    icon: Swords,
-    span: { col: 1, row: 1 },
-  },
-  {
     name: "Music",
     description: "Original tracks — beats, loops, and full songs.",
     link: "https://drive.google.com/drive/folders/1FEBMf_0n5hFSyTncZp58bVYQxpnPn_-g",
@@ -280,7 +270,7 @@ export const projects: Project[] = [
     tag: "Creative",
     status: "live",
     icon: Music,
-    span: { col: 2, row: 1 },
+    span: { col: 1, row: 1 },
   },
   {
     name: "School Animations",
@@ -290,7 +280,17 @@ export const projects: Project[] = [
     status: "school",
     icon: Clapperboard,
     media: { kind: "animations" },
-    span: { col: 2, row: 1 },
+    span: { col: 4, row: 1 },
+  },
+  {
+    name: "Avatar Archive",
+    description:
+      "Everything Avatar: The Last Airbender in one place — episodes, lore, books, characters. Email me for access 😉",
+    link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
+    tag: "Live Project",
+    status: "live",
+    icon: Swords,
+    span: { col: 1, row: 1 },
   },
   {
     name: "CAD Housing",
@@ -303,7 +303,7 @@ export const projects: Project[] = [
     icon: Building2,
     // Drop cad-housing.pdf into /public — used as card background only (rendered to png)
     media: { kind: "cad", src: "/cad-housing.png" },
-    span: { col: 1, row: 1 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "Robotics Builds",
