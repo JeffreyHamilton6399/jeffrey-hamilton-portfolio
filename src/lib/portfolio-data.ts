@@ -253,10 +253,10 @@ export const projects: Project[] = [
     span: { col: 2, row: 1 },
   },
   {
-    name: "AI Music",
-    description: "Original tracks made with AI — beats, loops, and full songs.",
+    name: "Music",
+    description: "Original tracks — beats, loops, and full songs.",
     link: "https://drive.google.com/drive/folders/1FEBMf_0n5hFSyTncZp58bVYQxpnPn_-g",
-    tag: "Creative · AI",
+    tag: "Creative",
     status: "live",
     icon: Music,
     span: { col: 2, row: 1 },
@@ -270,7 +270,7 @@ export const projects: Project[] = [
     status: "school",
     icon: Clapperboard,
     media: { kind: "animations" },
-    span: { col: 4, row: 3 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "CAD Housing",
@@ -283,7 +283,7 @@ export const projects: Project[] = [
     icon: Building2,
     // Drop cad-housing.pdf into /public — used as card background only (rendered to png)
     media: { kind: "cad", src: "/cad-housing.png" },
-    span: { col: 2, row: 2 },
+    span: { col: 2, row: 1 },
   },
   {
     name: "Robotics Builds",
