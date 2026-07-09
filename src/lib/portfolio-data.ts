@@ -20,6 +20,7 @@ import {
   MessagesSquare,
   Music,
   Church,
+  Layout,
 } from "lucide-react";
 
 export const profile = {
@@ -250,7 +251,7 @@ export const projects: Project[] = [
     name: "Avatar Archive",
     description:
       "Everything Avatar: The Last Airbender in one place — episodes, lore, books, characters. Email me for access 😉",
-    link: "https://jeffreyhamilton6399.github.io/AvatarArchive/",
+    link: "https://avatar-archive.vercel.app",
     tag: "Live Project",
     status: "live",
     icon: Swords,
@@ -309,6 +310,15 @@ export const projects: Project[] = [
     status: "school",
     icon: Bot,
     media: { kind: "robotics" },
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "Slate",
+    description: "A clean, modern client interface — fast, minimal, and built to just work.",
+    link: "https://slate-client.vercel.app",
+    tag: "Live Project",
+    status: "live",
+    icon: Layout,
     span: { col: 1, row: 1 },
   },
 ];
