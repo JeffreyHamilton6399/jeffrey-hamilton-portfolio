@@ -21,6 +21,7 @@ import {
   Music,
   Church,
   Layout,
+  Spline,
 } from "lucide-react";
 
 export const profile = {
@@ -319,6 +320,16 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Layout,
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "Line Glide",
+    description: "Draw a line, ride it. A Line Rider-style physics game in the browser.",
+    link: "https://line-glide.vercel.app",
+    ctaLabel: "Play",
+    tag: "Live Project",
+    status: "live",
+    icon: Spline,
     span: { col: 1, row: 1 },
   },
 ];
