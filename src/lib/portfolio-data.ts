@@ -332,6 +332,15 @@ export const projects: Project[] = [
     icon: Spline,
     span: { col: 1, row: 1 },
   },
+  {
+    name: "Buddy",
+    description: "A desktop companion app — keeps you company and helps you get things done.",
+    link: "https://jeffreyhamilton6399.github.io/buddy-desktop",
+    tag: "Live Project",
+    status: "live",
+    icon: Bot,
+    span: { col: 1, row: 1 },
+  },
 ];
 
 export const projectsTeaser = "";
