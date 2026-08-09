@@ -138,7 +138,7 @@ export const experiences: Experience[] = [
 
 // ---- Tools: single hero banner (replaces the old 9-card grid) ----
 export const toolsBanner = {
-  headline: "9 Privacy-First Browser Tools",
+  headline: "10 Privacy-First Browser Tools",
   subheadline:
     "Everything runs on your device. No uploads. No servers. No accounts.",
   pills: [
@@ -151,6 +151,7 @@ export const toolsBanner = {
     "LinkClean",
     "FileBeam",
     "BlurIt",
+    "VoiceRip",
   ],
   cta: "Explore All Tools",
   link: "https://jeffrey-hamilton-tools.vercel.app",
