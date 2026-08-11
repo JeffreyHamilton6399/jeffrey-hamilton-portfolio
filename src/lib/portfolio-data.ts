@@ -22,6 +22,7 @@ import {
   Church,
   Layout,
   Spline,
+  Globe,
 } from "lucide-react";
 
 export const profile = {
@@ -138,7 +139,7 @@ export const experiences: Experience[] = [
 
 // ---- Tools: single hero banner (replaces the old 9-card grid) ----
 export const toolsBanner = {
-  headline: "11 Privacy-First Browser Tools",
+  headline: "10 Privacy-First Browser Tools",
   subheadline:
     "Everything runs on your device. No uploads. No servers. No accounts.",
   pills: [
@@ -152,7 +153,6 @@ export const toolsBanner = {
     "FileBeam",
     "BlurIt",
     "VoiceRip",
-    "Vela",
   ],
   cta: "Explore All Tools",
   link: "https://jeffrey-hamilton-tools.vercel.app",
@@ -341,6 +341,15 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Bot,
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "Vela",
+    description: "A web browser built for all your browsing — clean, fast, and simple.",
+    link: "https://jeffreyhamilton6399.github.io/vela/",
+    tag: "Live Project",
+    status: "live",
+    icon: Globe,
     span: { col: 1, row: 1 },
   },
 ];
