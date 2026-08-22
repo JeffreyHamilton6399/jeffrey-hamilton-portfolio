@@ -23,6 +23,7 @@ import {
   Layout,
   Spline,
   Globe,
+  Hand,
 } from "lucide-react";
 
 export const profile = {
@@ -352,6 +353,16 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Globe,
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "SignBridge",
+    description: "On-device ASL recognition — your camera reads the sign. Video never leaves your device.",
+    link: "https://signbridge-jet.vercel.app/",
+    ctaLabel: "Try It",
+    tag: "Live Project",
+    status: "live",
+    icon: Hand,
     span: { col: 1, row: 1 },
   },
 ];
