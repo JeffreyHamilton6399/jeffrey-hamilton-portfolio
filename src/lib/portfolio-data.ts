@@ -24,6 +24,7 @@ import {
   Spline,
   Globe,
   Hand,
+  Inbox,
 } from "lucide-react";
 
 export const profile = {
@@ -363,6 +364,15 @@ export const projects: Project[] = [
     tag: "Live Project",
     status: "live",
     icon: Hand,
+    span: { col: 1, row: 1 },
+  },
+  {
+    name: "InboxPilot",
+    description: "AI email client — connects Gmail, organizes your inbox, and drafts replies in your voice. Open source and free.",
+    link: "https://inboxpilot-eight.vercel.app",
+    tag: "Live Project",
+    status: "live",
+    icon: Inbox,
     span: { col: 1, row: 1 },
   },
 ];
