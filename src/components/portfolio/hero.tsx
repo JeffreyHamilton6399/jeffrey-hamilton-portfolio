@@ -119,8 +119,7 @@ export function Hero() {
           />
           {/* circular crop via border-radius: 50% + overflow: hidden on wrapper */}
           <div
-            className="relative aspect-square w-60 overflow-hidden rounded-full border-4 border-background bg-muted shadow-xl sm:w-72 md:w-80"
-            style={{ imageRendering: "high-quality" }}
+            className="relative aspect-square w-60 overflow-hidden rounded-full border-4 border-background bg-muted shadow-xl [image-rendering:high-quality] sm:w-72 md:w-80"
           >
             <Image
               src="/profile.jpg"

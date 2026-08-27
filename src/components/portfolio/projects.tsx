@@ -41,7 +41,8 @@ function ProjectCard({ project }: { project: Project }) {
   const buttonLabel = project.ctaLabel ?? "View Project";
   const isImageCard =
     project.media?.kind === "cad" || project.media?.kind === "robotics";
-  const isCad = project.media?.kind === "cad";
+  const cadMedia = project.media?.kind === "cad" ? project.media : null;
+  const isCad = cadMedia !== null;
   const isRobotics = project.media?.kind === "robotics";
 
   return (
@@ -55,10 +56,10 @@ function ProjectCard({ project }: { project: Project }) {
         }`}
       >
         {/* Background image for CAD / Robotics cards */}
-        {isCad ? (
+        {cadMedia ? (
           <div className="absolute inset-0">
             <Image
-              src={project.media!.src}
+              src={cadMedia.src}
               alt={`${project.name} floor plan`}
               fill
               unoptimized
