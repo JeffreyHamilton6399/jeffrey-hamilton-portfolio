@@ -1,0 +1,19 @@
+# OS cruft
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Local preview renders
+_*.png
+
+# Logs
+*.log
+
+# Source video. iPhone HEVC (.MOV) will not play in Chrome or Firefox,
+# so these need converting to H.264 MP4 before they can go on the site.
+*.MOV
+*.mov
