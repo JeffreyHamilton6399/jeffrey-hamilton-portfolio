@@ -1,29 +1,19 @@
-# dependencies
-node_modules
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
+# OS cruft
+Thumbs.db
+Desktop.ini
 .DS_Store
-*.pem
 
-# debug
-npm-debug.log*
-yarn-debug.log*
+# Editors
+.vscode/
+.idea/
+
+# Local preview renders
+_*.png
+
+# Logs
 *.log
 
-# env files
-.env*
-!.env.example
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Source video. iPhone HEVC (.MOV) will not play in Chrome or Firefox,
+# so these need converting to H.264 MP4 before they can go on the site.
+*.MOV
+*.mov

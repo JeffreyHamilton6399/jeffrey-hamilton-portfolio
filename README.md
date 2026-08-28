@@ -1,45 +1,24 @@
-# Portfolio
+# jeffreyhamilton.com
 
-My personal site — projects, work history, certificates, and a contact form.
-Built with Next.js and deployed on Vercel.
+My portfolio. One HTML file, one stylesheet, and a folder of screenshots.
 
-## Running locally
+There is no build step and nothing to install. Open `index.html` in a browser
+and that is the site.
 
-```bash
-bun install
-bun run dev
-```
+## What is in here
 
-The site runs at http://localhost:3000.
+| Path | What it is |
+| :--- | :--- |
+| `index.html` | The whole page |
+| `styles.css` | All of the styling |
+| `assets/portrait.jpg` | Headshot |
+| `assets/shots/` | A screenshot of each project |
 
-## Stack
+The only outside request the page makes is to Google Fonts for Inter and
+Source Serif 4. Everything else is local.
 
-- Next.js 16 (App Router) and React 19
-- Tailwind CSS v4 with shadcn/ui components
-- Framer Motion for section transitions
-- TypeScript throughout
+## Deploying
 
-## Layout
-
-```
-src/
-  app/
-    page.tsx              single-page layout, composes the sections below
-    api/contact/route.ts  validates and handles contact form submissions
-  components/portfolio/   one component per section (hero, about, projects, ...)
-  lib/portfolio-data.ts   all site content — projects, jobs, education, links
-public/                   images, certificates, animation demos
-```
-
-Content lives in `src/lib/portfolio-data.ts` rather than in the components, so
-adding a project or a job is a single edit to one file.
-
-## Contact form
-
-`POST /api/contact` takes `{ name, email, message }` and validates all three
-server-side before doing anything with them. There is no database — submissions
-are handled in the route.
-
-## License
-
-MIT — see [LICENSE](LICENSE).
+Hosted on Vercel. Every push to `main` deploys automatically.
+No framework preset, no build command, no output directory. Vercel serves
+`index.html` from the root.
