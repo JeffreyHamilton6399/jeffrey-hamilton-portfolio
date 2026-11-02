@@ -1,0 +1,465 @@
+/* ==========================================================================
+   Intro: the page being built live by five simulated collaborators.
+
+   Everything here is scoped to html.intro (set by the inline script in
+   <head> before first paint) or to the .ib-* overlay classes that intro.js
+   creates. Without JavaScript, with reduced motion, or on a repeat visit in
+   the same session, none of this applies and the page renders as normal.
+   ========================================================================== */
+
+/* The sticky header and the scroll lock below would otherwise change the
+   page width when the scrollbar comes back. Reserving the gutter keeps the
+   built page and the finished page pixel-identical. */
+html { scrollbar-gutter: stable; }
+
+/* -------------------------------------------------- While the intro runs */
+
+html.intro { overflow: hidden; }
+html.intro body { overflow: hidden; }
+
+/* Nothing on the page is clickable until the build is done */
+html.intro .site-head,
+html.intro main { pointer-events: none; }
+
+/* The canvas grid shows through the header's cream fade */
+html.intro .site-head { background: transparent; }
+
+/* Things the cursors build start out hidden, but keep their layout box so
+   the finished page never shifts. intro.js flips .ib-on as each is made. */
+html.intro .bubble,
+html.intro .wordmark,
+html.intro .nav a,
+html.intro .hero-copy > *,
+html.intro .hero-meta li,
+html.intro .hero-actions .btn,
+html.intro .hero-portrait { visibility: hidden; }
+
+html.intro .ib-on { visibility: visible !important; }
+
+/* Characters waiting to be typed */
+.ib-ch { visibility: hidden; }
+.ib-ch.on { visibility: visible; }
+.ib-typo { visibility: visible; }
+
+/* The entrance animations would replay when html.intro comes off, so they
+   stay off for the rest of the visit once the intro has built the page. */
+html.intro .bubble,
+html.intro .hero *,
+html.intro-done .bubble,
+html.intro-done .hero * { animation: none !important; }
+
+/* The portrait is dragged in from outside the window */
+html.intro .hero { overflow-x: clip; }
+html.intro .hero-portrait { transform-origin: 0 0; will-change: transform; }
+html.intro .hero-title { transform-origin: 0 0; }
+
+/* Below the hero is out of shot until the reveal */
+html.intro main > section:not(.hero),
+html.intro .site-foot { opacity: 0; }
+html.intro .hero { border-bottom-color: transparent; }
+
+html.intro-done main > section:not(.hero),
+html.intro-done .site-foot { transition: opacity .9s var(--ease); }
+html.intro-done .hero { transition: border-color .9s var(--ease); }
+
+/* A button before anyone has styled it */
+.btn.ib-raw {
+  background: transparent;
+  color: var(--ink);
+  border: 1px dashed color-mix(in srgb, var(--bark) 40%, transparent);
+}
+.btn.ib-styling {
+  transition: background .35s ease, color .35s ease, border-color .35s ease;
+}
+
+/* -------------------------------------------------- Loading screen */
+
+.ib-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  display: none;
+  place-items: center;
+  background: var(--paper);
+  color: var(--ink);
+  transition: opacity .55s var(--ease), visibility 0s linear .55s;
+}
+html.intro .ib-loader { display: grid; }
+.ib-loader.is-done { display: grid; opacity: 0; visibility: hidden; }
+
+.ib-loader-inner {
+  display: grid;
+  justify-items: center;
+  gap: 1.125rem;
+  width: min(260px, 72vw);
+  transition: transform .55s var(--ease);
+}
+.ib-loader.is-done .ib-loader-inner { transform: translateY(-8px) scale(.985); }
+
+.ib-loader-label {
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  letter-spacing: -.005em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.ib-loader-label .ib-dots span {
+  display: inline-block;
+  animation: ib-dot 1.2s ease-in-out infinite;
+}
+.ib-loader-label .ib-dots span:nth-child(2) { animation-delay: .15s; }
+.ib-loader-label .ib-dots span:nth-child(3) { animation-delay: .3s; }
+
+@keyframes ib-dot {
+  0%, 60%, 100% { opacity: .25; }
+  30%           { opacity: 1; }
+}
+
+.ib-bar {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--rule);
+  overflow: hidden;
+}
+.ib-bar-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--bark);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+/* A soft highlight travelling along the filled part */
+.ib-bar-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--sand) 70%, transparent), transparent);
+  background-size: 40% 100%;
+  background-repeat: no-repeat;
+  animation: ib-sheen 1.4s linear infinite;
+}
+@keyframes ib-sheen {
+  from { background-position: -60% 0; }
+  to   { background-position: 160% 0; }
+}
+
+.ib-loader-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: .75rem;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+}
+.ib-pct { color: var(--ink-soft); font-weight: 500; }
+
+/* Five collaborators joining, one per fifth of the bar */
+.ib-joiners { display: flex; gap: 5px; }
+.ib-joiners i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .3s ease, transform .4s var(--ease);
+}
+.ib-joiners i.on { opacity: 1; transform: none; }
+
+/* -------------------------------------------------- Canvas grid */
+
+.ib-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--bark) 20%, transparent) 1px, transparent 1.4px);
+  background-size: 24px 24px;
+  background-position: 12px 12px;
+  opacity: 0;
+  transition: opacity .7s var(--ease);
+}
+.ib-grid.on { opacity: 1; }
+
+/* -------------------------------------------------- Overlay */
+
+.ib-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  overflow: hidden;
+  font-family: var(--sans);
+  contain: strict;
+}
+.ib-layer > * { position: absolute; left: 0; top: 0; will-change: transform; }
+
+/* Cursors */
+.ib-cursor {
+  --c: #333;
+  transition: opacity .35s ease;
+}
+.ib-cursor.gone { opacity: 0; }
+.ib-cursor svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, .22));
+  transform-origin: 3px 2px;
+  transition: transform .09s ease;
+}
+.ib-cursor.down svg { transform: scale(.86); }
+.ib-cursor .ib-shape { display: none; }
+.ib-cursor[data-shape="arrow"]  .ib-shape-arrow,
+.ib-cursor[data-shape="text"]   .ib-shape-text,
+.ib-cursor[data-shape="resize"] .ib-shape-resize,
+.ib-cursor[data-shape="ew"]     .ib-shape-ew { display: block; }
+
+.ib-name {
+  position: absolute;
+  left: 14px;
+  top: 17px;
+  padding: 3px 8px 3px 7px;
+  border-radius: 3px 9px 9px 9px;
+  background: var(--c);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .14);
+  transition: opacity .3s ease, transform .3s var(--ease);
+}
+.ib-name small { font-size: 11px; font-weight: 400; opacity: .78; }
+.ib-cursor.quiet .ib-name { opacity: 0; transform: translateY(-3px) scale(.92); }
+
+/* Click ripple */
+.ib-ripple {
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  border: 2px solid var(--c);
+  opacity: 0;
+  animation: ib-ripple .42s ease-out forwards;
+}
+@keyframes ib-ripple {
+  from { opacity: .7; transform: var(--at) scale(.3); }
+  to   { opacity: 0;  transform: var(--at) scale(1.2); }
+}
+
+/* Selection, marquee and text boxes */
+.ib-box {
+  --c: #333;
+  width: 1px;
+  height: 1px;
+  border: 1.5px solid var(--c);
+  transform-origin: 0 0;
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.ib-box.on { opacity: 1; }
+.ib-box.marquee { background: color-mix(in srgb, var(--c) 8%, transparent); }
+.ib-box.soft { border-style: dashed; border-width: 1px; }
+
+/* Handles and tags live inside a box that is sized with width/height,
+   not scale, so they keep their own size. */
+.ib-handle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin: -4.75px 0 0 -4.75px;
+  background: #fff;
+  border: 1.5px solid var(--c);
+  border-radius: 1px;
+}
+.ib-handle.tl { left: 0;    top: 0; }
+.ib-handle.tr { left: 100%; top: 0; }
+.ib-handle.bl { left: 0;    top: 100%; }
+.ib-handle.br { left: 100%; top: 100%; }
+.ib-handle.mr { left: 100%; top: 50%; }
+.ib-handle.ml { left: 0;    top: 50%; }
+
+.ib-tag {
+  position: absolute;
+  left: -1.5px;
+  bottom: calc(100% + 4px);
+  padding: 1px 5px;
+  border-radius: 2px;
+  background: var(--c);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.ib-dim {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translateX(-50%);
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--c);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.ib-dim:empty { display: none; }
+
+/* Text caret */
+.ib-caret {
+  --c: #333;
+  width: 2px;
+  height: 1px;
+  background: var(--c);
+  border-radius: 1px;
+  opacity: 0;
+}
+.ib-caret.on { opacity: 1; }
+.ib-caret.blink { animation: ib-blink 1s steps(1) infinite; }
+@keyframes ib-blink { 50% { opacity: 0; } }
+
+/* Snapping guides and spacing measurements */
+.ib-guide {
+  --c: #E8457A;
+  width: 1px;
+  height: 1px;
+  background: var(--c);
+  transform-origin: 0 0;
+  opacity: 0;
+  transition: opacity .12s ease;
+}
+.ib-guide.on { opacity: 1; }
+
+.ib-measure {
+  --c: #E8457A;
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+.ib-measure.on { opacity: 1; }
+.ib-measure .ib-mline {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: var(--c);
+  transform-origin: 0 0;
+}
+.ib-measure .ib-mlabel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--c);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Little property panels a cursor clicks on */
+.ib-panel {
+  --c: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid rgba(40, 54, 24, .12);
+  box-shadow: 0 6px 18px rgba(40, 54, 24, .14), 0 1px 2px rgba(40, 54, 24, .1);
+  font-size: 10px;
+  color: var(--bark);
+  opacity: 0;
+  transition: opacity .16s ease;
+}
+.ib-panel.on { opacity: 1; }
+.ib-panel .ib-plabel { padding: 0 3px 0 2px; color: var(--ink-soft); font-weight: 500; }
+.ib-panel .ib-opt {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  transition: background .15s ease, box-shadow .15s ease;
+}
+.ib-panel .ib-opt.on { background: rgba(40, 54, 24, .08); box-shadow: inset 0 0 0 1.5px var(--c); }
+.ib-panel .ib-sw {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(40, 54, 24, .2);
+}
+.ib-panel .ib-al { display: grid; gap: 2px; width: 12px; }
+.ib-panel .ib-al i { display: block; height: 1.5px; background: var(--bark); border-radius: 1px; }
+
+/* -------------------------------------------------- Skip button */
+
+.ib-skip {
+  position: fixed;
+  right: clamp(.75rem, 3vw, 1.5rem);
+  bottom: clamp(.75rem, 3vw, 1.5rem);
+  z-index: 9600;
+  display: none;
+  align-items: center;
+  gap: .625rem;
+  padding: .5rem .5rem .5rem .9rem;
+  font: 500 .8125rem/1 var(--sans);
+  color: var(--ink-soft);
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--bark) 8%, transparent);
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, opacity .3s ease;
+}
+html.intro .ib-skip { display: inline-flex; }
+.ib-skip:hover { color: var(--bark); border-color: var(--frame); }
+.ib-skip kbd {
+  font: 500 .6875rem/1 var(--sans);
+  padding: .3rem .45rem;
+  border-radius: 999px;
+  background: var(--rule-soft);
+  color: var(--ink-faint);
+}
+.ib-skip.is-leaving { display: inline-flex; opacity: 0; pointer-events: none; }
+.ib-skip[hidden] { display: none !important; }
+
+/* Skipping lands on the finished page with a short settle rather than a cut */
+html.ib-flash .site-head,
+html.ib-flash .hero { animation: ib-settle .45s var(--ease) both; }
+@keyframes ib-settle { from { opacity: .3; } to { opacity: 1; } }
+@media (hover: none) { .ib-skip kbd { display: none; } .ib-skip { padding-right: .9rem; } }
+
+/* -------------------------------------------------- Replay link in footer */
+
+.replay-intro {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--paper) 30%, transparent);
+  text-underline-offset: 3px;
+  transition: color .18s ease;
+}
+.replay-intro:hover { color: var(--paper); }
+
+@media (prefers-reduced-motion: reduce) {
+  .replay-intro { display: none; }
+}
