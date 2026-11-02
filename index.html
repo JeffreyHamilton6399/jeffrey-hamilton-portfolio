@@ -9,8 +9,38 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="intro.css">
+<script>
+  /* Decide before first paint whether the build-it-live intro plays: first
+     visit this session, no reduced-motion preference, and not a deep link.
+     ?intro forces it, ?nointro skips it. If intro.js never arrives, the page
+     is shown anyway after a few seconds. */
+  (function () {
+    var d = document.documentElement, q = location.search, seen;
+    if (/[?&]nointro\b/.test(q)) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    try { seen = sessionStorage.getItem('jh-intro-seen'); } catch (e) {}
+    if (!/[?&]intro\b/.test(q) && (seen || location.hash)) return;
+    d.classList.add('intro');
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    setTimeout(function () { if (!window.__ibStarted) d.classList.remove('intro'); }, 5000);
+  })();
+</script>
+<script src="intro.js" defer></script>
 </head>
 <body>
+
+<div class="ib-loader" aria-hidden="true">
+  <div class="ib-loader-inner">
+    <p class="ib-loader-label">Preparing your experience<span class="ib-dots"><span>.</span><span>.</span><span>.</span></span></p>
+    <div class="ib-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="ib-bar-fill"></div></div>
+    <div class="ib-loader-meta">
+      <span class="ib-joiners"><i style="--c:#E2622B"></i><i style="--c:#2B6CB0"></i><i style="--c:#7C4DBF"></i><i style="--c:#148A74"></i><i style="--c:#D23C83"></i></span>
+      <span class="ib-pct">0%</span>
+    </div>
+  </div>
+</div>
+<button class="ib-skip" type="button" hidden>Skip intro <kbd>Esc</kbd></button>
 
 <a class="skip" href="#work">Skip to work</a>
 
@@ -492,6 +522,7 @@
 <footer class="site-foot">
   <div class="wrap foot-inner">
     <p>&copy; 2026 Jeffrey Hamilton</p>
+    <button class="replay-intro" type="button" hidden>Replay intro</button>
   </div>
 </footer>
 
