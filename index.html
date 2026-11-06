@@ -584,6 +584,12 @@ function connectPreview(origin) {
       pointerFrame = 0;
     });
   }, {passive: true});
+  let scrolled = false;
+  addEventListener('scroll', () => {
+    if (scrolled || scrollY < 120) return;
+    scrolled = true;
+    parent.postMessage({legacy: 'scroll'}, origin);
+  }, {passive: true});
   addEventListener('hashchange', report);
   addEventListener('load', report);
   addEventListener('keydown', e => {
