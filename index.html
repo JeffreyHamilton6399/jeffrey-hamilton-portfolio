@@ -569,5 +569,20 @@
   })();
 </script>
 
+<script>
+if (parent !== window && location.search.includes('nointro')) {
+  const origin = document.referrer ? new URL(document.referrer).origin : '*';
+  const report = () => parent.postMessage({legacy: 'location', hash: location.hash}, origin);
+  addEventListener('hashchange', report);
+  addEventListener('load', report);
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape') parent.postMessage({legacy: 'escape'}, origin);
+  });
+  addEventListener('message', e => {
+    if (e.source === parent && e.origin === origin && typeof e.data?.legacyHash === 'string')
+      location.replace(location.pathname + location.search + e.data.legacyHash);
+  });
+}
+</script>
 </body>
 </html>
