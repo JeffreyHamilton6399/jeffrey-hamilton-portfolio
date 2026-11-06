@@ -573,6 +573,14 @@
 if (parent !== window && location.search.includes('nointro')) {
   const origin = document.referrer ? new URL(document.referrer).origin : '*';
   const report = () => parent.postMessage({legacy: 'location', hash: location.hash}, origin);
+  let pointerFrame = 0;
+  addEventListener('pointermove', e => {
+    if (pointerFrame) return;
+    pointerFrame = requestAnimationFrame(() => {
+      parent.postMessage({legacy: 'pointer', x: e.clientX, y: e.clientY}, origin);
+      pointerFrame = 0;
+    });
+  }, {passive: true});
   addEventListener('hashchange', report);
   addEventListener('load', report);
   addEventListener('keydown', e => {
