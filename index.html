@@ -571,7 +571,10 @@
 
 <script>
 if (parent !== window && location.search.includes('nointro')) {
-  const origin = document.referrer ? new URL(document.referrer).origin : '*';
+  const origin = location.ancestorOrigins?.[0] || (document.referrer && new URL(document.referrer).origin);
+  if (origin) connectPreview(origin);
+}
+function connectPreview(origin) {
   const report = () => parent.postMessage({legacy: 'location', hash: location.hash}, origin);
   let pointerFrame = 0;
   addEventListener('pointermove', e => {
@@ -587,8 +590,14 @@ if (parent !== window && location.search.includes('nointro')) {
     if (e.key === 'Escape') parent.postMessage({legacy: 'escape'}, origin);
   });
   addEventListener('message', e => {
-    if (e.source === parent && e.origin === origin && typeof e.data?.legacyHash === 'string')
-      location.replace(location.pathname + location.search + e.data.legacyHash);
+    if (e.source !== parent || e.origin !== origin) return;
+    const hash = e.data?.legacyHash;
+    if (typeof hash !== 'string' || (hash && !hash.startsWith('#'))) return;
+    history.replaceState(null, '', location.pathname + location.search + hash);
+    const section = document.getElementById(hash.slice(1));
+    if (section) section.scrollIntoView();
+    else window.scrollTo(0, 0);
+    report();
   });
 }
 </script>
