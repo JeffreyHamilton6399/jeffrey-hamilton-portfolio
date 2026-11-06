@@ -586,7 +586,7 @@ function connectPreview(origin) {
   }, {passive: true});
   let scrolled = false;
   addEventListener('scroll', () => {
-    if (scrolled || scrollY < 120) return;
+    if (scrolled || scrollY < Math.max(480, innerHeight)) return;
     scrolled = true;
     parent.postMessage({legacy: 'scroll'}, origin);
   }, {passive: true});
